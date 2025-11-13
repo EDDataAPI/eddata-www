@@ -5,6 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      cache_from:
+        - ghcr.io/eddataapi/eddata-www:latest
+    image: ghcr.io/eddataapi/eddata-www:latest
     container_name: eddata-www
     ports:
       - '3000:3000'
@@ -15,18 +18,27 @@ services:
       - EDDATA_AUTH_BASE_URL=${EDDATA_AUTH_BASE_URL:-https://auth.eddata.app}
     restart: unless-stopped
     healthcheck:
-      test: ['CMD', 'node', '-e', "require('http').get('http://localhost:3000', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"]
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "require('http').get('http://localhost:3000/api/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-      - "traefik.enable=true"
-      - "traefik.http.routers.eddata-www.rule=Host(`eddata.app`) || Host(`www.eddata.app`)"
-      - "traefik.http.routers.eddata-www.entrypoints=websecure"
-      - "traefik.http.routers.eddata-www.tls.certresolver=letsencrypt"
-      - "traefik.http.services.eddata-www.loadbalancer.server.port=3000"
+      - 'com.centurylinklabs.watchtower.enable=true'
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.eddata-www.rule=Host(`eddata.app`) || Host(`www.eddata.app`)'
+      - 'traefik.http.routers.eddata-www.entrypoints=websecure'
+      - 'traefik.http.routers.eddata-www.tls.certresolver=letsencrypt'
+      - 'traefik.http.services.eddata-www.loadbalancer.server.port=3000'
+      # Health check for Traefik
+      - 'traefik.http.services.eddata-www.loadbalancer.healthcheck.path=/api/health'
+      - 'traefik.http.services.eddata-www.loadbalancer.healthcheck.interval=30s'
     networks:
       - web
 

@@ -270,34 +270,67 @@ function Inspector({ systemObject }) {
   })
 
   const services = []
-  if (systemObject?.blackMarket === 1) services.push('Black market')
-  if (systemObject?.crewLounge === 1) services.push('Crew lounge')
-  if (systemObject?.materialTrader === 1) services.push('Marterial trader')
-  if (systemObject?.missions === 1) services.push('Missions')
-  if (systemObject?.outfitting === 1) services.push('Outfitting')
-  if (systemObject?.refuel === 1) services.push('Refuel')
-  if (systemObject?.repair === 1) services.push('Repair')
-  if (systemObject?.restock === 1) services.push('Restock')
-  if (systemObject?.searchAndRescue === 1) services.push('Search & rescue')
-  if (systemObject?.shipyard === 1) services.push('Shipyard')
-  if (systemObject?.technologyBroker === 1) services.push('Technology broker')
-  if (systemObject?.tuning === 1) services.push('Tuning')
-  if (systemObject?.universalCartographics === 1)
+  if (systemObject?.blackMarket === 1) {
+    services.push('Black market')
+  }
+  if (systemObject?.crewLounge === 1) {
+    services.push('Crew lounge')
+  }
+  if (systemObject?.materialTrader === 1) {
+    services.push('Marterial trader')
+  }
+  if (systemObject?.missions === 1) {
+    services.push('Missions')
+  }
+  if (systemObject?.outfitting === 1) {
+    services.push('Outfitting')
+  }
+  if (systemObject?.refuel === 1) {
+    services.push('Refuel')
+  }
+  if (systemObject?.repair === 1) {
+    services.push('Repair')
+  }
+  if (systemObject?.restock === 1) {
+    services.push('Restock')
+  }
+  if (systemObject?.searchAndRescue === 1) {
+    services.push('Search & rescue')
+  }
+  if (systemObject?.shipyard === 1) {
+    services.push('Shipyard')
+  }
+  if (systemObject?.technologyBroker === 1) {
+    services.push('Technology broker')
+  }
+  if (systemObject?.tuning === 1) {
+    services.push('Tuning')
+  }
+  if (systemObject?.universalCartographics === 1) {
     services.push('Universal Cartographics')
+  }
 
   // Show exploration only if there is intersting data to show
   let showExploration = false
-  if (Object.prototype.hasOwnProperty.call(systemObject, 'mapped'))
+  if (Object.prototype.hasOwnProperty.call(systemObject, 'mapped')) {
     showExploration = true
-  if (systemObject.isLandable) showExploration = true
-  if (systemObject.volcanismType !== 'No volcanism') showExploration = true
-  if (systemObject?.signals?.biological > 0) showExploration = true
+  }
+  if (systemObject.isLandable) {
+    showExploration = true
+  }
+  if (systemObject.volcanismType !== 'No volcanism') {
+    showExploration = true
+  }
+  if (systemObject?.signals?.biological > 0) {
+    showExploration = true
+  }
   if (
     systemObject.terraformingState &&
     systemObject.terraformingState !== 'Not terraformable' &&
     systemObject.terraformingState !== 'Terraformed'
-  )
+  ) {
     showExploration = true
+  }
 
   return (
     <>

@@ -46,10 +46,12 @@ export default () => {
   const [title, setTitle] = useState('')
 
   const views = ['', 'list', 'exports', 'imports', 'services', 'nearby']
-  
+
   // Helper to parse slug from router query
   const getSystemIdentifierAndView = () => {
-    const systemIdentifier = router.query.slug?.[0]?.replaceAll('_', ' ')?.trim()
+    const systemIdentifier = router.query.slug?.[0]
+      ?.replaceAll('_', ' ')
+      ?.trim()
     const view = router.query?.slug?.[1] ?? ''
     return { systemIdentifier, view }
   }
@@ -57,17 +59,26 @@ export default () => {
   useEffect(animateTableEffect)
 
   useEffect(() => {
-    if (system !== undefined) setLoading(false)
+    if (system !== undefined) {
+      setLoading(false)
+    }
   })
 
   useEffect(() => {
     ;(async () => {
-      if (!router.query.slug) return
+      if (!router.query.slug) {
+        return
+      }
 
-      const { systemIdentifier: systemIdentifer, view } = getSystemIdentifierAndView()
-      if (!systemIdentifer) return
+      const { systemIdentifier: systemIdentifer, view } =
+        getSystemIdentifierAndView()
+      if (!systemIdentifer) {
+        return
+      }
 
-      if (activeViewIndex !== views.indexOf(view)) setInspector(undefined) // Hide inspector when switching views
+      if (activeViewIndex !== views.indexOf(view)) {
+        setInspector(undefined)
+      } // Hide inspector when switching views
       setActiveViewIndex(views.indexOf(view))
 
       if (view) {

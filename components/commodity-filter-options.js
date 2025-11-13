@@ -47,7 +47,7 @@ export default ({ disabled = false, commodities = [], commodity }) => {
     updateOptions()
   }, [])
 
-  function optionChangeHandler(e) {
+  function optionChangeHandler(_e) {
     const query = {}
 
     if (locationRef.current?.dataset.value) {
@@ -147,7 +147,7 @@ export default ({ disabled = false, commodities = [], commodity }) => {
           name='commodity-name'
           label='Commodity'
           placeholder='Commodity name'
-          onClear={e => {
+          onClear={_e => {
             commodityRef.current.value = ''
           }}
           onChange={e => {

@@ -37,7 +37,7 @@ export default () => {
         console.error(e)
       }
     })()
-  }, [])
+  }, [setNavigationPath])
 
   return (
     <Layout

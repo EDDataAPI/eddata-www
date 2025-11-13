@@ -13,10 +13,41 @@ class MyDocument extends Document {
   }
 
   render() {
+    const structuredData = {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'EDData',
+      description: 'Elite Dangerous trade and exploration data',
+      url: 'https://eddata.app',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: 'https://eddata.app/system/{search_term_string}'
+        },
+        'query-input': 'required name=search_term_string'
+      }
+    }
+
     return (
       <Html lang='en'>
         <Head>
           <meta name='theme-color' content='#000' />
+          <meta
+            name='description'
+            content='Elite Dangerous trade and exploration data - Real-time commodity prices, system information, and trade routes'
+          />
+          <meta
+            name='keywords'
+            content='Elite Dangerous, EDData, trade data, commodity prices, exploration, systems, stations'
+          />
+
+          {/* Structured Data */}
+          <script
+            type='application/ld+json'
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          />
+
           <style
             dangerouslySetInnerHTML={{
               __html: 'html,body{background:#000;}'

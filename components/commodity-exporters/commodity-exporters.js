@@ -17,7 +17,9 @@ async function getExportsForCommodityBySystem(systemAddress, commodityName) {
     `${API_BASE_URL}/v2/system/address/${systemAddress}/commodity/name/${commodityName}`
   )
   const exports = await res.json()
-  if (!exports || exports.error) return [] // Handle system not found
+  if (!exports || exports.error) {
+    return []
+  } // Handle system not found
   return exports.filter(c => c.stock > 0)
 }
 
@@ -141,8 +143,9 @@ function ExpandedRow({ r }) {
   const [exports, setExports] = useState()
 
   useEffect(() => {
-    if (!r) return
-    
+    if (!r) {
+      return
+    }
     ;(async () => {
       const exports = await getExportsForCommodityBySystem(
         r.systemAddress,
@@ -161,14 +164,12 @@ function ExpandedRow({ r }) {
       <Collapsible
         trigger={
           <CollapsibleTrigger>
-            Selling <strong>{r.name}</strong> in{' '}
-            {r.systemName}
+            Selling <strong>{r.name}</strong> in {r.systemName}
           </CollapsibleTrigger>
         }
         triggerWhenOpen={
           <CollapsibleTrigger open>
-            Selling <strong>{r.name}</strong> in{' '}
-            {r.systemName}
+            Selling <strong>{r.name}</strong> in {r.systemName}
           </CollapsibleTrigger>
         }
         open

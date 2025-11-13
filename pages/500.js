@@ -1,6 +1,6 @@
 import Layout from 'components/layout'
 
-export default () => (
+const ServerErrorPage = () => (
   <Layout>
     <div className='heading--with-underline'>
       <h2 className='heading--with-icon'>
@@ -18,3 +18,5 @@ export default () => (
     </div>
   </Layout>
 )
+
+export default ServerErrorPage

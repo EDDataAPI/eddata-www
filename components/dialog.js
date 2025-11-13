@@ -10,7 +10,9 @@ export default () => {
   const [buttons, setButtons] = useState()
 
   useEffect(() => {
-    if (!dialogContext) return
+    if (!dialogContext) {
+      return
+    }
     dialogContext?.visible === true ? setVisible(true) : setVisible(false)
     dialogContext?.title ? setTitle(dialogContext.title) : setTitle('Dialog')
     dialogContext?.contents
@@ -30,7 +32,9 @@ export default () => {
     setVisible(false) // Reset visibility to false if page state changes (e.g. page transition)
   }, [])
 
-  if (!visible) return
+  if (!visible) {
+    return
+  }
 
   return (
     <>

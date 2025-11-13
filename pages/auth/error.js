@@ -1,6 +1,6 @@
 import Layout from 'components/layout'
 
-export default () => {
+const AuthErrorPage = () => {
   return (
     <Layout>
       <div className='fx__fade-in'>
@@ -10,3 +10,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default AuthErrorPage

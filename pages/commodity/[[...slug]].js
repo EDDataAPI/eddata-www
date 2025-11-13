@@ -90,14 +90,18 @@ export default () => {
 
   async function loadCommodity(_commoditySymbol, _activeTab) {
     const commoditySymbol = _commoditySymbol?.toLowerCase()
-    if (!commoditySymbol) return
+    if (!commoditySymbol) {
+      return
+    }
 
     const cacheFingerprint = JSON.stringify({
       commoditySymbol,
       activeTab: _activeTab,
       query: parseQueryString()
     })
-    if (cachedQuery && cachedQuery === cacheFingerprint) return // If the query hasn't *really* changed, return early
+    if (cachedQuery && cachedQuery === cacheFingerprint) {
+      return
+    } // If the query hasn't *really* changed, return early
     setCachedQuery(cacheFingerprint) // If the query has changed, continue and update the "last seen" query
 
     // Reset Imports / Exports when loading a new commodity or applying new filter rules
@@ -121,8 +125,12 @@ export default () => {
       }
 
       playLoadingSound()
-      if (activeTab === 'exporters') getExporters(commoditySymbol, activeTab)
-      if (activeTab === 'importers') getImporters(commoditySymbol, activeTab)
+      if (activeTab === 'exporters') {
+        getExporters(commoditySymbol, activeTab)
+      }
+      if (activeTab === 'importers') {
+        getImporters(commoditySymbol, activeTab)
+      }
     } else {
       // Invalid commodity names / symbols get set to null
       setCommodity(null)
@@ -166,10 +174,14 @@ export default () => {
     const _activeTab = router.query?.slug?.[1] ?? TABS[0]
 
     // Validate inputs: check if commodity symbol exists and tab is valid
-    if (!commoditySymbol) return
+    if (!commoditySymbol) {
+      return
+    }
     if (!TABS.includes(_activeTab)) {
       // Redirect to valid tab if invalid tab provided
-      router.push(`/commodity/${commoditySymbol}/${TABS[0]}${window.location.search}`)
+      router.push(
+        `/commodity/${commoditySymbol}/${TABS[0]}${window.location.search}`
+      )
       return
     }
 
@@ -336,9 +348,12 @@ function apiQueryOptions() {
 
   options.push(`maxDaysAgo=${lastUpdatedFilterValue}`)
   options.push(`minVolume=${minVolumeFilterValue}`)
-  if (fleetCarrierFilterValue === 'excluded')
+  if (fleetCarrierFilterValue === 'excluded') {
     options.push('fleetCarriers=false')
-  if (fleetCarrierFilterValue === 'only') options.push('fleetCarriers=true')
+  }
+  if (fleetCarrierFilterValue === 'only') {
+    options.push('fleetCarriers=true')
+  }
   if (
     locationFilterValue &&
     locationFilterValue !== COMMODITY_FILTER_LOCATION_DEFAULT
@@ -371,7 +386,9 @@ function parseQueryString() {
 const CommodityInfo = ({ commodities, commodity, rareMarket }) => {
   const [, setDialog] = useContext(DialogContext)
 
-  if (!commodity) return
+  if (!commodity) {
+    return
+  }
 
   return (
     <div style={{ paddingTop: '.5rem' }}>

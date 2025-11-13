@@ -33,27 +33,18 @@ export default async function sitemap() {
     // This is wrapped in a try/catch block to suppress errors if the API is
     // unavailable (e.g. when deploying during a maintenance window)
     const commodities = await getCommoditiesWithPricing()
-    commodities.forEach(commodity => {
-      sitemap.push({
-        url: `https://eddata.app/commodity/${commodity.commodityName}`,
+    const symbols = Object.keys(commodities)
+      .map(symbol => commodities[symbol])
+      .filter(commodity => commodity?.category)
+      .map(commodity => commodity.symbol)
+      .map(symbol => ({
+        url: `https://eddata.app/commodity/${symbol}`,
         lastModified: new Date(),
-        changeFrequency: 'daily',
+        changeFrequency: 'hourly',
         priority: 0.8
-      })
-      sitemap.push({
-        url: `https://eddata.app/commodity/${commodity.commodityName}/importers`,
-        lastModified: new Date(),
-        changeFrequency: 'daily',
-        priority: 0.8
-      })
-      sitemap.push({
-        url: `https://eddata.app/commodity/${commodity.commodityName}/exporters`,
-        lastModified: new Date(),
-        changeFrequency: 'daily',
-        priority: 0.8
-      })
-    })
-  } catch (_e) {
+      }))
+    sitemap.push(...symbols)
+  } catch {
     console.warn(
       'WARNING: Skipped building sitemap for commodites - API may be unavailable'
     )

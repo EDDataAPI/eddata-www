@@ -3,6 +3,7 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { Toaster } from 'react-hot-toast'
 import { NavigationContext, DialogContext } from 'lib/context'
+import { reportWebVitals } from 'lib/web-vitals'
 import 'css/index.css'
 import 'public/fonts/icarus-terminal/icarus-terminal.css'
 import { playLoadingSound } from 'lib/sounds'
@@ -11,6 +12,9 @@ import { playLoadingSound } from 'lib/sounds'
 const Header = dynamic(() => import('components/header'), {
   loading: () => <div>Loading...</div>
 })
+
+// Export reportWebVitals for Next.js automatic measurement
+export { reportWebVitals }
 
 const handleOnClick = e => {
   try {
@@ -103,7 +107,7 @@ export default function App({ Component, pageProps }) {
           href='/icons/icon-16x16.png'
         />
         <link rel='manifest' href='/manifest.json' />
-                <meta
+        <meta
           property='og:image'
           content='https://eddata.app/og-image.png'
           key='og-image'

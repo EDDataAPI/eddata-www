@@ -30,7 +30,7 @@ export default () => {
   const toggleMenu = () => setMenuVisible(!menuVisible)
 
   useEffect(() => {
-    const onFullScreenChangeHandler = event =>
+    const onFullScreenChangeHandler = _event =>
       setFullScreenState(isFullScreen())
     document.addEventListener('fullscreenchange', onFullScreenChangeHandler)
     return () =>
@@ -42,7 +42,9 @@ export default () => {
 
   useEffect(() => {
     const hideMenuHandler = event => {
-      if (event?.target?.id !== 'header-menu-toggle') setMenuVisible(false)
+      if (event?.target?.id !== 'header-menu-toggle') {
+        setMenuVisible(false)
+      }
     }
     document.addEventListener('click', hideMenuHandler)
     return () => document.removeEventListener('click', hideMenuHandler)
@@ -155,7 +157,7 @@ export default () => {
       const latestCommodityData = await getCommoditiesWithPricing()
 
       const newTickerItems = []
-      ticker.forEach((item, i) => {
+      ticker.forEach((item, _i) => {
         const metadataForCommodity = latestCommodityData.find(
           el => el.symbol.toLowerCase() === item.commodityName.toLowerCase()
         )
@@ -210,25 +212,60 @@ export default () => {
       stationSearchResults.forEach(i => {
         const _stationType = i?.stationType
         let icon = 'poi'
-        if (!_stationType && i?.bodyName) icon = 'settlement'
-        if (!_stationType && i?.stationName.match('^[A-Z0-9]{3}-[A-Z0-9]{3}$'))
+        if (!_stationType && i?.bodyName) {
+          icon = 'settlement'
+        }
+        if (
+          !_stationType &&
+          i?.stationName.match('^[A-Z0-9]{3}-[A-Z0-9]{3}$')
+        ) {
           icon = 'fleet-carrier'
-        if (!_stationType && i?.stationName === 'Stronghold Carrier')
+        }
+        if (!_stationType && i?.stationName === 'Stronghold Carrier') {
           icon = 'megaship'
-        if (_stationType === 'Orbis') icon = 'orbis-starport'
-        if (_stationType === 'Coriolis') icon = 'coriolis-starport'
-        if (_stationType === 'Ocellus') icon = 'ocellus-starport'
-        if (_stationType === 'AsteroidBase') icon = 'asteroid-base'
-        if (_stationType === 'Outpost') icon = 'outpost'
-        if (_stationType === 'MegaShip') icon = 'megaship'
-        if (_stationType === 'StrongholdCarrier') icon = 'megaship'
-        if (_stationType === 'FleetCarrier') icon = 'fleet-carrier'
-        if (_stationType === 'CraterPort') icon = 'planetary-port'
-        if (_stationType === 'CraterOutpost') icon = 'planetary-port'
-        if (_stationType === 'OnFootSettlement') icon = 'settlement'
-        if (_stationType === 'SurfaceStation') icon = 'poi'
-        if (_stationType === 'PlanetaryConstructionDepot') icon = 'poi-empty'
-        if (_stationType === 'SpaceConstructionDepot') icon = 'poi-empty'
+        }
+        if (_stationType === 'Orbis') {
+          icon = 'orbis-starport'
+        }
+        if (_stationType === 'Coriolis') {
+          icon = 'coriolis-starport'
+        }
+        if (_stationType === 'Ocellus') {
+          icon = 'ocellus-starport'
+        }
+        if (_stationType === 'AsteroidBase') {
+          icon = 'asteroid-base'
+        }
+        if (_stationType === 'Outpost') {
+          icon = 'outpost'
+        }
+        if (_stationType === 'MegaShip') {
+          icon = 'megaship'
+        }
+        if (_stationType === 'StrongholdCarrier') {
+          icon = 'megaship'
+        }
+        if (_stationType === 'FleetCarrier') {
+          icon = 'fleet-carrier'
+        }
+        if (_stationType === 'CraterPort') {
+          icon = 'planetary-port'
+        }
+        if (_stationType === 'CraterOutpost') {
+          icon = 'planetary-port'
+        }
+        if (_stationType === 'OnFootSettlement') {
+          icon = 'settlement'
+        }
+        if (_stationType === 'SurfaceStation') {
+          icon = 'poi'
+        }
+        if (_stationType === 'PlanetaryConstructionDepot') {
+          icon = 'poi-empty'
+        }
+        if (_stationType === 'SpaceConstructionDepot') {
+          icon = 'poi-empty'
+        }
         searchResults.push({
           icon: `icarus-terminal-${icon}`,
           name: i.stationName,
@@ -256,7 +293,9 @@ export default () => {
           document.activeElement.blur()
         } else {
           // If focus is on an INPUT element do nothing (may add more exceptions)
-          if (document?.activeElement?.tagName === 'INPUT') return
+          if (document?.activeElement?.tagName === 'INPUT') {
+            return
+          }
           headerSearchRef.current.focus()
         }
       }
@@ -321,7 +360,7 @@ export default () => {
               type='text'
               autoComplete='off'
               placeholder='Search'
-              onBlur={e => {
+              onBlur={_e => {
                 setSearchResultsVisible(false)
               }}
               onFocus={e => {
@@ -609,7 +648,9 @@ export default () => {
 }
 
 function isFullScreen() {
-  if (typeof document === 'undefined') return false
+  if (typeof document === 'undefined') {
+    return false
+  }
 
   if (
     !document.fullscreenElement &&

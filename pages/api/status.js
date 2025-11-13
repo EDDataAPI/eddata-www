@@ -12,7 +12,10 @@ export default function handler(req, res) {
   }
 
   // Only allow in development or with specific auth token
-  if (IS_PRODUCTION && req.headers.authorization !== `Bearer ${process.env.STATUS_TOKEN}`) {
+  if (
+    IS_PRODUCTION &&
+    req.headers.authorization !== `Bearer ${process.env.STATUS_TOKEN}`
+  ) {
     return res.status(403).json({ error: 'Forbidden' })
   }
 

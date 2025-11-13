@@ -178,7 +178,7 @@ const _hex2rgb = hex => {
 
 const _rgb2hex = (r, g, b) => {
   const rgb = (r << 16) | (g << 8) | b
-  return '#' + rgb.toString(16).padStart(6, 0)
+  return `#${rgb.toString(16).padStart(6, 0)}`
 }
 
 const hex2hsl = hex => {
@@ -231,11 +231,21 @@ const hsl2hex = (h, s, l) => {
     r = g = b = l // achromatic
   } else {
     const hue2rgb = (p, q, t) => {
-      if (t < 0) t += 1
-      if (t > 1) t -= 1
-      if (t < 1 / 6) return p + (q - p) * 6 * t
-      if (t < 1 / 2) return q
-      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
+      if (t < 0) {
+        t += 1
+      }
+      if (t > 1) {
+        t -= 1
+      }
+      if (t < 1 / 6) {
+        return p + (q - p) * 6 * t
+      }
+      if (t < 1 / 2) {
+        return q
+      }
+      if (t < 2 / 3) {
+        return p + (q - p) * (2 / 3 - t) * 6
+      }
       return p
     }
 
@@ -248,7 +258,7 @@ const hsl2hex = (h, s, l) => {
 
   const toHex = c => {
     const hex = Math.round(c * 255).toString(16)
-    return hex.length === 1 ? '0' + hex : hex
+    return hex.length === 1 ? `0${hex}` : hex
   }
 
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`

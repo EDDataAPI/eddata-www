@@ -46,8 +46,7 @@ export default ({ toggle }) => {
         <h2>About</h2>
       </div>
       <p>
-        EDData provides open trade data and system information for the
-        game{' '}
+        EDData provides open trade data and system information for the game{' '}
         <a
           href='https://www.elitedangerous.com/'
           rel='noreferrer'

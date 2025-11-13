@@ -1,0 +1,96 @@
+
+> eddata-www@2.7.1 lint
+> next lint
+
+`next lint` is deprecated and will be removed in Next.js 16.
+For new projects, use create-next-app to choose your preferred linter.
+For existing projects, migrate to the ESLint CLI:
+npx @next/codemod@canary next-lint-to-eslint-cli .
+
+
+./pages/commodities/[[...slug]].js
+52:6  Warning: React Hook useEffect has missing dependencies: 'commodities' and 'setNavigationPath'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+232:37  Warning: 'r' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+
+./pages/commodity/[[...slug]].js
+170:6  Warning: React Hook useEffect has missing dependencies: 'loadCommodityEventHandler' and 'setNavigationPath'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+197:6  Warning: React Hook useEffect has missing dependencies: 'activeTab', 'loadCommodity', and 'router'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./pages/fleetcarrier/cargo.js
+37:6  Warning: React Hook useEffect has a missing dependency: 'setNavigationPath'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+73:29  Warning: 'r' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+81:29  Warning: 'r' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+
+./pages/fleetcarrier/index.js
+3:8  Warning: 'Table' is defined but never used. Allowed unused vars must match /^_/u.  no-unused-vars
+12:10  Warning: 'fleetCarrierCargo' is assigned a value but never used. Allowed unused vars must match /^_/u.  no-unused-vars
+12:29  Warning: 'setFleetCarrierCargo' is assigned a value but never used. Allowed unused vars must match /^_/u.  no-unused-vars
+23:6  Warning: React Hook useEffect has a missing dependency: 'setNavigationPath'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./pages/index.js
+50:6  Warning: React Hook useEffect has a missing dependency: 'setNavigationPath'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+66:51  Warning: 'i' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+69:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+93:66  Warning: 'j' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+100:35  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./pages/news.js
+28:6  Warning: React Hook useEffect has a missing dependency: 'setNavigationPath'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+70:23  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+105:39  Warning: 'j' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+
+./pages/system/[[...slug]].js
+61:3  Warning: React Hook useEffect contains a call to 'setLoading'. Without a list of dependencies, this can lead to an infinite chain of updates. To fix this, pass [system] as a second argument to the useEffect Hook.  react-hooks/exhaustive-deps
+350:6  Warning: React Hook useEffect has missing dependencies: 'activeViewIndex', 'getSystemIdentifierAndView', 'setNavigationPath', 'system?.systemAddress', and 'views'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/cmdr.js
+93:6  Warning: React Hook useEffect has missing dependencies: 'cmdrProfile' and 'updateCmdrProfile'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/commodity-exporters/commodity-exporters-nearby.js
+31:6  Warning: React Hook useEffect has a missing dependency: 'commodity.symbol'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/commodity-exporters/commodity-exporters.js
+156:6  Warning: React Hook useEffect has a missing dependency: 'r'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/commodity-filter-options.js
+40:6  Warning: React Hook useEffect has a missing dependency: 'selectedCommodity?.symbol'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+44:6  Warning: React Hook useEffect has a missing dependency: 'updateOptions'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+48:6  Warning: React Hook useEffect has a missing dependency: 'updateOptions'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+50:32  Warning: 'e' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+150:20  Warning: 'e' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+
+./components/commodity-importers/commodity-importers-nearby.js
+31:6  Warning: React Hook useEffect has a missing dependency: 'commodity.symbol'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/commodity-importers/commodity-importers.js
+168:6  Warning: React Hook useEffect has a missing dependency: 'r'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/header.js
+33:39  Warning: 'event' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+160:29  Warning: 'i' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+363:23  Warning: 'e' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+
+./components/input-with-autocomplete.js
+10:14  Warning: 'e' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+11:14  Warning: 'text' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+12:13  Warning: 'e' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+13:12  Warning: 'e' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+46:6  Warning: React Hook useEffect has missing dependencies: 'forwardRef', 'id', and 'onSelect'. Either include them or remove the dependency array. If 'onSelect' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+
+./components/layout.js
+31:6  Warning: React Hook useEffect has a missing dependency: 'loadingSound'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/loader.js
+1:50  Warning: 'text' is assigned a value but never used. Allowed unused args must match /^_/u.  no-unused-vars
+
+./components/system/system-list.js
+37:6  Warning: React Hook useEffect has a missing dependency: 'system'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/system/system-map.js
+361:44  Warning: 'i' is defined but never used. Allowed unused args must match /^_/u.  no-unused-vars
+
+./components/theme-settings.js
+30:6  Warning: React Hook useEffect has a missing dependency: 'hueShift'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+34:6  Warning: React Hook useEffect has a missing dependency: 'saveChanges'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules

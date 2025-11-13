@@ -358,7 +358,7 @@ const SystemMap = ({
         />
         {starsVisible &&
           nearbySystems &&
-          nearbySystems.map((nearbySystem, i) => (
+          nearbySystems.map((nearbySystem, _i) => (
             <div
               key={nearbySystem.systemAddress}
               className='system-map__point fx__fade-in'

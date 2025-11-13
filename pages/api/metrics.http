@@ -1,0 +1,13 @@
+# Prometheus metrics endpoint for Docker monitoring
+GET /metrics
+Host: eddata-www:3000
+
+###
+# Health check endpoint
+GET /api/health
+Host: localhost:3000
+
+###
+# Status endpoint
+GET /api/status
+Host: localhost:3000

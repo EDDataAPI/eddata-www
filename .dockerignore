@@ -14,6 +14,15 @@ dist/
 # Testing
 coverage/
 .nyc_output/
+__tests__/
+e2e/
+playwright-report/
+test-results/
+*.test.js
+*.spec.js
+jest.config.js
+jest.setup.js
+playwright.config.js
 
 # Environment variables
 .env
@@ -34,6 +43,10 @@ coverage/
 .git/
 .gitignore
 .gitattributes
+.github/
+
+# Husky
+.husky/
 
 # Documentation
 *.md
@@ -48,6 +61,7 @@ logs/
 .editorconfig
 .eslintrc*
 .prettierrc*
+commitlint.config.js
 .prettierignore
 tsconfig.json
 

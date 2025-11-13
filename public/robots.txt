@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Disallow admin/internal routes
+Disallow: /api/
+Disallow: /auth/
+Disallow: /_next/
+Disallow: /static/
+
+# Sitemap
+Sitemap: https://eddata.app/sitemap.xml

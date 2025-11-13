@@ -24,7 +24,9 @@ export default ({
 }) => {
   useEffect(() => {
     ;(() => {
-      if (loadingSound === true) playLoadingSound()
+      if (loadingSound === true) {
+        playLoadingSound()
+      }
     })()
   }, [])
 

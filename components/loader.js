@@ -1,4 +1,4 @@
-export default function Loader({ visible = true, text = 'test' }) {
+export default function Loader({ visible = true, text: _text = 'test' }) {
   return (
     <>
       <div

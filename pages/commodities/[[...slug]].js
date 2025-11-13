@@ -17,7 +17,7 @@ export default function Page(props) {
   const [commodities, setCommodities] = useState(props.commodities)
   const [categories, setCategories] = useState(props.categories)
 
-  const onRowClick = (record, index, event) => {
+  const onRowClick = record => {
     router.push(`/commodity/${record.commodityName}`)
   }
 
@@ -229,7 +229,7 @@ export default function Page(props) {
                         align: 'right',
                         className: 'is-hidden-mobile no-wrap',
                         width: 150,
-                        render: (v, r) =>
+                        render: (v, _r) =>
                           v > 0 ? (
                             <>{v.toLocaleString()} CR</>
                           ) : (
@@ -266,8 +266,8 @@ export default function Page(props) {
                       c => c.category.toLowerCase() === category.toLowerCase()
                     )}
                     rowKey='name'
-                    onRow={(record, index) => ({
-                      onClick: onRowClick.bind(null, record, index)
+                    onRow={record => ({
+                      onClick: () => onRowClick(record)
                     })}
                   />
                 </div>

@@ -1,6 +1,6 @@
 import Layout from 'components/layout'
 
-export default () => (
+const TestPage = () => (
   <Layout>
     <div className='heading--with-underline'>
       <h2>Theme preview</h2>
@@ -71,3 +71,5 @@ export default () => (
     </div>
   </Layout>
 )
+
+export default TestPage

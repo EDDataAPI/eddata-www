@@ -4,13 +4,13 @@ import Layout from 'components/layout'
 import About from 'components/about'
 import { NavigationContext } from 'lib/context'
 
-export default () => {
+const AboutPage = () => {
   const [, setNavigationPath] = useContext(NavigationContext)
   useEffect(() => {
     setNavigationPath([
       { name: 'About EDData', path: '/about', icon: 'icarus-terminal-info' }
     ])
-  }, [])
+  }, [setNavigationPath])
   return (
     <Layout
       title='About EDData for Elite Dangerous'
@@ -27,3 +27,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default AboutPage

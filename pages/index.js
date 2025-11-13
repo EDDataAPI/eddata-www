@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import Layout from 'components/layout'
 import Cmdr from 'components/cmdr'
 import { NavigationContext, DialogContext } from 'lib/context'
@@ -63,14 +64,16 @@ export default () => {
             <h2 className='text-uppercase'>Galnet News</h2>
           </div>
           {galnetNews &&
-            galnetNews.slice(0, 1).map((newsItem, i) => (
+            galnetNews.slice(0, 1).map((newsItem, _i) => (
               <div key={newsItem.url}>
                 <div className='home__news-article-body'>
-                  <img
+                  <Image
                     src={newsItem.image}
-                    width='100%'
+                    width={800}
+                    height={450}
                     alt='News article headline'
                     className='home__news-headline-image'
+                    priority
                   />
                   <div className='home__news-article-text scrollable'>
                     <h3 className='home__news-article-headline'>
@@ -90,16 +93,17 @@ export default () => {
                       <h3>More from Galnet</h3>
                     </div>
                     <ul style={{ margin: '1rem 0' }}>
-                      {galnetNews.slice(1, 5).map((nextNewsItem, j) => (
+                      {galnetNews.slice(1, 5).map((nextNewsItem, _j) => (
                         <li
                           onClick={() =>
                             setDialog({
                               title: 'Galnet News',
                               contents: (
                                 <>
-                                  <img
+                                  <Image
                                     src={nextNewsItem.image}
-                                    width='100%'
+                                    width={800}
+                                    height={450}
                                     alt='News article headline'
                                     className='home__news-headline-image'
                                     style={{ maxHeight: '10rem' }}
@@ -235,8 +239,7 @@ export default () => {
             <h3 className='text-uppercase'>EDData</h3>
           </div>
           <p>
-            EDData is the leading provider of open trade data in the
-            galaxy.
+            EDData is the leading provider of open trade data in the galaxy.
           </p>
           <p>
             Latest commodity prices and buy/sell orders are provided by data

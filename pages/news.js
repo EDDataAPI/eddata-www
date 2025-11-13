@@ -1,13 +1,14 @@
 import { useEffect, useContext, useState, Fragment } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import Image from 'next/image'
 import Head from 'next/head'
 import Layout from 'components/layout'
 import { NavigationContext } from 'lib/context'
 import { API_BASE_URL } from 'lib/consts'
 import Markdown from 'react-markdown'
 
-export default props => {
+export default _props => {
   const router = useRouter()
   const [, setNavigationPath] = useContext(NavigationContext)
   const [galnetNews, setGalnetNews] = useState()
@@ -18,7 +19,9 @@ export default props => {
     ;(async () => {
       try {
         const res = await fetch(`${API_BASE_URL}/v2/news/galnet`)
-        if (res.ok) setGalnetNews(await res.json())
+        if (res.ok) {
+          setGalnetNews(await res.json())
+        }
       } catch (e) {
         console.error(e)
       }
@@ -65,11 +68,13 @@ export default props => {
                     }}
                   >
                     <div className='home__news-article-body'>
-                      <img
+                      <Image
                         src={newsItem.image}
-                        width='100%'
+                        width={800}
+                        height={450}
                         alt='News article headline'
                         className='home__news-headline-image'
+                        priority
                       />
                       <div className='home__news-article-text scrollable'>
                         <h3 className='home__news-article-headline'>
@@ -100,7 +105,7 @@ export default props => {
               <ul style={{ margin: '1rem 0' }}>
                 {galnetNews
                   .filter(a => a.slug !== articleSlug)
-                  .map((nextNewsItem, j) => (
+                  .map((nextNewsItem, _j) => (
                     <li
                       key={nextNewsItem.url}
                       className='text-uppercase'

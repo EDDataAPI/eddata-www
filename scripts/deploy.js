@@ -40,7 +40,7 @@ class DeploymentManager {
     if (this.verbose) {
       this.log(`Executing: ${command}`)
     }
-    
+
     try {
       const result = execSync(command, {
         encoding: 'utf8',
@@ -57,11 +57,11 @@ class DeploymentManager {
 
   checkPrerequisites() {
     this.log('Checking prerequisites...')
-    
+
     try {
       this.exec('docker --version')
       this.exec('docker-compose --version')
-    } catch (error) {
+    } catch {
       throw new Error('Docker and Docker Compose are required')
     }
 
@@ -79,14 +79,17 @@ class DeploymentManager {
       this.log(`Loading environment from ${config.env}`)
       require('dotenv').config({ path: config.env })
     } else {
-      this.log(`Environment file ${config.env} not found, using defaults`, 'warn')
+      this.log(
+        `Environment file ${config.env} not found, using defaults`,
+        'warn'
+      )
     }
   }
 
   build() {
     this.log(`Building Docker image for ${this.environment}...`)
     const config = ENVIRONMENTS[this.environment]
-    
+
     this.exec(`docker-compose -f ${config.compose} build --no-cache`)
     this.log('Build completed successfully')
   }
@@ -94,20 +97,20 @@ class DeploymentManager {
   deploy() {
     this.log(`Deploying to ${this.environment}...`)
     const config = ENVIRONMENTS[this.environment]
-    
+
     // Stop existing containers
     try {
       this.exec(`docker-compose -f ${config.compose} down`)
-    } catch (error) {
+    } catch {
       this.log('No existing containers to stop', 'warn')
     }
-    
+
     // Start new containers
     this.exec(`docker-compose -f ${config.compose} up -d`)
-    
+
     this.log('Deployment completed')
     this.log('Waiting for service to be ready...')
-    
+
     // Wait for health check
     this.waitForHealthy()
   }
@@ -115,42 +118,44 @@ class DeploymentManager {
   waitForHealthy(maxWait = 120) {
     const startTime = Date.now()
     const maxWaitMs = maxWait * 1000
-    
+
     while (Date.now() - startTime < maxWaitMs) {
       try {
-        const result = this.exec('docker ps --filter "name=eddata-www" --filter "health=healthy" --format "{{.ID}}"')
+        const result = this.exec(
+          'docker ps --filter "name=eddata-www" --filter "health=healthy" --format "{{.ID}}"'
+        )
         if (result.trim()) {
           this.log('Service is healthy!')
           return
         }
-      } catch (error) {
+      } catch {
         // Continue waiting
       }
-      
+
       // Wait 2 seconds before next check
       execSync('sleep 2')
     }
-    
+
     this.log('Service did not become healthy in time', 'warn')
   }
 
   rollback() {
     this.log('Rolling back to previous version...')
     const config = ENVIRONMENTS[this.environment]
-    
+
     this.exec(`docker-compose -f ${config.compose} down`)
     this.exec(`docker-compose -f ${config.compose} up -d --force-recreate`)
-    
+
     this.log('Rollback completed')
   }
 
   status() {
     this.log('Checking service status...')
     const config = ENVIRONMENTS[this.environment]
-    
+
     try {
       this.exec(`docker-compose -f ${config.compose} ps`)
-    } catch (error) {
+    } catch {
       this.log('Failed to get status', 'error')
     }
   }
@@ -158,7 +163,7 @@ class DeploymentManager {
   logs() {
     this.log('Fetching logs...')
     const config = ENVIRONMENTS[this.environment]
-    
+
     this.exec(`docker-compose -f ${config.compose} logs -f --tail=100`)
   }
 
@@ -207,26 +212,26 @@ async function main() {
         manager.loadEnvironment()
         manager.build()
         break
-        
+
       case 'deploy':
         manager.checkPrerequisites()
         manager.loadEnvironment()
         manager.build()
         manager.deploy()
         break
-        
+
       case 'status':
         manager.status()
         break
-        
+
       case 'logs':
         manager.logs()
         break
-        
+
       case 'rollback':
         manager.rollback()
         break
-        
+
       default:
         manager.showHelp()
         break

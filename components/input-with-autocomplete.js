@@ -7,10 +7,10 @@ export default ({
   name = 'input',
   placeholder = '',
   defaultValue = '',
-  onChange = e => {},
-  onSelect = text => {},
-  onFocus = e => {},
-  onBlur = e => {},
+  onChange = _e => {},
+  onSelect = _text => {},
+  onFocus = _e => {},
+  onBlur = _e => {},
   autoCompleteResults,
   onClear
 }) => {
@@ -22,7 +22,9 @@ export default ({
   useEffect(() => {
     _setAutoCompleteResults(autoCompleteResults)
     // setHighlightedResult(0)
-    if (resultsRef?.current?.scrollTop) resultsRef.current.scrollTop = 0
+    if (resultsRef?.current?.scrollTop) {
+      resultsRef.current.scrollTop = 0
+    }
   }, [autoCompleteResults])
 
   useEffect(() => {

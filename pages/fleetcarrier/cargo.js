@@ -70,7 +70,7 @@ export default () => {
                 dataIndex: 'commodityName',
                 key: 'commodityName',
                 align: 'left',
-                render: (v, r) => <>{v}</>
+                render: (v, _r) => <>{v}</>
               },
               {
                 title: 'Quantity',
@@ -78,7 +78,7 @@ export default () => {
                 key: 'quantity',
                 align: 'right',
                 width: 100,
-                render: (v, r) => <>{v}</>
+                render: (v, _r) => <>{v}</>
               }
             ]}
             data={fleetCarrierCargo}

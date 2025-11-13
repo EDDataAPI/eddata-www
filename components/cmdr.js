@@ -83,7 +83,9 @@ export default () => {
   }
 
   useEffect(() => {
-    if (cmdrProfile !== undefined) setSignedIn(true)
+    if (cmdrProfile !== undefined) {
+      setSignedIn(true)
+    }
     ;(async () => {
       await updateCmdrProfile()
       setCsrfToken(await getCsrfToken())

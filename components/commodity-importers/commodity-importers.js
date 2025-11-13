@@ -17,7 +17,9 @@ async function getImportsForCommodityBySystem(systemAddress, commodityName) {
     `${API_BASE_URL}/v2/system/address/${systemAddress}/commodity/name/${commodityName}`
   )
   const imports = await res.json()
-  if (!imports || imports.error) return [] // Handle system not found
+  if (!imports || imports.error) {
+    return []
+  } // Handle system not found
   return imports.filter(
     c => (c.demand > 0 || c.demand === 0) && c.sellPrice > 1
   )
@@ -153,8 +155,9 @@ function ExpandedRow({ r, rare }) {
   const [imports, setImports] = useState()
 
   useEffect(() => {
-    if (!r) return
-    
+    if (!r) {
+      return
+    }
     ;(async () => {
       const imports = await getImportsForCommodityBySystem(
         r.systemAddress,
@@ -173,14 +176,12 @@ function ExpandedRow({ r, rare }) {
       <Collapsible
         trigger={
           <CollapsibleTrigger>
-            Buying <strong>{r.name}</strong> in{' '}
-            {r.systemName}
+            Buying <strong>{r.name}</strong> in {r.systemName}
           </CollapsibleTrigger>
         }
         triggerWhenOpen={
           <CollapsibleTrigger open>
-            Buying <strong>{r.name}</strong> in{' '}
-            {r.systemName}
+            Buying <strong>{r.name}</strong> in {r.systemName}
           </CollapsibleTrigger>
         }
         open

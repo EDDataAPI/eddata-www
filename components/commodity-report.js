@@ -14,7 +14,9 @@ export default ({ commodityName, reportName = 'core-systems-1000' }) => {
       setExports(undefined)
       setImports(undefined)
 
-      if (!commodityName) return
+      if (!commodityName) {
+        return
+      }
 
       const commodityReport = await getCommodityReport(
         commodityName,

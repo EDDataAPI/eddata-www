@@ -1,6 +1,5 @@
 import { useEffect, useContext, useState } from 'react'
 import Head from 'next/head'
-import Table from 'rc-table'
 import Layout from 'components/layout'
 import { NavigationContext } from 'lib/context'
 import { loadCache, saveCache } from 'lib/cache'
@@ -9,7 +8,6 @@ import { getCmdrInfo } from 'lib/cmdr'
 export default () => {
   const [, setNavigationPath] = useContext(NavigationContext)
   const [cmdrFleetCarrier, setCmdrFleetCarrier] = useState()
-  const [fleetCarrierCargo, setFleetCarrierCargo] = useState([])
 
   const updateFleetCarrier = async () => {
     const _cmdrFleetCarrier = await getCmdrInfo('fleetcarrier')
