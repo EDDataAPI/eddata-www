@@ -1,0 +1,369 @@
+.data-table {
+  z-index: 3;
+  animation: fx__fade-in-animation 0.5s;
+}
+
+.data-table th,
+.data-table td {
+  text-wrap: pretty;
+  overflow: hidden;
+  padding: 0.5rem;
+}
+
+.data-table .rc-table-row-expand-icon-cell {
+  width: 0;
+  padding: 0;
+}
+
+.data-table table {
+  border-spacing: 0;
+  width: 100%;
+}
+
+.data-table--interactive
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > thead
+  > tr,
+.data-table--sticky-heading
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > thead
+  > tr {
+  top: -1rem;
+  position: sticky !important;
+  z-index: 1;
+}
+
+.data-table--interactive
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > thead
+  > tr
+  > th,
+.data-table--sticky-heading
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > thead
+  > tr
+  > th {
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary-1),
+    var(--color-primary-1)
+  );
+}
+
+.data-table th {
+  color: var(--color-text);
+  border-bottom: 0.15rem solid var(--color-primary-4);
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  text-transform: uppercase;
+  font-family: 'Jura', sans-serif;
+  background: transparent;
+  background: var(--color-table-background);
+  background: linear-gradient(to bottom, transparent, var(--color-primary-2));
+}
+
+.data-table td {
+  background: #222;
+  background: var(--color-table-background);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Don't apply above nowrapping to p tag in cells */
+.data-table td p {
+  white-space: normal;
+}
+
+.data-table tr.rc-table-row td {
+  margin-bottom: 0.5rem;
+  border-top: 0.25rem solid var(--color-primary-0);
+}
+
+.data-table
+  tr.rc-table-row:has(+ tr.rc-table-expanded-row:not([style='display: none;']))
+  td,
+.data-table
+  tr.rc-table-row:has(+ tr.rc-table-expanded-row:not([style='display: none;']))
+  td
+  > *,
+.data-table
+  tr.rc-table-row:has(
+    + tr.rc-table-expanded-row:not([style='display: none;'])
+  ):hover
+  td,
+.data-table
+  tr.rc-table-row:has(
+    + tr.rc-table-expanded-row:not([style='display: none;'])
+  ):hover
+  td
+  > * {
+  color: var(--color-highlight-1);
+}
+
+.data-table
+  tr.rc-table-row:has(+ tr.rc-table-expanded-row:not([style='display: none;']))
+  td
+  > *,
+.data-table
+  tr.rc-table-row:has(
+    + tr.rc-table-expanded-row:not([style='display: none;'])
+  ):hover
+  td
+  > * {
+  background: transparent;
+}
+
+.data-table
+  tr.rc-table-row:has(+ tr.rc-table-expanded-row:not([style='display: none;']))
+  td,
+.data-table
+  tr.rc-table-row:has(
+    + tr.rc-table-expanded-row:not([style='display: none;'])
+  ):hover
+  td {
+  background: var(--color-table-row-selected-frame) !important;
+  border-bottom: none;
+}
+
+.data-table tr.data-table__row--selected,
+.data-table tr.rc-table-expanded-row:not([style='display: none;']),
+.data-table
+  tr.rc-table-row:has(
+    + tr.rc-table-expanded-row:not([style='display: none;'])
+  ) {
+  /* filter: var(--filter-overdrive); */
+}
+
+.data-table tr.data-table__row--selected td,
+.data-table tr.data-table__row--selected td > *,
+.data-table tr.data-table__row--selected td small,
+.data-table tr.data-table__row--selected td i {
+  background: var(--color-table-row-selected-frame) !important;
+  color: var(--color-primary-1) !important;
+}
+
+.data-table
+  tr.rc-table-row:has(+ tr.rc-table-expanded-row:not([style='display: none;']))
+  td
+  a,
+.data-table
+  tr.rc-table-row:has(+ tr.rc-table-expanded-row:not([style='display: none;']))
+  td
+  small {
+  color: var(--color-primary-1) !important;
+}
+
+.data-table
+  tr.rc-table-row:has(+ tr.rc-table-expanded-row:not([style='display: none;']))
+  .counter--table-counter {
+  border-color: transparent !important;
+}
+
+.data-table
+  tr.rc-table-row:has(+ tr.rc-table-expanded-row:not([style='display: none;']))
+  a:hover {
+  background: transparent !important;
+}
+
+.data-table tr.rc-table-row + tr.rc-table-expanded-row > td {
+  box-shadow: 0 0 2rem 2rem rgba(0, 0, 0, 0.25) inset;
+  border-left: 0.2rem solid var(--color-table-row-selected-frame);
+  border-right: 0.2rem solid var(--color-table-row-selected-frame);
+  border-bottom: 0.2rem solid var(--color-table-row-selected-frame);
+  background: var(--color-table-background) !important;
+  padding: 0 0.25rem 0.25rem 0.25rem;
+  background: var(--color-highlight-0) !important;
+}
+
+.data-table th .icon,
+.data-table td .icon {
+  margin-right: 0.25rem;
+  margin-left: -0.25rem;
+  float: left;
+}
+
+.data-table--mini {
+  overflow: auto;
+}
+
+table.data-table--mini > thead > tr > th,
+.rc-table.data-table--mini
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > thead
+  > tr
+  > th {
+  border-color: var(--color-highlight-4);
+  background: linear-gradient(
+    to bottom,
+    var(--color-highlight-1),
+    var(--color-highlight-2)
+  );
+}
+
+table.data-table--mini > tbody,
+.rc-table.data-table--mini
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > tbody {
+  background: var(--color-highlight-1) !important;
+}
+
+table.data-table--mini > tbody small,
+.rc-table.data-table--mini
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > tbody
+  small {
+  color: var(--color-highlight-5);
+}
+
+table.data-table--mini > tbody > tr > td,
+.rc-table.data-table--mini
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > tbody
+  > tr
+  > td {
+  background: none;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  border-top: 0.25rem solid var(--color-highlight-0);
+}
+
+.data-table--compact {
+  margin-top: 0.5rem;
+}
+
+table.data-table--compact > tbody > tr > td,
+.data-table--compact
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > tbody
+  > tr
+  > td {
+  padding: 0 0 0.5rem 0;
+  vertical-align: top;
+}
+
+.data-table--mini
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > tbody
+  > tr
+  > td
+  small {
+  font-size: 0.8rem;
+}
+
+.data-table__label {
+  display: block;
+  opacity: 0.5;
+}
+
+table.data-table--striped > tbody > tr:nth-child(odd of .rc-table-row) > td,
+.data-table--striped
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > tbody
+  > tr:nth-child(odd of .rc-table-row)
+  > td {
+  background: var(--color-table-row);
+}
+
+table.data-table--striped > tbody > tr:nth-child(even of .rc-table-row) > td,
+.data-table--striped
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > tbody
+  > tr:nth-child(even of .rc-table-row)
+  > td {
+  background: var(--color-table-row-alt);
+}
+
+table.data-table--interactive > tbody > tr.rc-table-row:hover > td,
+table.data-table--striped.data-table--interactive
+  > tbody
+  > tr.rc-table-row:hover
+  > td,
+.data-table--interactive
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > tbody
+  > tr.rc-table-row:hover
+  > td,
+.data-table--striped.data-table--interactive
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > tbody
+  > tr.rc-table-row:hover
+  > td {
+  background: var(--color-table-row-hover);
+}
+
+/*
+table.data-table--border-left,
+.data-table--border-left  > .rc-table-container > .rc-table-content > table {
+  border-left: .2rem solid var(--color-primary-9);
+}
+*/
+
+table.data-table--animated > tbody > tr:not(.rc-table-expanded-row),
+.data-table--animated
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > tbody
+  > tr:not(.rc-table-expanded-row) {
+  opacity: 0;
+}
+
+table.data-table--animated
+  > tbody
+  > tr:not(.rc-table-expanded-row).data-table__row--visible,
+.data-table--animated
+  > .rc-table-container
+  > .rc-table-content
+  > table
+  > tbody
+  > tr:not(.rc-table-expanded-row).data-table__row--visible {
+  animation: row-flash-in-animation 0.25s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes row-flash-in-animation {
+  0% {
+    opacity: 0;
+    filter: invert(1);
+  }
+  30% {
+    color: var(--color-primary-5);
+    background: var(--color-primary-3);
+  }
+  60% {
+    background: none;
+    filter: invert(0);
+  }
+  100% {
+    opacity: 1;
+  }
+}

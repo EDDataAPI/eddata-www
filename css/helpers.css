@@ -1,0 +1,95 @@
+.clear {
+  clear: both;
+}
+
+.muted {
+  opacity: 0.75;
+}
+
+.transparent {
+  opacity: 0;
+}
+
+.no-wrap {
+  white-space: nowrap !important;
+  text-wrap: nowrap !important;
+}
+
+.text-large {
+  font-size: 1.2rem;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-positive {
+  color: var(--color-positive);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-negative {
+  color: var(--color-negative);
+}
+
+.text-info {
+  color: var(--color-info);
+}
+
+.text-rare {
+  color: rgb(255, 180, 0);
+}
+
+.text-muted {
+  color: var(--color-primary-4);
+}
+
+.text-no-transform {
+  text-transform: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-blink-slow {
+  animation: text-blink-animation 0.75s ease-in-out infinite;
+}
+
+.text-blink {
+  animation: text-blink-animation 0.5s ease-in-out infinite;
+}
+
+.text-blink-fast {
+  animation: text-blink-animation 0.25s ease-in-out infinite;
+}
+
+@keyframes text-blink-animation {
+  50% {
+    opacity: 10%;
+  }
+}
+
+.flip-vertical {
+  transform: rotateX(180deg);
+}
+
+.flip-horizontal {
+  transform: rotateY(180deg);
+}
+
+.flip-both,
+.flip-horizontal.flip-vertical {
+  transform: rotateY(180deg) rotateX(180deg);
+}

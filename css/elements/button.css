@@ -1,0 +1,109 @@
+.button {
+  position: relative;
+  background: var(--color-primary-2);
+  color: var(--color-primary-5);
+  border: 0.15rem solid var(--color-primary-2);
+  border-color: transparent;
+  border-radius: 0.1rem;
+  font-size: 1rem;
+  line-height: 2rem;
+  padding: 0.5rem;
+  font-family: 'Jura', sans-serif;
+  margin: 0.25rem;
+  padding: 0.25rem 1rem;
+  pointer-events: all;
+  text-shadow:
+    1.1px 0 1.5rem,
+    -1.1px 0 1.5rem;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: 0.25s;
+  transition-property: width, color, background-color;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 1rem) 0,
+    100% 1rem,
+    100% 100%,
+    1rem 100%,
+    0 calc(100% - 1rem)
+  );
+  outline: 0;
+}
+/* 
+a.button {
+  border-bottom-color: transparent !important;
+  border-bottom: 0 !important;
+} */
+
+.button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 1rem) 0,
+    100% 1rem,
+    100% 100%,
+    1rem 100%,
+    0 calc(100% - 1rem)
+  );
+  z-index: -2;
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 0.2rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 1rem) 0,
+    100% 1rem,
+    100% 100%,
+    1rem 100%,
+    0 calc(100% - 1rem),
+    0 0,
+    0.2rem 0.2rem,
+    0.2rem calc(100% - 1rem - 0.08rem),
+    calc(1rem + 0.08rem) calc(100% - 0.2rem),
+    calc(100% - 0.2rem) calc(100% - 0.2rem),
+    calc(100% - 0.2rem) calc(1rem + 0.08rem),
+    calc(100% - 1rem - 0.08rem) 0.2rem,
+    0.2rem 0.2rem
+  );
+}
+
+.button--active,
+.button:hover {
+  background-color: var(--color-primary-5);
+  color: var(--color-primary-1);
+  text-shadow:
+    0 0 4rem rgba(0, 0, 0, 1),
+    0 0 3rem rgba(0, 0, 0, 1),
+    0 0 2rem rgba(0, 0, 0, 1),
+    0 0 0.25rem rgba(0, 0, 0, 0.5);
+  filter: none !important;
+}
+
+.button--active::after,
+.button:hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 1rem) 0,
+    100% 1rem,
+    100% 100%,
+    1rem 100%,
+    0 calc(100% - 1rem)
+  );
+}
+
+.button .icon {
+  font-size: 1.6rem !important;
+  line-height: 2.2rem;
+}

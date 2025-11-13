@@ -1,0 +1,62 @@
+{
+  "name": "ardent-www",
+  "version": "2.7.1",
+  "description": "Ardent Insight Website",
+  "main": "index.js",
+  "scripts": {
+    "start": "next start -p 3000",
+    "build": "next build",
+    "build:analyze": "cross-env ANALYZE=true next build",
+    "build:local": "cross-env ARDENT_API_BASE_URL=http://localhost:3001/api ARDENT_AUTH_BASE_URL=http://localhost:3003/auth next build",
+    "dev": "next dev -p 3000 --turbo",
+    "dev:local": "cross-env ARDENT_API_BASE_URL=http://localhost:3001/api ARDENT_AUTH_BASE_URL=http://localhost:3003/auth next dev -p 3000 --turbo",
+    "dev:local:api": "cross-env ARDENT_API_BASE_URL=http://localhost:3001/api next dev -p 3000 --turbo",
+    "dev:local:auth": "cross-env ARDENT_AUTH_BASE_URL=http://localhost:3003/auth next dev -p 3000 --turbo",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "tsc --noEmit",
+    "clean": "rimraf .next out"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iaincollins/ardent-spike.git"
+  },
+  "author": "",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/iaincollins/ardent-spike/issues"
+  },
+  "homepage": "https://github.com/iaincollins/ardent-spike#readme",
+  "dependencies": {
+    "@react-three/fiber": "^8.18.0",
+    "byte-size": "^9.0.1",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.2.3",
+    "next": "^15.0.5",
+    "rc-table": "^7.55.1",
+    "react": "^18.3.1",
+    "react-collapsible": "^2.10.0",
+    "react-colorful": "^5.6.1",
+    "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.6.0",
+    "react-markdown": "^9.1.0",
+    "react-tabs": "^6.1.0",
+    "use-debounce": "^10.0.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@next/bundle-analyzer": "^15.0.5",
+    "@types/node": "24.10.0",
+    "eslint": "^9.17.0",
+    "eslint-config-next": "^15.0.5",
+    "prettier": "^3.4.2",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "npm": ">=10.0.0",
+    "node": ">=20.0.0"
+  }
+}

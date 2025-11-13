@@ -1,0 +1,8 @@
+.next
+out
+node_modules
+.git
+*.md
+lib/sfxr.js
+public/
+.env*

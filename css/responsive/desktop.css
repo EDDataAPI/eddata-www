@@ -1,0 +1,100 @@
+@media only screen and (min-width: 768px) {
+  .data-table--striped-not-mobile tbody tr:nth-child(odd) td {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .is-visible-mobile {
+    display: none !important;
+  }
+
+  html {
+    font-size: max(min(1vw, 1.5rem), 1.25rem);
+  }
+
+  .layout__content--right {
+    left: 15.25rem;
+    bottom: 0;
+    width: calc(100% - 16rem);
+    padding-top: 1rem;
+  }
+
+  .layout__content--left-sidebar {
+    left: -0.5rem;
+    bottom: 0;
+    width: 15rem;
+    padding-top: 1rem;
+    padding-left: 0.1rem;
+    padding-right: 0.35rem;
+    overflow: scroll;
+    background: linear-gradient(
+      to left,
+      var(--color-primary-2) -30%,
+      var(--color-primary-0) 100%
+    );
+  }
+
+  .layout__content-wrapper {
+    position: absolute;
+    top: 0rem;
+    bottom: 3.25rem;
+    width: calc(100% - 1rem);
+  }
+
+  .layout__content-heading {
+    position: relative;
+    top: -0.2rem;
+  }
+
+  .header__search {
+    margin-right: 0.5rem;
+  }
+
+  .header__search-input--always-visible input {
+    color: var(--color-text-light);
+    background-color: var(--color-primary-1);
+    outline: 0.175rem solid var(--color-primary-2);
+    transition: all 0.2s;
+  }
+
+  .header__search-input--always-visible input:hover {
+    outline: 0.175rem solid var(--color-primary-3);
+  }
+
+  .header__search-input--always-visible input:focus {
+    background: linear-gradient(
+      to top,
+      var(--color-primary-2) -50%,
+      var(--color-primary-1) 100%
+    );
+    outline: 0.175rem solid var(--color-primary-5);
+  }
+
+  .header__search-input--always-visible input,
+  .header__search-input--always-visible input:focus {
+    width: 12rem;
+    padding-left: 2.25rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .is-hidden-desktop {
+    display: none !important;
+  }
+
+  .header__search-input--always-visible input,
+  .header__search-input--always-visible input:focus {
+    width: 18rem;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  html {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1900px) {
+  html {
+    font-size: max(min(1vw, 1.75rem), 1.5rem);
+  }
+}

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  ardent-www:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - ARDENT_DOMAIN=${ARDENT_DOMAIN:-ardent-insight.com}
+      - ARDENT_API_BASE_URL=${ARDENT_API_BASE_URL:-https://api.ardent-insight.com}
+      - ARDENT_AUTH_BASE_URL=${ARDENT_AUTH_BASE_URL:-https://auth.ardent-insight.com}
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'node', '-e', "require('http').get('http://localhost:3000', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

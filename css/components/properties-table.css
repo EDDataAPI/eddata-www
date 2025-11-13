@@ -1,0 +1,32 @@
+table.properties-table {
+  border-spacing: 0;
+  margin-bottom: 1rem;
+  width: 100%;
+  clear: both;
+  position: relative;
+  top: -0.5rem;
+}
+
+table.properties-table > tbody > tr > th,
+table.properties-table > tbody > tr > td {
+  text-transform: uppercase;
+  vertical-align: top;
+  padding-top: 0.25rem;
+  padding-right: 0.5rem;
+}
+
+table.properties-table > tbody > tr > th {
+  font-family: 'Jura', sans-serif;
+  opacity: 0.8;
+  text-align: right;
+  width: 11rem;
+  font-size: 1.05rem;
+}
+
+table.properties-table > tbody > tr > td {
+  text-align: left;
+}
+
+table.properties-table > tbody > tr > td > small {
+  font-size: 0.9rem;
+}

@@ -1,0 +1,134 @@
+.dialog__background {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(0.1rem);
+  transition: 1.5s ease-in-out;
+}
+
+.dialog__container {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.dialog {
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1000;
+  position: relative;
+  margin: auto;
+  max-width: min(60rem, calc(100vw - 3rem));
+  height: auto; /* auto size ... */
+  min-height: 5rem;
+  max-height: calc(100dvh - 7rem); /* ... but dont grow bigger than screen */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: all;
+  padding-bottom: 3.1rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 2rem) 0,
+    100% 2rem,
+    100% 100%,
+    2rem 100%,
+    0 calc(100% - 2rem)
+  );
+  border-radius: 0.3rem;
+  background: var(--color-primary-0);
+}
+
+.dialog:after {
+  position: absolute;
+  content: '';
+  pointer-events: none;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    2rem 100%,
+    0 calc(100% - 2rem),
+    0 0,
+    0.2rem 0.2rem,
+    0.2rem calc(100% - 2rem - 0.08rem),
+    calc(2rem + 0.08rem) calc(100% - 0.2rem),
+    calc(100% - 0.2rem) calc(100% - 0.2rem),
+    calc(100% - 0.2rem) 0.2rem,
+    0.2rem 0.2rem
+  );
+  inset: 0;
+  z-index: 100000;
+  background: var(--color-primary-3);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 2rem) 0,
+    100% 2rem,
+    100% 100%,
+    2rem 100%,
+    0 calc(100% - 2rem),
+    0 0,
+    0.2rem 0.2rem,
+    0.2rem calc(100% - 2rem - 0.08rem),
+    calc(2rem + 0.08rem) calc(100% - 0.2rem),
+    calc(100% - 0.2rem) calc(100% - 0.2rem),
+    calc(100% - 0.2rem) calc(2rem + 0.08rem),
+    calc(100% - 2rem - 0.08rem) 0.2rem,
+    0.2rem 0.2rem
+  );
+}
+
+.dialog__title {
+  font-size: 1.25rem !important;
+  line-height: 2rem !important;
+  padding-left: 0.5rem;
+  clip-path: none;
+  color: var(--color-text-light);
+  background: var(--color-primary-3);
+}
+
+.dialog__content {
+  z-index: 1002;
+  width: calc(100% - 1rem);
+  height: 100%;
+  position: relative;
+  padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+
+.dialog__inner-content {
+  display: inline-block;
+  overflow-y: scroll;
+  position: relative;
+  z-index: 1003;
+  padding-right: 0.25rem;
+}
+
+.dialog__buttons {
+  position: absolute;
+  display: block;
+  bottom: 0rem;
+  width: 100%;
+  height: 3.1rem;
+  text-align: right;
+  overflow: hidden;
+  z-index: 1002;
+  padding-bottom: 0.2rem;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 2rem 100%, 0 calc(100% - 2rem));
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary-0),
+    var(--color-primary-1)
+  );
+}

@@ -1,0 +1,136 @@
+.layout__frame {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 2rem) 0,
+    100% 2rem,
+    100% 100%,
+    2rem 100%,
+    0 calc(100% - 2rem)
+  );
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.layout__frame::after {
+  position: absolute;
+  z-index: 100;
+  content: '';
+  inset: 0;
+  background: var(--color-layout-frame);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 2rem) 0,
+    100% 2rem,
+    100% 100%,
+    2rem 100%,
+    0 calc(100% - 2rem),
+    0 0,
+    0.25rem 0.25rem,
+    0.25rem calc(100% - 2rem - 0.1rem),
+    calc(2rem + 0.1rem) calc(100% - 0.25rem),
+    calc(100% - 0.25rem) calc(100% - 0.25rem),
+    calc(100% - 0.25rem) calc(2rem + 0.1rem),
+    calc(100% - 2rem - 0.1rem) 0.25rem,
+    0.25rem 0.25rem
+  );
+  pointer-events: none;
+}
+
+/*
+.layout__frame::before {
+  position: absolute;
+  z-index: 1000;
+  content: "";
+  clip-path: polygon(0 0, calc(100% - 2.00rem) 0, 100% 2.00rem, 100% 100%, 2.00rem 100%, 0 calc(100% - 2.00rem));
+  pointer-events: none;
+  background: rgba(255, 255, 255, .05);
+  zoom: 1;
+  inset: 0;
+  top: .25rem;
+  left: .25rem;
+  right: .25rem;
+  bottom: .25rem;
+  filter: blur(5rem);
+}
+*/
+
+.layout__content {
+  overflow: auto;
+  position: absolute;
+  top: 3.8rem;
+  left: 0rem;
+  right: 0rem;
+  bottom: 3.2rem;
+  padding-right: 0.25rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  margin: 0 0.5rem;
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      black 1.25rem,
+      black calc(100% - 1.25rem),
+      transparent
+    ),
+    linear-gradient(black, black);
+  mask-size:
+    100% 100%,
+    16px 100%; /* The 16px here matches the width of the scrollbars, so the mask doesn't overlap them */
+  mask-position:
+    0 0,
+    100% 0;
+  mask-repeat: no-repeat, no-repeat;
+  /*
+    This line actually causes Chrome to fail to render the site (hard failure).
+    It seems like the tab crashes, but no errors in the logs. Only reproducable
+    in production builds, but can be reliably reproduced on ~50% of reloads on Mac
+    Windows and Android systems, by shift-refreshing.
+    I guess the implementation of scrollbar-gutter in Chrome has a bug.
+  */
+  /* scrollbar-gutter: stable; */
+  background: transparent;
+}
+
+.layout__content--with-navigation {
+  left: 3.6rem;
+}
+
+.layout__content--with-navigation-overlayed,
+.layout__content--with-navigation.layout__content--with-navigation-overlayed {
+  left: 0;
+}
+
+.layout__content--with-inspector {
+  width: calc(100% - 25rem);
+}
+
+.layout__inspector {
+  width: 19.7rem;
+  display: inline-block;
+  top: 4.3rem;
+  right: 1rem;
+  bottom: 3.75rem;
+  position: fixed;
+  animation: inspector-slide-in-animation 0.25s ease-in-out;
+  padding-right: 0.25rem;
+}
+
+@keyframes inspector-slide-in-animation {
+  from {
+    right: -21rem;
+  }
+  to {
+    right: 1rem;
+  }
+}
+
+.layout__inspector p {
+  padding: 0 0.5rem;
+}

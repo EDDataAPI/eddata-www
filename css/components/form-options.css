@@ -1,0 +1,79 @@
+.form-options {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(to bottom, var(--color-primary-4), transparent);
+  color: var(--color-text-muted);
+  padding: 0.75rem 0.25rem 0.25rem 0.25rem;
+  font-family: 'Jura', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  overflow: auto;
+}
+
+.form-options form label {
+  position: relative;
+  display: inline-block;
+  top: -0.25rem;
+  margin-top: 0.25rem;
+  margin-right: 0.75rem;
+}
+
+.form-options form label span {
+  float: left;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  opacity: 0.75;
+}
+
+.form-options form input[type='text'] {
+  width: 8.25rem;
+  border-radius: 2rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.form-options form input,
+.form-options form select {
+  float: left;
+  clear: both;
+  background: var(--color-primary-8);
+  border-color: var(--color-primary-3);
+  color: var(--color-text-dark);
+  border-style: solid;
+  border-width: 0.15rem;
+  border-radius: 0.2rem;
+  padding: 0.25rem;
+  font-size: 1rem;
+  font-family: 'Jura', sans-serif;
+  transition: opacity 500ms;
+}
+
+.form-options form input:hover:not(:disabled),
+.form-options form select:hover:not(:disabled) {
+  background: var(--color-primary-9);
+  border-color: var(--color-primary-3);
+}
+
+.form-options form button:disabled,
+.form-options form input:disabled,
+.form-options form select:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.form-options form button {
+  border-radius: 0.2rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  position: absolute;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  transition: 500ms;
+  text-transform: uppercase;
+}
+
+.form-options form input[type='checkbox'] {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}

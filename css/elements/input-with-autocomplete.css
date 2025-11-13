@@ -1,0 +1,102 @@
+.input-with-autocomplete {
+  position: relative;
+}
+
+.input-with-autocomplete__label {
+}
+
+.input-with-autocomplete__label-text {
+}
+
+.input-with-autocomplete__input {
+  width: 100% !important;
+  outline: none !important;
+  position: relative;
+  z-index: 2;
+}
+
+.input-with-autocomplete__input--with-focus {
+  z-index: 4;
+}
+
+.input-with-autocomplete__input::placeholder {
+}
+
+.input-with-autocomplete__input:focus::placeholder {
+}
+
+.input-with-autocomplete__results-dropdown {
+  z-index: 1;
+  position: absolute;
+  max-height: 15rem;
+  background: var(--color-primary-1);
+  border: 0.15rem solid var(--color-primary-5);
+  border-radius: 0.2rem;
+  width: 100%;
+  box-shadow:
+    0 0 1rem rgb(0, 0, 0),
+    0 0 2rem rgb(0, 0, 0);
+  padding: 0.35rem 0.2rem 0.2rem 0.2rem;
+  margin-top: -0.3rem;
+}
+
+.input-with-autocomplete__input--with-focus
+  + .input-with-autocomplete__results-dropdown {
+  z-index: 3;
+}
+
+.input-with-autocomplete__results {
+  max-height: 15rem;
+}
+
+.input-with-autocomplete__result {
+  margin: 0 0.2rem 0 0;
+  padding: 0.2rem;
+  font-size: 0.8rem;
+  position: relative;
+}
+
+.input-with-autocomplete__result:not(
+    .input-with-autocomplete__result--disabled
+  ):hover {
+  background: var(--color-highlight-5);
+  color: var(--color-text-dark);
+}
+
+.input-with-autocomplete__result-icon {
+  position: absolute;
+  left: 0;
+}
+
+.input-with-autocomplete__result--with-icon {
+  padding-left: 1.2rem;
+}
+
+.input-with-autocomplete__clear {
+  position: absolute;
+  right: -1.4rem;
+  top: 1.6rem;
+  z-index: 2;
+  opacity: 0 !important;
+  text-align: center;
+  display: inline-block;
+  background-color: var(--color-primary-3);
+  border-radius: 2rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  line-height: 1.3rem;
+}
+
+.input-with-autocomplete__clear:hover,
+.input-with-autocomplete__input:hover ~ .input-with-autocomplete__clear,
+.input-with-autocomplete__input--with-focus ~ .input-with-autocomplete__clear {
+  z-index: 2;
+}
+
+.input-with-autocomplete__clear:hover {
+  opacity: 1 !important;
+}
+/* .input-with-autocomplete__clear:hover {
+  color: red;
+  background: greenyellow;
+} */

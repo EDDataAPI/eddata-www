@@ -1,0 +1,100 @@
+.sidebar__options {
+  padding-bottom: 0.15rem;
+}
+
+.sidebar__options form label {
+  position: relative;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.sidebar__options form label span {
+  display: block;
+  text-transform: uppercase;
+  opacity: 0.75;
+  font-size: 0.9rem;
+  padding-bottom: 0.15rem;
+}
+
+.sidebar__options form input[type='text'] {
+  width: calc(100% - 1.75rem);
+  border-radius: 2rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.sidebar__options form input,
+.sidebar__options form select {
+  width: calc(100%);
+  background: var(--color-primary-1);
+  border-color: var(--color-primary-4);
+  color: var(--color-text);
+  border-style: solid;
+  border-width: 0.15rem;
+  border-radius: 0.2rem;
+  padding: 0.25rem;
+  font-size: 1rem;
+  font-family: 'Jura', sans-serif;
+  transition:
+    opacity 500ms,
+    background-color 250ms,
+    border-color 250ms,
+    color 250ms;
+  outline: none;
+}
+
+.sidebar__options form input:focus,
+.sidebar__options form select:focus,
+.sidebar__options form input:hover:not(:disabled),
+.sidebar__options form select:hover:not(:disabled) {
+  background: var(--color-primary-0);
+  border-color: var(--color-primary-5);
+}
+
+.sidebar__options form button:disabled,
+.sidebar__options form input:disabled,
+.sidebar__options form select:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.sidebar__options form button {
+  border-radius: 0.2rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  position: absolute;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  transition: 500ms;
+  text-transform: uppercase;
+}
+
+.sidebar__options form input[type='checkbox'] {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+.sidebar__properties-table th,
+.sidebar__properties-table td {
+  text-align: left;
+}
+
+.sidebar__properties-table th {
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.sidebar__options .input-with-autocomplete {
+  width: calc(100% - 1.75rem);
+}
+
+.sidebar__options .input-with-autocomplete__results-dropdown {
+  width: calc(100%);
+  left: 0.5rem;
+}
+
+.sidebar__options .input-with-autocomplete__result-highlighted {
+  background: var(--color-primary-5);
+  color: var(--color-primary-1);
+}
