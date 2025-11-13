@@ -19,7 +19,7 @@ export default function handler(req, res) {
   try {
     const status = getDetailedStatus()
     res.status(200).json(status)
-  } catch (_error) {
+  } catch {
     res.status(500).json({
       error: 'Status check failed',
       timestamp: new Date().toISOString()

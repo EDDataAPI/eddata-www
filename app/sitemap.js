@@ -53,7 +53,7 @@ export default async function sitemap() {
         priority: 0.8
       })
     })
-  } catch (e) {
+  } catch (_e) {
     console.warn(
       'WARNING: Skipped building sitemap for commodites - API may be unavailable'
     )

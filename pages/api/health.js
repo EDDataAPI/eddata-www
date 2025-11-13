@@ -13,7 +13,7 @@ export default function handler(req, res) {
   try {
     const status = getHealthStatus()
     res.status(200).json(status)
-  } catch (_error) {
+  } catch {
     res.status(500).json({
       status: 'error',
       message: 'Health check failed',
