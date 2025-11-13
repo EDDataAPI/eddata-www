@@ -1,34 +1,37 @@
 {
-  "name": "ardent-www",
+  "name": "eddata-www",
   "version": "2.7.1",
-  "description": "Ardent Insight Website",
+  "description": "EDData Website",
   "main": "index.js",
   "scripts": {
     "start": "next start -p 3000",
     "build": "next build",
     "build:analyze": "cross-env ANALYZE=true next build",
-    "build:local": "cross-env ARDENT_API_BASE_URL=http://localhost:3001/api ARDENT_AUTH_BASE_URL=http://localhost:3003/auth next build",
+    "build:local": "cross-env EDDATA_API_BASE_URL=http://localhost:3001/api EDDATA_AUTH_BASE_URL=http://localhost:3003/auth next build",
     "dev": "next dev -p 3000 --turbo",
-    "dev:local": "cross-env ARDENT_API_BASE_URL=http://localhost:3001/api ARDENT_AUTH_BASE_URL=http://localhost:3003/auth next dev -p 3000 --turbo",
-    "dev:local:api": "cross-env ARDENT_API_BASE_URL=http://localhost:3001/api next dev -p 3000 --turbo",
-    "dev:local:auth": "cross-env ARDENT_AUTH_BASE_URL=http://localhost:3003/auth next dev -p 3000 --turbo",
+    "dev:local": "cross-env EDDATA_API_BASE_URL=http://localhost:3001/api EDDATA_AUTH_BASE_URL=http://localhost:3003/auth next dev -p 3000 --turbo",
+    "dev:local:api": "cross-env EDDATA_API_BASE_URL=http://localhost:3001/api next dev -p 3000 --turbo",
+    "dev:local:auth": "cross-env EDDATA_AUTH_BASE_URL=http://localhost:3003/auth next dev -p 3000 --turbo",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
-    "clean": "rimraf .next out"
+    "validate": "npm run type-check && npm run lint && npm run format:check",
+    "clean": "rimraf .next out",
+    "audit:security": "npm audit",
+    "audit:fix": "npm audit fix"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iaincollins/ardent-spike.git"
+    "url": "git+https://github.com/EDDataAPI/eddata-www.git"
   },
   "author": "",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/iaincollins/ardent-spike/issues"
+    "url": "https://github.com/EDDataAPI/eddata-www/issues"
   },
-  "homepage": "https://github.com/iaincollins/ardent-spike#readme",
+  "homepage": "https://github.com/EDDataAPI/eddata-www#readme",
   "dependencies": {
     "@react-three/fiber": "^8.18.0",
     "byte-size": "^9.0.1",

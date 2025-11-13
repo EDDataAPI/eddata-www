@@ -3,25 +3,25 @@ import { getCommoditiesWithPricing } from 'lib/commodities'
 export default async function sitemap() {
   const sitemap = [
     {
-      url: 'https://ardent-insight.com',
+      url: 'https://eddata.app',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1
     },
     {
-      url: 'https://ardent-insight.com/commodities',
+      url: 'https://eddata.app/commodities',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.7
     },
     {
-      url: 'https://ardent-insight.com/about',
+      url: 'https://eddata.app/about',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.3
     },
     {
-      url: 'https://ardent-insight.com/downloads',
+      url: 'https://eddata.app/downloads',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.3
@@ -35,19 +35,19 @@ export default async function sitemap() {
     const commodities = await getCommoditiesWithPricing()
     commodities.forEach(commodity => {
       sitemap.push({
-        url: `https://ardent-insight.com/commodity/${commodity.commodityName}`,
+        url: `https://eddata.app/commodity/${commodity.commodityName}`,
         lastModified: new Date(),
         changeFrequency: 'daily',
         priority: 0.8
       })
       sitemap.push({
-        url: `https://ardent-insight.com/commodity/${commodity.commodityName}/importers`,
+        url: `https://eddata.app/commodity/${commodity.commodityName}/importers`,
         lastModified: new Date(),
         changeFrequency: 'daily',
         priority: 0.8
       })
       sitemap.push({
-        url: `https://ardent-insight.com/commodity/${commodity.commodityName}/exporters`,
+        url: `https://eddata.app/commodity/${commodity.commodityName}/exporters`,
         lastModified: new Date(),
         changeFrequency: 'daily',
         priority: 0.8

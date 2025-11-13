@@ -2,19 +2,29 @@ const path = require('path')
 const fs = require('fs')
 
 // Valid config file locations
-const ARDENT_CONFIG_LOCATIONS = [
-  '/etc/ardent.config',
-  path.join(__dirname, '../ardent.config'),
-  path.join(__dirname, './ardent.config')
+const EDDATA_CONFIG_LOCATIONS = [
+  '/etc/eddata.config',
+  path.join(__dirname, '../eddata.config'),
+  path.join(__dirname, './eddata.config')
 ]
 
-for (const configPath of ARDENT_CONFIG_LOCATIONS.reverse()) {
-  if (fs.existsSync(configPath)) require('dotenv').config({ path: configPath })
+// Load configuration file if exists
+for (const configPath of EDDATA_CONFIG_LOCATIONS.reverse()) {
+  if (fs.existsSync(configPath)) {
+    require('dotenv').config({ path: configPath })
+    break
+  }
 }
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  
+  // Experimental features
+  experimental: {
+    optimizePackageImports: ['react-icons', 'react-hot-toast']
+  },
+  
   turbopack: {
     rules: {
       '*.svg': {
@@ -23,6 +33,7 @@ const nextConfig = {
       }
     }
   },
+  
   // Webpack configuration for path resolution
   webpack: (config, _context) => {
     config.resolve.modules = config.resolve.modules || []
@@ -36,6 +47,7 @@ const nextConfig = {
     
     return config
   },
+  
   async rewrites() {
     return [
       {
@@ -44,6 +56,7 @@ const nextConfig = {
       }
     ]
   },
+  
   async redirects() {
     return [
       {
@@ -63,14 +76,51 @@ const nextConfig = {
       }
     ]
   },
+  
+  // Environment variables exposed to browser
   env: {
-    ARDENT_DOMAIN: process.env.ARDENT_DOMAIN,
-    ARDENT_API_BASE_URL: process.env.ARDENT_API_BASE_URL,
-    ARDENT_AUTH_BASE_URL: process.env.ARDENT_AUTH_BASE_URL
+    EDDATA_DOMAIN: process.env.EDDATA_DOMAIN,
+    EDDATA_API_BASE_URL: process.env.EDDATA_API_BASE_URL,
+    EDDATA_AUTH_BASE_URL: process.env.EDDATA_AUTH_BASE_URL
   },
-  // Performance optimizations
+  
+  // Performance and optimization
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production'
+  },
+  
+  // Image optimization
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384]
+  },
+  
+  // Headers for security and performance
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY'
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block'
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin'
+          }
+        ]
+      }
+    ]
   }
 }
 

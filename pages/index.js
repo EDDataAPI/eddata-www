@@ -51,11 +51,11 @@ export default () => {
 
   return (
     <Layout
-      title='Ardent Insight - Elite Dangerous'
-      description='Ardent Insight is companion software for the game Elite Dangerous'
+      title='EDData - Elite Dangerous'
+      description='EDData is companion software for the game Elite Dangerous'
     >
       <Head>
-        <link rel='canonical' href='https://ardent-insight.com/about' />
+        <link rel='canonical' href='https://eddata.app/about' />
       </Head>
       <div className='home fx__fade-in scrollable'>
         <div className='home__news-feed'>
@@ -155,7 +155,7 @@ export default () => {
                 style={{ position: 'relative', top: '-.1rem' }}
               />
               <Link href='/about'>
-                Ardent OS {Package.version} | API {version?.version ?? '?.?.?'}
+                EDData OS {Package.version} | API {version?.version ?? '?.?.?'}
               </Link>
             </small>
           </p>
@@ -232,10 +232,10 @@ export default () => {
             className='heading--with-underline'
             style={{ marginTop: '1.5rem' }}
           >
-            <h3 className='text-uppercase'>Ardent Insight</h3>
+            <h3 className='text-uppercase'>EDData</h3>
           </div>
           <p>
-            Ardent Insight is the leading provider of open trade data in the
+            EDData is the leading provider of open trade data in the
             galaxy.
           </p>
           <p>
@@ -247,7 +247,7 @@ export default () => {
             relay.
           </p>
           <div className='heading--with-underline'>
-            <h3>Ardent HQ</h3>
+            <h3>EDData HQ</h3>
           </div>
           <p style={{ margin: 0, padding: '.5rem .25rem' }}>
             <Link
@@ -265,12 +265,12 @@ export default () => {
           </p>
           <br />
           <div className='heading--with-underline'>
-            <h3>Ardent Carrier</h3>
+            <h3>EDData Carrier</h3>
           </div>
           <p style={{ margin: 0, padding: '.5rem .25rem' }}>
             <span className='text-uppercase'>
               <i className='icon icarus-terminal-fleet-carrier' />
-              Ardent Pioneer V9G-G7Z
+              EDData Pioneer V9G-G7Z
             </span>
           </p>
         </div>

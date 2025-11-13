@@ -41,14 +41,14 @@ export default () => {
 
   return (
     <Layout
-      title='Downloads for Ardent Insight software'
-      description='Download bulk exports of data for the game Elite Dangerous from Ardent Insight'
+      title='Downloads for EDData software'
+      description='Download bulk exports of data for the game Elite Dangerous from EDData'
     >
       <Head>
-        <link rel='canonical' href='https://ardent-insight.com/downloads' />
+        <link rel='canonical' href='https://eddata.app/downloads' />
       </Head>
       <div className='fx__fade-in'>
-        <p>You can download the source code and data for Ardent Insight.</p>
+        <p>You can download the source code and data for EDData.</p>
         <p>
           <Link href='/about'>About this software</Link>.
         </p>
@@ -62,38 +62,38 @@ export default () => {
         <ul>
           <li>
             <a
-              href='https://github.com/iaincollins/ardent-www'
-              rel='noreferrer'
-              target='_blank'
+              href='https://github.com/EDDataAPI/eddata-www'
+              target='blank'
+              className='link-no-underline'
             >
-              Ardent Website Source Code
+              EDData Website Source Code
             </a>
           </li>
           <li>
             <a
-              href='https://github.com/iaincollins/ardent-api'
+              href='https://github.com/EDDataAPI/eddata-api'
               rel='noreferrer'
               target='_blank'
             >
-              Ardent API Source Code
+              EDData API Source Code
             </a>
           </li>
           <li>
             <a
-              href='https://github.com/iaincollins/ardent-collector'
+              href='https://github.com/EDDataAPI/eddata-collector'
               rel='noreferrer'
               target='_blank'
             >
-              Ardent Collector Source Code
+              EDData Collector Source Code
             </a>
           </li>
           <li>
             <a
-              href='https://github.com/iaincollins/ardent-auth'
-              rel='noreferrer'
-              target='_blank'
+              href='https://github.com/EDDataAPI/eddata-auth'
+              target='blank'
+              className='link-no-underline'
             >
-              Ardent Authentication Source Code
+              EDData Authentication Source Code
             </a>
           </li>
         </ul>

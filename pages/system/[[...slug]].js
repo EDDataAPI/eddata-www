@@ -45,8 +45,14 @@ export default () => {
   const [inspector, setInspector] = useState()
   const [title, setTitle] = useState('')
 
-  // TODO Refactor to read path from slug
   const views = ['', 'list', 'exports', 'imports', 'services', 'nearby']
+  
+  // Helper to parse slug from router query
+  const getSystemIdentifierAndView = () => {
+    const systemIdentifier = router.query.slug?.[0]?.replaceAll('_', ' ')?.trim()
+    const view = router.query?.slug?.[1] ?? ''
+    return { systemIdentifier, view }
+  }
 
   useEffect(animateTableEffect)
 
@@ -58,10 +64,9 @@ export default () => {
     ;(async () => {
       if (!router.query.slug) return
 
-      const systemIdentifer = router.query.slug[0]?.replaceAll('_', ' ')?.trim()
+      const { systemIdentifier: systemIdentifer, view } = getSystemIdentifierAndView()
       if (!systemIdentifer) return
 
-      const view = router.query?.slug?.[1] ?? ''
       if (activeViewIndex !== views.indexOf(view)) setInspector(undefined) // Hide inspector when switching views
       setActiveViewIndex(views.indexOf(view))
 
@@ -394,7 +399,7 @@ export default () => {
       <Head>
         <link
           rel='canonical'
-          href={`https://ardent-insight.com/system/${system?.systemAddress}/${views[activeViewIndex]}`}
+          href={`https://eddata.app/system/${system?.systemAddress}/${views[activeViewIndex]}`}
         />
       </Head>
       {system === null && (

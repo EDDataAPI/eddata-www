@@ -1,8 +1,8 @@
-# Ardent Website
+# EDData Website
 
-This is the website for [ardent-insight.com](https://ardent-insight.com)
+This is the website for [eddata.app](https://eddata.app)
 
-Ardent provides trade and exploration data for the game 
+EDData provides trade and exploration data for the game 
 [Elite Dangerous](https://www.elitedangerous.com/).
 
 It uses a live data feed from the 
@@ -11,9 +11,9 @@ It uses a live data feed from the
 
 Related repositories:
 
-* https://github.com/iaincollins/ardent-api
-* https://github.com/iaincollins/ardent-collector
-* https://github.com/iaincollins/ardent-auth
+* https://github.com/EDDataAPI/eddata-api
+* https://github.com/EDDataAPI/eddata-collector
+* https://github.com/EDDataAPI/eddata-auth
 
 ## Getting started
 
@@ -41,7 +41,7 @@ way for a Node.js application:
 This will start a web server running on port `3000` in development mode with 
 hot reloading enabled, the site will connect to the live API. This is useful 
 for testing with real world data without needing to have a full  copy of the 
-databsases locally, but is limited as sign in will not work in this mode.
+databases locally, but is limited as sign in will not work in this mode.
 
 Note: You may sometimes see CORS requests failing locally in the browser as a 
 side effect of running the site on localhost while making calls to the 
@@ -50,29 +50,29 @@ production API URL. These errors can be safely ignored.
 ### Starting the full stack in development mode
 
 You can run the full stack with 
-[ardent-www](https://github.com/iaincollins/ardent-www), 
-[ardent-api](https://github.com/iaincollins/ardent-api) and
-[ardent-auth](https://github.com/iaincollins/ardent-auth) locally by starting 
+[eddata-www](https://github.com/EDDataAPI/eddata-www), 
+[eddata-api](https://github.com/EDDataAPI/eddata-api) and
+[eddata-auth](https://github.com/EDDataAPI/eddata-auth) locally by starting 
 all of them using `npm run dev:local` which will start each service running on 
 port `3000`, `3001` and `3003` respectively. You can optionally also run the 
-[ardent-collector](https://github.com/iaincollins/ardent-collector) using 
+[eddata-collector](https://github.com/EDDataAPI/eddata-collector) using 
 `npm run dev`, port `3002` is reserved for the collector although it does not 
 have a public facing interface.
 
 Being able to run the full stack locally, including authentication, requires 
 configuration of appropriate auth tokens using environment variables or an 
-`ardent.config` file.
+`eddata.config` file.
 
-You will, at a mimium, need to configure the following details, with the 
+You will, at a minimum, need to configure the following details, with the 
 `AUTH_CLIENT_ID` option corresponding to the Client ID you can configured 
 on the Frontier Development developer portal.
 
     AUTH_CLIENT_ID=
-    ARDENT_AUTH_JWT_SECRET=
-    ARDENT_SESSION_SECRET=
+    EDDATA_AUTH_JWT_SECRET=
+    EDDATA_SESSION_SECRET=
 
-Tip: If you create a file called `ardent.config` in the parent directory for 
-the repositories - or create a file at `/etc/ardent.config` - with environment 
+Tip: If you create a file called `eddata.config` in the parent directory for 
+the repositories - or create a file at `/etc/eddata.config` - with environment 
 variables in this format all the services will use any supported configuration 
 options specified there.
 

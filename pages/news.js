@@ -31,11 +31,11 @@ export default props => {
 
   return (
     <Layout
-      title='Ardent Insight'
-      description='Ardent Insight is companion software for the game Elite Dangerous'
+      title='EDData'
+      description='EDData is companion software for the game Elite Dangerous'
     >
       <Head>
-        <link rel='canonical' href='https://ardent-insight.com/about' />
+        <link rel='canonical' href='https://eddata.app/about' />
       </Head>
       <div className='fx__fade-in'>
         <div

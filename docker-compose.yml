@@ -1,17 +1,18 @@
 version: '3.8'
 
 services:
-  ardent-www:
+  eddata-www:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: eddata-www
     ports:
       - '3000:3000'
     environment:
       - NODE_ENV=production
-      - ARDENT_DOMAIN=${ARDENT_DOMAIN:-ardent-insight.com}
-      - ARDENT_API_BASE_URL=${ARDENT_API_BASE_URL:-https://api.ardent-insight.com}
-      - ARDENT_AUTH_BASE_URL=${ARDENT_AUTH_BASE_URL:-https://auth.ardent-insight.com}
+      - EDDATA_DOMAIN=${EDDATA_DOMAIN:-eddata.app}
+      - EDDATA_API_BASE_URL=${EDDATA_API_BASE_URL:-https://api.eddata.app}
+      - EDDATA_AUTH_BASE_URL=${EDDATA_AUTH_BASE_URL:-https://auth.eddata.app}
     restart: unless-stopped
     healthcheck:
       test: ['CMD', 'node', '-e', "require('http').get('http://localhost:3000', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"]
@@ -19,3 +20,16 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "traefik.enable=true"
+      - "traefik.http.routers.eddata-www.rule=Host(`eddata.app`) || Host(`www.eddata.app`)"
+      - "traefik.http.routers.eddata-www.entrypoints=websecure"
+      - "traefik.http.routers.eddata-www.tls.certresolver=letsencrypt"
+      - "traefik.http.services.eddata-www.loadbalancer.server.port=3000"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

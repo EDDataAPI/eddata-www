@@ -285,7 +285,7 @@ export default () => {
         >
           <h1>
             <i className='icarus-terminal-logo icon' />
-            Ardent <span className='is-hidden-mobile'>Insight</span>
+            EDData <span className='is-hidden-mobile'></span>
           </h1>
         </Link>
         <ul

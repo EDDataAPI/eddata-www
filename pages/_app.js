@@ -103,9 +103,10 @@ export default function App({ Component, pageProps }) {
           href='/icons/icon-16x16.png'
         />
         <link rel='manifest' href='/manifest.json' />
-        <meta
+                <meta
           property='og:image'
-          content='https://ardent-insight.com/og-image.png'
+          content='https://eddata.app/og-image.png'
+          key='og-image'
         />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </Head>

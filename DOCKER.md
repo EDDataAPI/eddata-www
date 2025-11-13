@@ -11,17 +11,17 @@ This Next.js application uses:
 ## Building the Docker Image
 
 ```bash
-docker build -t ardent-www .
+docker build -t eddata-www .
 ```
 
-## Running the Container
+### Run the Container
 
 ```bash
-docker run -p 3000:3000 \
-  -e ARDENT_DOMAIN=your-domain.com \
-  -e ARDENT_API_BASE_URL=https://api.your-domain.com \
-  -e ARDENT_AUTH_BASE_URL=https://auth.your-domain.com \
-  ardent-www
+docker run -d -p 3000:3000 \
+  -e EDDATA_DOMAIN=your-domain.com \
+  -e EDDATA_API_BASE_URL=https://api.your-domain.com \
+  -e EDDATA_AUTH_BASE_URL=https://auth.your-domain.com \
+  eddata-www
 ```
 
 ## Docker Compose Example
@@ -42,15 +42,15 @@ Or use the provided `docker-compose.yml`:
 version: '3.8'
 
 services:
-  ardent-www:
+  eddata-www:
     build: .
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - ARDENT_DOMAIN=your-domain.com
-      - ARDENT_API_BASE_URL=https://api.your-domain.com
-      - ARDENT_AUTH_BASE_URL=https://auth.your-domain.com
+      - EDDATA_DOMAIN=your-domain.com
+      - EDDATA_API_BASE_URL=https://api.your-domain.com
+      - EDDATA_AUTH_BASE_URL=https://auth.your-domain.com
     restart: unless-stopped
     healthcheck:
       test: ['CMD', 'node', '-e', "require('http').get('http://localhost:3000', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"]
@@ -61,9 +61,9 @@ services:
 
 ## Environment Variables
 
-- `ARDENT_DOMAIN` - Your domain name
-- `ARDENT_API_BASE_URL` - API base URL
-- `ARDENT_AUTH_BASE_URL` - Authentication service URL
+- `EDDATA_DOMAIN` - Your domain name
+- `EDDATA_API_BASE_URL` - API base URL
+- `EDDATA_AUTH_BASE_URL` - Authentication service URL
 
 ## GitHub Container Registry
 
@@ -74,7 +74,7 @@ The image is automatically built and pushed to GitHub Container Registry on:
 
 Pull the latest image:
 ```bash
-docker pull ghcr.io/edtoolbox/ardent-www:latest
+docker pull ghcr.io/eddataapi/eddata-www:latest
 ```
 
 ## Multi-platform Support

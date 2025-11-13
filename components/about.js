@@ -32,10 +32,10 @@ export default ({ toggle }) => {
   return (
     <>
       <p>
-        ArdentOS v{Package.version}
+        EDData OS v{Package.version}
         <span className='muted'>{' | '}</span>
         <a
-          href='https://github.com/iaincollins/ardent-api'
+          href='https://github.com/EDDataAPI/eddata-api'
           rel='noreferrer'
           target='_blank'
         >
@@ -46,7 +46,7 @@ export default ({ toggle }) => {
         <h2>About</h2>
       </div>
       <p>
-        Ardent Insight provides open trade data and system information for the
+        EDData provides open trade data and system information for the
         game{' '}
         <a
           href='https://www.elitedangerous.com/'

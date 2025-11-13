@@ -8,16 +8,16 @@ export default () => {
   const [, setNavigationPath] = useContext(NavigationContext)
   useEffect(() => {
     setNavigationPath([
-      { name: 'About Ardent', path: '/about', icon: 'icarus-terminal-info' }
+      { name: 'About EDData', path: '/about', icon: 'icarus-terminal-info' }
     ])
   }, [])
   return (
     <Layout
-      title='About Ardent Insight for Elite Dangerous'
-      description='Ardent Insight is companion software for the game Elite Dangerous'
+      title='About EDData for Elite Dangerous'
+      description='EDData is companion software for the game Elite Dangerous'
     >
       <Head>
-        <link rel='canonical' href='https://ardent-insight.com/about' />
+        <link rel='canonical' href='https://eddata.app/about' />
       </Head>
       <div className='fx__fade-in'>
         <div className='clear'>

@@ -132,9 +132,8 @@ export default () => {
   const loadCommodityEventHandler = e => {
     const commoditySymbol = e.detail.toLowerCase()
 
-    // We don't have access to the router.query from an event, so hackily reading from the URL
-    const _activeTab =
-      window.location.pathname.split('/')?.[3]?.toLowerCase() ?? TABS[0]
+    // Extract active tab from router query or use default
+    const _activeTab = activeTab || TABS[0]
 
     router.push(
       `/commodity/${commoditySymbol}/${_activeTab}${window.location.search}`
@@ -166,9 +165,13 @@ export default () => {
     const commoditySymbol = router.query?.slug?.[0]?.toLowerCase()
     const _activeTab = router.query?.slug?.[1] ?? TABS[0]
 
-    // TODO: Check inputs and gracefully invalid values
+    // Validate inputs: check if commodity symbol exists and tab is valid
     if (!commoditySymbol) return
-    if (!_activeTab) return
+    if (!TABS.includes(_activeTab)) {
+      // Redirect to valid tab if invalid tab provided
+      router.push(`/commodity/${commoditySymbol}/${TABS[0]}${window.location.search}`)
+      return
+    }
 
     setActiveTab(_activeTab)
 
@@ -217,7 +220,7 @@ export default () => {
       <Head>
         <link
           rel='canonical'
-          href={`https://ardent-insight.com/commodity/${commodity?.symbol}/${activeTab}`}
+          href={`https://eddata.app/commodity/${commodity?.symbol}/${activeTab}`}
         />
       </Head>
       {commodity && (
