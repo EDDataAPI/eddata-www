@@ -43,6 +43,10 @@ coverage/
 # Optional eslint cache
 .eslintcache
 
+# Temporary files
+lint-output.txt
+*.http
+
 # Bundle analyzer
 .bundle-analyzer
 
