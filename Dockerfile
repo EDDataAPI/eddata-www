@@ -10,8 +10,8 @@ COPY package*.json ./
 
 # Install dependencies with production optimizations
 # Using npm install instead of npm ci for better platform compatibility
-# HUSKY=0 disables husky prepare script in Docker
-RUN HUSKY=0 npm install --omit=dev --prefer-offline --no-audit && npm cache clean --force
+# --ignore-scripts prevents husky prepare script from running
+RUN npm install --omit=dev --prefer-offline --no-audit --ignore-scripts && npm cache clean --force
 
 # Copy application files
 COPY . .
