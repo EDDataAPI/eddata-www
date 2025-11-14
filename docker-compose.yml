@@ -32,10 +32,12 @@ services:
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
       - 'traefik.enable=true'
+      - 'traefik.docker.network=web'
       - 'traefik.http.routers.eddata-www.rule=Host(`eddata.app`) || Host(`www.eddata.app`)'
       - 'traefik.http.routers.eddata-www.entrypoints=websecure'
       - 'traefik.http.routers.eddata-www.tls.certresolver=letsencrypt'
       - 'traefik.http.services.eddata-www.loadbalancer.server.port=3000'
+      - 'traefik.http.services.eddata-www.loadbalancer.server.scheme=http'
       # Health check for Traefik
       - 'traefik.http.services.eddata-www.loadbalancer.healthcheck.path=/api/health'
       - 'traefik.http.services.eddata-www.loadbalancer.healthcheck.interval=30s'
