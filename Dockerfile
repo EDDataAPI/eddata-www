@@ -1,5 +1,5 @@
 # Build stage
-FROM node:24-alpine AS builder
+FROM node:24-bookworm-slim AS builder
 
 # Set working directory
 WORKDIR /app
@@ -20,7 +20,7 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:24-alpine AS runner
+FROM node:24-bookworm-slim AS runner
 
 # Set working directory
 WORKDIR /app
