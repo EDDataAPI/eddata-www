@@ -25,7 +25,7 @@
     "clean": "rimraf .next out",
     "audit:security": "npm audit",
     "audit:fix": "npm audit fix",
-    "prepare": "husky"
+    "prepare": "node -e \"if (!process.env.CI && !process.env.DOCKER_BUILD) { try { require('husky') } catch (e) {} }\""
   },
   "repository": {
     "type": "git",
