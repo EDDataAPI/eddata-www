@@ -3,7 +3,7 @@
  * GET /api/health
  */
 
-import { getHealthStatus } from '@/lib/health'
+import { getHealthStatus } from '../../lib/health'
 
 export default function handler(req, res) {
   if (req.method !== 'GET') {

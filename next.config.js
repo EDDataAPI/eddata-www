@@ -41,9 +41,19 @@ const nextConfig = {
   },
 
   // Webpack configuration for path resolution
-  webpack: (config, _context) => {
+  webpack: (config, context) => {
     config.resolve.modules = config.resolve.modules || []
     config.resolve.modules.push(path.resolve(__dirname))
+
+    // Mark Node.js modules as external for client-side builds
+    if (!context.isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+        dotenv: false
+      }
+    }
 
     // Bundle analyzer only in ANALYZE mode
     if (process.env.ANALYZE === 'true') {

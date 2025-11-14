@@ -3,8 +3,8 @@
  * GET /api/status
  */
 
-import { getDetailedStatus } from '@/lib/health'
-import { IS_PRODUCTION } from '@/lib/consts'
+import { getDetailedStatus } from '../../lib/health'
+import { IS_PRODUCTION } from '../../lib/consts'
 
 export default function handler(req, res) {
   if (req.method !== 'GET') {
