@@ -27,7 +27,8 @@ const nextConfig = {
       'react-hot-toast',
       'react-markdown'
     ],
-    optimizeCss: true,
+    // Disable CSS optimization in production builds (requires critters dev dependency)
+    optimizeCss: process.env.NODE_ENV !== 'production',
     scrollRestoration: true
   },
 
