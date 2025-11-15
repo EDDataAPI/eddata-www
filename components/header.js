@@ -153,7 +153,15 @@ function Header() {
   const updateTicker = async () => {
     try {
       const res = await fetch(`${API_BASE_URL}/v2/news/commodities`)
+      if (!res.ok) {
+        console.warn(`Failed to fetch commodity news: ${res.status}`)
+        return
+      }
       const ticker = await res.json()
+      if (!Array.isArray(ticker)) {
+        console.warn('Commodity news response is not an array')
+        return
+      }
       const latestCommodityData = await getCommoditiesWithPricing()
 
       const newTickerItems = []

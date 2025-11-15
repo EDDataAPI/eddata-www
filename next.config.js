@@ -150,8 +150,7 @@ const nextConfig = {
           "font-src 'self' data:",
           "connect-src 'self' https://eddata.dev https://*.eddata.dev",
           "frame-ancestors 'none'",
-          "base-uri 'self'",
-          "form-action 'self' https://auth.eddata.dev/ https://api.eddata.dev/ https://eddata.dev/"
+          "base-uri 'self'"
         ].join('; ')
       }
     ]

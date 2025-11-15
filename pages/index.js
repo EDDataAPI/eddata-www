@@ -26,8 +26,10 @@ function Home() {
     ;(async () => {
       try {
         const res = await fetch(`${API_BASE_URL}/v2/news/galnet`)
-        const news = await res.json()
-        setGalnetNews(news)
+        if (res.ok) {
+          const news = await res.json()
+          setGalnetNews(news)
+        }
       } catch (e) {
         console.error(e)
       }

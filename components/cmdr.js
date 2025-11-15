@@ -427,17 +427,31 @@ function Cmdr() {
               </div>
             )}
             {csrfToken && (
-              <form id='signout' method='POST' action={SIGN_OUT_URL}>
-                <input type='hidden' name='csrfToken' value={csrfToken} />
-                <p className='text-center'>
-                  <small
-                    style={{ paddingBottom: '1rem' }}
-                    onClick={() => document.getElementById('signout').submit()}
-                  >
-                    Sign out
-                  </small>
-                </p>
-              </form>
+              <p className='text-center'>
+                <small
+                  style={{ paddingBottom: '1rem', cursor: 'pointer' }}
+                  onClick={async () => {
+                    try {
+                      const response = await fetch(SIGN_OUT_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
+                        body: JSON.stringify({ csrfToken })
+                      })
+                      if (response.redirected) {
+                        window.location.href = response.url
+                      } else {
+                        window.location.reload()
+                      }
+                    } catch (error) {
+                      console.error('Sign out failed:', error)
+                      window.location.reload()
+                    }
+                  }}
+                >
+                  Sign out
+                </small>
+              </p>
             )}
           </>
         )}
@@ -483,19 +497,20 @@ function Cmdr() {
                   </span>
                 </p>
                 <p className='text-center'>Sign in to access services</p>
-                <form method='GET' action={SIGN_IN_URL}>
-                  <button
-                    className='button button--large'
-                    style={{
-                      display: 'block',
-                      width: '100%',
-                      padding: '.75rem .25rem',
-                      fontSize: '1.25rem'
-                    }}
-                  >
-                    Sign in
-                  </button>
-                </form>
+                <button
+                  className='button button--large'
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    padding: '.75rem .25rem',
+                    fontSize: '1.25rem'
+                  }}
+                  onClick={() => {
+                    window.location.href = SIGN_IN_URL
+                  }}
+                >
+                  Sign in
+                </button>
               </div>
             )}
           </>
