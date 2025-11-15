@@ -82,3 +82,4 @@ temp/
 .idea/
 *.swp
 *.swo
+public/sitemap.xml
