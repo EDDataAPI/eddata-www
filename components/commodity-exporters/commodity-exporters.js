@@ -23,7 +23,7 @@ async function getExportsForCommodityBySystem(systemAddress, commodityName) {
   return exports.filter(c => c.stock > 0)
 }
 
-export default ({ tableName = 'Exporters', commodities }) => {
+function CommodityExporters({ tableName = 'Exporters', commodities }) {
   useEffect(animateTableEffect)
 
   return (
@@ -337,3 +337,5 @@ function ExpandedRow({ r }) {
     </>
   )
 }
+
+export default CommodityExporters

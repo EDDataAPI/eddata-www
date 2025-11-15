@@ -25,7 +25,7 @@ async function getImportsForCommodityBySystem(systemAddress, commodityName) {
   )
 }
 
-export default ({ tableName = 'Importers', commodities, rare }) => {
+function CommodityImporters({ tableName = 'Importers', commodities, rare }) {
   useEffect(animateTableEffect)
 
   return (
@@ -359,3 +359,5 @@ function ExpandedRow({ r, rare }) {
     </>
   )
 }
+
+export default CommodityImporters

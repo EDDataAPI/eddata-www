@@ -15,7 +15,7 @@ async function getNearbyImportersOfCommodity(systemAddress, commodityName) {
   return await res.json()
 }
 
-export default ({ commodity, rare }) => {
+function CommodityImportersNearby({ commodity, rare }) {
   const [nearbyImporters, setNearbyImporters] = useState()
 
   useEffect(() => {
@@ -169,3 +169,5 @@ export default ({ commodity, rare }) => {
     </>
   )
 }
+
+export default CommodityImportersNearby

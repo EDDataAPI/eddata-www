@@ -4,7 +4,7 @@ import TradeBracketIcon from 'components/trade-bracket'
 import StationIcon from 'components/station-icon'
 import CopyOnClick from 'components/copy-on-click'
 
-export default ({ commodityOrders }) => {
+function CommodityExportersInSystem({ commodityOrders }) {
   return (
     <>
       {!commodityOrders && (
@@ -94,3 +94,5 @@ export default ({ commodityOrders }) => {
     </>
   )
 }
+
+export default CommodityExportersInSystem

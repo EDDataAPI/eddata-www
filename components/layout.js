@@ -9,7 +9,7 @@ const DEFAULT_TITLE = 'EDData – Trade & Exploration'
 const DEFAULT_DESCRIPTION =
   'EDData provides trade and exploration data for the game Elite Dangerous'
 
-export default ({
+function Layout({
   title = DEFAULT_TITLE,
   description = DEFAULT_DESCRIPTION,
   loading = false,
@@ -21,7 +21,7 @@ export default ({
   navigation = undefined,
   navigationOverlaid = false,
   inspector = undefined
-}) => {
+}) {
   useEffect(() => {
     ;(() => {
       if (loadingSound === true) {
@@ -80,3 +80,5 @@ export default ({
     </>
   )
 }
+
+export default Layout

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 
-export default ({
+function InputWithAutocomplete({
   id = 'inputWithAutocomplete',
-  forwardRef = useRef(),
+  forwardRef,
   label = 'Input',
   name = 'input',
   placeholder = '',
@@ -13,7 +13,9 @@ export default ({
   onBlur = _e => {},
   autoCompleteResults,
   onClear
-}) => {
+}) {
+  const internalRef = useRef()
+  const inputRef = forwardRef || internalRef
   const resultsRef = useRef()
   const [focus, setFocus] = useState(false)
   const [_autoCompleteResults, _setAutoCompleteResults] = useState()
@@ -33,8 +35,8 @@ export default ({
         e.preventDefault()
         const dataObj = JSON.parse(e.target.dataset.autoCompleteOption)
         const text = dataObj.text
-        forwardRef.current.value = text
-        forwardRef.current.dataset.autoCompleteOption = JSON.stringify(dataObj)
+        inputRef.current.value = text
+        inputRef.current.dataset.autoCompleteOption = JSON.stringify(dataObj)
         onSelect(text, dataObj)
         document.activeElement.blur()
         setFocus(false)
@@ -49,11 +51,11 @@ export default ({
     setFocus(true)
     onFocus(e)
     onChange(e)
-    forwardRef.current.select()
+    inputRef.current.select()
     // This seems to be required on Chrome (seems to be a known issue)
     setTimeout(() => {
-      if (window?.getSelection()?.toString() !== forwardRef.current.value) {
-        forwardRef.current.select()
+      if (window?.getSelection()?.toString() !== inputRef.current.value) {
+        inputRef.current.select()
       }
     }, 200)
   }
@@ -108,7 +110,7 @@ export default ({
         <span className='input-with-autocomplete__label-text'>{label}</span>
         <input
           id={`${id}-input`}
-          ref={forwardRef}
+          ref={inputRef}
           type='text'
           name={name}
           defaultValue={defaultValue}
@@ -158,7 +160,7 @@ export default ({
             </div>
           </div>
         )}
-        {onClear !== undefined && forwardRef?.current?.value !== '' && (
+        {onClear !== undefined && inputRef?.current?.value !== '' && (
           <div className='input-with-autocomplete__clear' onClick={onClear}>
             ✖
           </div>
@@ -167,3 +169,5 @@ export default ({
     </div>
   )
 }
+
+export default InputWithAutocomplete

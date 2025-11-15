@@ -4,7 +4,7 @@ import Package from 'package.json'
 
 import { API_BASE_URL } from 'lib/consts'
 
-export default ({ toggle }) => {
+function About({ toggle }) {
   const [, setStats] = useState()
   const [version, setVersion] = useState()
 
@@ -131,3 +131,5 @@ export default ({ toggle }) => {
     </>
   )
 }
+
+export default About

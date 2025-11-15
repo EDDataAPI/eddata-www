@@ -5,7 +5,7 @@ import CommodityImportOrders from './commodity-importers'
 import commoditiesInfo from 'lib/commodities.json'
 import { API_BASE_URL } from 'lib/consts'
 
-export default ({ commodityName, reportName = 'core-systems-1000' }) => {
+function CommodityReport({ commodityName, reportName = 'core-systems-1000' }) {
   const [exports, setExports] = useState()
   const [imports, setImports] = useState()
 
@@ -75,6 +75,8 @@ export default ({ commodityName, reportName = 'core-systems-1000' }) => {
     </>
   )
 }
+
+export default CommodityReport
 
 async function getCommodityReport(commodityName, reportName) {
   const res = await fetch(

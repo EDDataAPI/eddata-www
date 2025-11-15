@@ -5,7 +5,7 @@ import StationIcon from 'components/station-icon'
 import { NO_DEMAND_TEXT } from 'lib/consts'
 import CopyOnClick from 'components/copy-on-click'
 
-export default ({ commodityOrders }) => {
+function CommodityImportersInSystem({ commodityOrders }) {
   return (
     <>
       {!commodityOrders && (
@@ -103,3 +103,5 @@ export default ({ commodityOrders }) => {
     </>
   )
 }
+
+export default CommodityImportersInSystem

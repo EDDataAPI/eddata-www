@@ -12,7 +12,11 @@ import {
 import InputWithAutoComplete from 'components/input-with-autocomplete'
 import { getCommodityBySymbolOrName } from 'lib/commodities'
 
-export default ({ disabled = false, commodities = [], commodity }) => {
+function CommodityFilterOptions({
+  disabled = false,
+  commodities = [],
+  commodity
+}) {
   const router = useRouter()
 
   const commodityRef = useRef()
@@ -493,3 +497,5 @@ export default ({ disabled = false, commodities = [], commodity }) => {
     </div>
   )
 }
+
+export default CommodityFilterOptions
