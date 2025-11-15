@@ -41,9 +41,13 @@ function Home() {
     })()
     ;(async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/v2/version`)
-        const version = await res.json()
-        setVersion(version)
+        const res = await fetch(`${API_BASE_URL}/`)
+        const text = await res.text()
+        // Parse version from "EDData API v1.0.0 Online"
+        const match = text.match(/EDData API v([\d.]+)/)
+        if (match) {
+          setVersion({ version: match[1] })
+        }
       } catch (e) {
         console.error(e)
       }
