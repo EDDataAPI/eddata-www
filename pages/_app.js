@@ -9,8 +9,9 @@ import 'public/fonts/icarus-terminal/icarus-terminal.css'
 import { playLoadingSound } from 'lib/sounds'
 
 // Lazy load Header component for better performance
+// Using ssr: false to prevent hydration errors with localStorage-dependent theme
 const Header = dynamic(() => import('components/header'), {
-  loading: () => <div>Loading...</div>
+  ssr: false
 })
 
 // Export reportWebVitals for Next.js automatic measurement
