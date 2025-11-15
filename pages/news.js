@@ -38,7 +38,7 @@ function News(_props) {
       description='EDData is companion software for the game Elite Dangerous'
     >
       <Head>
-        <link rel='canonical' href='https://eddata.app/about' />
+        <link rel='canonical' href='https://eddata.dev/news' />
       </Head>
       <div className='fx__fade-in'>
         <div

@@ -410,7 +410,7 @@ function System() {
       <Head>
         <link
           rel='canonical'
-          href={`https://eddata.app/system/${system?.systemAddress}/${views[activeViewIndex]}`}
+          href={`https://eddata.dev/system/${system?.systemAddress}/${views[activeViewIndex]}`}
         />
       </Head>
       {system === null && (

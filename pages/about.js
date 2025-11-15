@@ -17,7 +17,7 @@ const AboutPage = () => {
       description='EDData is companion software for the game Elite Dangerous'
     >
       <Head>
-        <link rel='canonical' href='https://eddata.app/about' />
+        <link rel='canonical' href='https://eddata.dev/about' />
       </Head>
       <div className='fx__fade-in'>
         <div className='clear'>

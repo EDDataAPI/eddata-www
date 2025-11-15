@@ -31,7 +31,7 @@ services:
       - 'com.centurylinklabs.watchtower.enable=true'
       - 'traefik.enable=true'
       - 'traefik.docker.network=web'
-      - 'traefik.http.routers.eddata-www.rule=Host(`eddata.app`) || Host(`www.eddata.app`)'
+      - 'traefik.http.routers.eddata-www.rule=Host(`eddata.dev`) || Host(`www.eddata.dev`)'
       - 'traefik.http.routers.eddata-www.entrypoints=websecure'
       - 'traefik.http.routers.eddata-www.tls.certresolver=letsencrypt'
       - 'traefik.http.services.eddata-www.loadbalancer.server.port=3000'

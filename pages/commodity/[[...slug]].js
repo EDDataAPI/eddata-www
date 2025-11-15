@@ -232,7 +232,7 @@ function Commodity() {
       <Head>
         <link
           rel='canonical'
-          href={`https://eddata.app/commodity/${commodity?.symbol}/${activeTab}`}
+          href={`https://eddata.dev/commodity/${commodity?.symbol}/${activeTab}`}
         />
       </Head>
       {commodity && (

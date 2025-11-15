@@ -67,7 +67,7 @@ export default function Page(props) {
       }
     >
       <Head>
-        <link rel='canonical' href='https://eddata.app/commodities' />
+        <link rel='canonical' href='https://eddata.dev/commodities' />
       </Head>
       {commodities && categories && (
         <div className='fx__fade-in'>

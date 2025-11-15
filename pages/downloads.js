@@ -46,7 +46,7 @@ function Downloads() {
       description='Download bulk exports of data for the game Elite Dangerous from EDData'
     >
       <Head>
-        <link rel='canonical' href='https://eddata.app/downloads' />
+        <link rel='canonical' href='https://eddata.dev/downloads' />
       </Head>
       <div className='fx__fade-in'>
         <p>You can download the source code and data for EDData.</p>

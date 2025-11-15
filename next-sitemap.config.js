@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://eddata.app',
+  siteUrl: process.env.SITE_URL || 'https://eddata.dev',
   generateRobotsTxt: false, // robots.txt manually maintained
   generateIndexSitemap: false,
   exclude: [

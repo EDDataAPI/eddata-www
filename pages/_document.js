@@ -18,12 +18,12 @@ class MyDocument extends Document {
       '@type': 'WebSite',
       name: 'EDData',
       description: 'Elite Dangerous trade and exploration data',
-      url: 'https://eddata.app',
+      url: 'https://eddata.dev',
       potentialAction: {
         '@type': 'SearchAction',
         target: {
           '@type': 'EntryPoint',
-          urlTemplate: 'https://eddata.app/system/{search_term_string}'
+          urlTemplate: 'https://eddata.dev/system/{search_term_string}'
         },
         'query-input': 'required name=search_term_string'
       }

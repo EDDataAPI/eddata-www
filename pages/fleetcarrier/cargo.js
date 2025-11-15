@@ -55,7 +55,7 @@ function FleetCarrierCargo() {
       ]}
     >
       <Head>
-        <link rel='canonical' href='https://eddata.app/about' />
+        <link rel='canonical' href='https://eddata.dev/fleetcarrier/cargo' />
       </Head>
       <div className='fx__fade-in' onClick={updateFleetCarrier}>
         <div className='heading--with-underline'>

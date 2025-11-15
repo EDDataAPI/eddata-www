@@ -3,7 +3,7 @@ import { getCommoditiesWithPricing } from 'lib/commodities'
 export default async function sitemap() {
   const sitemap = [
     {
-      url: 'https://eddata.app',
+      url: 'https://eddata.dev',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1

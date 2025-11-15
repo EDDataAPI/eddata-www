@@ -163,7 +163,7 @@ jobs:
 
     environment:
       name: staging
-      url: https://staging.eddata.app
+      url: https://staging.eddata.dev
 
     steps:
       - name: Deploy to staging
@@ -182,7 +182,7 @@ jobs:
 
     environment:
       name: production
-      url: https://eddata.app
+      url: https://eddata.dev
 
     steps:
       - name: Deploy to production

@@ -1,6 +1,6 @@
 # EDData Website
 
-This is the website for [eddata.app](https://eddata.app)
+This is the website for [eddata.dev](https://eddata.dev)
 
 EDData provides trade and exploration data for the game 
 [Elite Dangerous](https://www.elitedangerous.com/).

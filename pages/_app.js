@@ -110,7 +110,7 @@ export default function App({ Component, pageProps }) {
         <link rel='manifest' href='/manifest.json' />
         <meta
           property='og:image'
-          content='https://eddata.app/og-image.png'
+          content='https://eddata.dev/og-image.png'
           key='og-image'
         />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
