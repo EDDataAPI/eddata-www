@@ -28,7 +28,7 @@ const nextConfig = {
       'react-markdown'
     ],
     // Disable CSS optimization in production builds (requires critters dev dependency)
-    optimizeCss: process.env.NODE_ENV !== 'production',
+    optimizeCss: false, // Temporarily disabled due to critters module issues
     scrollRestoration: true
   },
 
