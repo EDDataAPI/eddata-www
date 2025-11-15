@@ -3,7 +3,7 @@ name: Docker Build and Deploy
 on:
   push:
     branches: [main, develop]
-    tags: ['v*.*.*']
+    tags: ["v*.*.*"]
   pull_request:
     branches: [main]
 
@@ -23,8 +23,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24.11.0'
-          cache: 'npm'
+          node-version: "24.11.0"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -48,10 +48,24 @@ jobs:
     outputs:
       image: ${{ steps.image.outputs.image }}
       digest: ${{ steps.build.outputs.digest }}
+      version: ${{ steps.version.outputs.version }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required for semantic versioning
+
+      - name: Semantic Version
+        id: version
+        uses: paulhatch/semantic-version@v5.4.0
+        with:
+          tag_prefix: "v"
+          major_pattern: "(MAJOR)"
+          minor_pattern: "(MINOR)"
+          version_format: "${major}.${minor}.${patch}"
+          bump_each_commit: true
+          search_commit_body: true
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -72,13 +86,10 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=sha,prefix={{branch}}-
+            type=raw,value=${{ steps.version.outputs.version }}
+            type=raw,value=${{ steps.version.outputs.version_tag }}
             type=raw,value=latest,enable={{is_default_branch}}
+            type=sha,prefix={{branch}}-
 
       - name: Build and push
         id: build
@@ -91,7 +102,7 @@ jobs:
           build-args: |
             BUILD_DATE=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
             VCS_REF=${{ github.sha }}
-            VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
+            VERSION=${{ steps.version.outputs.version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64,linux/arm64
@@ -135,14 +146,14 @@ jobs:
           TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         with:
           image-ref: ${{ needs.build-and-push.outputs.image }}
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+          format: "sarif"
+          output: "trivy-results.sarif"
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: "trivy-results.sarif"
 
   deploy-staging:
     name: Deploy to Staging
@@ -158,6 +169,7 @@ jobs:
       - name: Deploy to staging
         run: |
           echo "🚀 Deploying to staging environment..."
+          echo "Version: ${{ needs.build-and-push.outputs.version }}"
           echo "Image: ${{ needs.build-and-push.outputs.image }}"
           # Hier würde die tatsächliche Deployment-Logik stehen
           # z.B. SSH-Verbindung zum Server, docker-compose pull & up, etc.
@@ -176,6 +188,7 @@ jobs:
       - name: Deploy to production
         run: |
           echo "🚀 Deploying to production environment..."
+          echo "Version: ${{ needs.build-and-push.outputs.version }}"
           echo "Image: ${{ needs.build-and-push.outputs.image }}"
           # Hier würde die tatsächliche Deployment-Logik stehen
           # z.B. SSH-Verbindung zum Server, docker-compose pull & up, etc.
