@@ -29,7 +29,7 @@ import StationIcon from 'components/station-icon'
 
 const TABS = ['exporters', 'importers']
 
-export default () => {
+function Commodity() {
   const router = useRouter()
 
   const [, setNavigationPath] = useContext(NavigationContext)
@@ -540,3 +540,5 @@ const CommodityInfo = ({ commodities, commodity, rareMarket }) => {
     </div>
   )
 }
+
+export default Commodity

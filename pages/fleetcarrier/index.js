@@ -5,7 +5,7 @@ import { NavigationContext } from 'lib/context'
 import { loadCache, saveCache } from 'lib/cache'
 import { getCmdrInfo } from 'lib/cmdr'
 
-export default () => {
+function FleetCarrier() {
   const [, setNavigationPath] = useContext(NavigationContext)
   const [cmdrFleetCarrier, setCmdrFleetCarrier] = useState()
 
@@ -52,3 +52,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default FleetCarrier

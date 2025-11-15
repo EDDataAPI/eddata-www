@@ -6,7 +6,7 @@ import { NavigationContext } from 'lib/context'
 import { loadCache, saveCache } from 'lib/cache'
 import { getCmdrInfo } from 'lib/cmdr'
 
-export default () => {
+function FleetCarrierCargo() {
   const [, setNavigationPath] = useContext(NavigationContext)
   const [cmdrFleetCarrier, setCmdrFleetCarrier] = useState()
   const [fleetCarrierCargo, setFleetCarrierCargo] = useState([])
@@ -92,3 +92,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default FleetCarrierCargo

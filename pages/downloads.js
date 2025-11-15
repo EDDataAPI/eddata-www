@@ -13,7 +13,8 @@ const databaseDescription = {
     'Name and location of stations, outposts, ports, settlements, megaships and fleet carriers',
   'locations.db': 'Unusual locations and points of interest'
 }
-export default () => {
+
+function Downloads() {
   const [, setNavigationPath] = useContext(NavigationContext)
   const [databases, setDatabases] = useState()
 
@@ -167,3 +168,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default Downloads

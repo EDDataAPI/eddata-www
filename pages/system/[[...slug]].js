@@ -24,7 +24,7 @@ import {
   HIDDEN_SYSTEMS
 } from 'lib/consts'
 
-export default () => {
+function System() {
   const router = useRouter()
   const [, setNavigationPath] = useContext(NavigationContext)
   const [loading, setLoading] = useState(true)
@@ -558,3 +558,5 @@ async function getSystemStatus(systemIdentifer) {
     console.error(e)
   }
 }
+
+export default System

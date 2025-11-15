@@ -10,7 +10,7 @@ import Markdown from 'react-markdown'
 // import commodityCategories from 'lib/commodities/commodity-categories.json'
 import Package from 'package.json'
 
-export default () => {
+function Home() {
   const [, setNavigationPath] = useContext(NavigationContext)
   const [, setDialog] = useContext(DialogContext)
   const [galnetNews, setGalnetNews] = useState()
@@ -281,3 +281,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default Home

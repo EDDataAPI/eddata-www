@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { DialogContext } from 'lib/context'
 
-export default () => {
+function Dialog() {
   const [dialogContext] = useContext(DialogContext)
   const [visible, setVisible] = useState(false)
   const [title, setTitle] = useState()
@@ -58,3 +58,5 @@ export default () => {
     </>
   )
 }
+
+export default Dialog

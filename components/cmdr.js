@@ -20,7 +20,7 @@ const SERVICE_STATION_TYPES = [
   'CraterOutpost'
 ]
 
-export default () => {
+function Cmdr() {
   const [signedIn, setSignedIn] = useState()
   const [maintanceMode, setMaintanceMode] = useState()
   const [csrfToken, setCsrfToken] = useState()
@@ -511,3 +511,5 @@ async function getNearestService(systemName, service) {
   )
   return res.ok ? await res.json() : null
 }
+
+export default Cmdr
