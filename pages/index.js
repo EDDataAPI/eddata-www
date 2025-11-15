@@ -2,13 +2,15 @@ import { useEffect, useContext, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import Layout from 'components/layout'
-import Cmdr from 'components/cmdr'
 import { NavigationContext, DialogContext } from 'lib/context'
 import { API_BASE_URL } from 'lib/consts'
 import Markdown from 'react-markdown'
 // import commodityCategories from 'lib/commodities/commodity-categories.json'
 import Package from 'package.json'
+
+const Cmdr = dynamic(() => import('components/cmdr'), { ssr: false })
 
 function Home() {
   const [, setNavigationPath] = useContext(NavigationContext)
