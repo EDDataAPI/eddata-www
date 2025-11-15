@@ -8,7 +8,7 @@ import { NavigationContext } from 'lib/context'
 import { API_BASE_URL } from 'lib/consts'
 import Markdown from 'react-markdown'
 
-export default _props => {
+function News(_props) {
   const router = useRouter()
   const [, setNavigationPath] = useContext(NavigationContext)
   const [galnetNews, setGalnetNews] = useState()
@@ -150,3 +150,5 @@ export default _props => {
     </Layout>
   )
 }
+
+export default News
