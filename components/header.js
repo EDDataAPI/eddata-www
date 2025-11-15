@@ -11,7 +11,7 @@ import { API_BASE_URL } from 'lib/consts'
 import { eliteDateTime } from 'lib/utils/dates'
 import ThemeSettings from 'components/theme-settings'
 
-export default () => {
+function Header() {
   const router = useRouter()
   const headerSearchRef = useRef()
   const [navigationPath] = useContext(NavigationContext)
@@ -687,3 +687,5 @@ async function toggleFullScreen() {
     return true
   }
 }
+
+export default Header
