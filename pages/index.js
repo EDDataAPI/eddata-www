@@ -71,7 +71,7 @@ function Home() {
           <div className='heading--with-underline'>
             <h2 className='text-uppercase'>Galnet News</h2>
           </div>
-          {galnetNews &&
+          {galnetNews && galnetNews.length > 0 ? (
             galnetNews.slice(0, 1).map((newsItem, _i) => (
               <div key={newsItem.url}>
                 <div className='home__news-article-body'>
@@ -148,7 +148,33 @@ function Home() {
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className='home__news-article-body'>
+              <div className='home__news-article-text scrollable'>
+                <p
+                  className='muted text-center'
+                  style={{ padding: '2rem 1rem' }}
+                >
+                  <i
+                    className='icarus-terminal-alert'
+                    style={{ marginRight: '.5rem' }}
+                  />
+                  Galnet news currently unavailable. Please check back later.
+                </p>
+                <p className='text-center'>
+                  <a
+                    href='https://www.elitedangerous.com/news/galnet'
+                    target='_blank'
+                    rel='noreferrer'
+                    className='button'
+                  >
+                    Visit Galnet Website
+                  </a>
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         <Cmdr />
