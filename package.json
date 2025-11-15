@@ -1,6 +1,6 @@
 {
   "name": "eddata-www",
-  "version": "2.7.1",
+  "version": "3.0.0",
   "description": "EDData Website",
   "main": "index.js",
   "scripts": {
