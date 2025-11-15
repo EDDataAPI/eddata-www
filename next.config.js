@@ -151,7 +151,7 @@ const nextConfig = {
           "connect-src 'self' https://eddata.dev https://*.eddata.dev",
           "frame-ancestors 'none'",
           "base-uri 'self'",
-          "form-action 'self'"
+          "form-action 'self' https://eddata.dev https://*.eddata.dev"
         ].join('; ')
       }
     ]
