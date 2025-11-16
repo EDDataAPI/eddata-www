@@ -238,21 +238,48 @@ function System() {
         })()
         ;(async () => {
           const [
+            apexInterstellar,
+            bartender,
+            blackMarket,
+            contacts,
+            engineer,
+            frontlineSolutions,
             interstellarFactors,
-            universalCartographics,
+            materialTrader,
+            pioneerSupplies,
             shipyard,
-            blackMarket
+            technologyBroker,
+            universalCartographics,
+            vistaGenomics
           ] = await Promise.all([
+            getNearestService(_system.systemAddress, 'apex-interstellar'),
+            getNearestService(_system.systemAddress, 'bartender'),
+            getNearestService(_system.systemAddress, 'black-market'),
+            getNearestService(_system.systemAddress, 'contacts'),
+            getNearestService(_system.systemAddress, 'engineer'),
+            getNearestService(_system.systemAddress, 'frontline-solutions'),
             getNearestService(_system.systemAddress, 'interstellar-factors'),
-            getNearestService(_system.systemAddress, 'universal-cartographics'),
+            getNearestService(_system.systemAddress, 'material-trader'),
+            getNearestService(_system.systemAddress, 'pioneer-supplies'),
             getNearestService(_system.systemAddress, 'shipyard'),
-            getNearestService(_system.systemAddress, 'black-market')
+            getNearestService(_system.systemAddress, 'technology-broker'),
+            getNearestService(_system.systemAddress, 'universal-cartographics'),
+            getNearestService(_system.systemAddress, 'vista-genomics')
           ])
           setNearestServices({
+            'Apex Interstellar': apexInterstellar,
+            Bartender: bartender,
+            'Black Market': blackMarket,
+            Contacts: contacts,
+            Engineer: engineer,
+            'Frontline Solutions': frontlineSolutions,
             'Interstellar Factors': interstellarFactors,
-            'Universal Cartographics': universalCartographics,
+            'Material Trader': materialTrader,
+            'Pioneer Supplies': pioneerSupplies,
             Shipyard: shipyard,
-            'Black Market': blackMarket
+            'Technology Broker': technologyBroker,
+            'Universal Cartographics': universalCartographics,
+            'Vista Genomics': vistaGenomics
           })
         })()
         ;(async () => {

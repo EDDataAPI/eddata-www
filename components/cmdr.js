@@ -32,21 +32,52 @@ function Cmdr() {
     loadCache('cmdrNearestServices')
   )
   const updateNearestServices = async _cmdrProfile => {
-    const [interstellarFactors, universalCartographics, shipyard, blackMarket] =
-      await Promise.all([
-        getNearestService(_cmdrProfile.lastSystem.name, 'interstellar-factors'),
-        getNearestService(
-          _cmdrProfile.lastSystem.name,
-          'universal-cartographics'
-        ),
-        getNearestService(_cmdrProfile.lastSystem.name, 'shipyard'),
-        getNearestService(_cmdrProfile.lastSystem.name, 'black-market')
-      ])
+    const [
+      apexInterstellar,
+      bartender,
+      blackMarket,
+      contacts,
+      engineer,
+      frontlineSolutions,
+      interstellarFactors,
+      materialTrader,
+      pioneerSupplies,
+      shipyard,
+      technologyBroker,
+      universalCartographics,
+      vistaGenomics
+    ] = await Promise.all([
+      getNearestService(_cmdrProfile.lastSystem.name, 'apex-interstellar'),
+      getNearestService(_cmdrProfile.lastSystem.name, 'bartender'),
+      getNearestService(_cmdrProfile.lastSystem.name, 'black-market'),
+      getNearestService(_cmdrProfile.lastSystem.name, 'contacts'),
+      getNearestService(_cmdrProfile.lastSystem.name, 'engineer'),
+      getNearestService(_cmdrProfile.lastSystem.name, 'frontline-solutions'),
+      getNearestService(_cmdrProfile.lastSystem.name, 'interstellar-factors'),
+      getNearestService(_cmdrProfile.lastSystem.name, 'material-trader'),
+      getNearestService(_cmdrProfile.lastSystem.name, 'pioneer-supplies'),
+      getNearestService(_cmdrProfile.lastSystem.name, 'shipyard'),
+      getNearestService(_cmdrProfile.lastSystem.name, 'technology-broker'),
+      getNearestService(
+        _cmdrProfile.lastSystem.name,
+        'universal-cartographics'
+      ),
+      getNearestService(_cmdrProfile.lastSystem.name, 'vista-genomics')
+    ])
     const _nearestServices = {
+      'Apex Interstellar': apexInterstellar,
+      Bartender: bartender,
+      'Black Market': blackMarket,
+      Contacts: contacts,
+      Engineer: engineer,
+      'Frontline Solutions': frontlineSolutions,
       'Interstellar Factors': interstellarFactors,
-      'Universal Cartographics': universalCartographics,
+      'Material Trader': materialTrader,
+      'Pioneer Supplies': pioneerSupplies,
       Shipyard: shipyard,
-      'Black Market': blackMarket
+      'Technology Broker': technologyBroker,
+      'Universal Cartographics': universalCartographics,
+      'Vista Genomics': vistaGenomics
     }
     setNearestServices(_nearestServices)
     saveCache('cmdrNearestServices', _nearestServices)

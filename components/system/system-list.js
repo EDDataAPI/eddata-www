@@ -270,20 +270,41 @@ function Inspector({ systemObject }) {
   })
 
   const services = []
+  if (systemObject?.apexInterstellar === 1) {
+    services.push('Apex Interstellar')
+  }
+  if (systemObject?.bartender === 1) {
+    services.push('Bartender')
+  }
   if (systemObject?.blackMarket === 1) {
     services.push('Black market')
+  }
+  if (systemObject?.contacts === 1) {
+    services.push('Contacts')
   }
   if (systemObject?.crewLounge === 1) {
     services.push('Crew lounge')
   }
+  if (systemObject?.engineer === 1) {
+    services.push('Engineer')
+  }
+  if (systemObject?.frontlineSolutions === 1) {
+    services.push('Frontline Solutions')
+  }
+  if (systemObject?.interstellarFactors === 1) {
+    services.push('Interstellar Factors')
+  }
   if (systemObject?.materialTrader === 1) {
-    services.push('Marterial trader')
+    services.push('Material trader')
   }
   if (systemObject?.missions === 1) {
     services.push('Missions')
   }
   if (systemObject?.outfitting === 1) {
     services.push('Outfitting')
+  }
+  if (systemObject?.pioneerSupplies === 1) {
+    services.push('Pioneer Supplies')
   }
   if (systemObject?.refuel === 1) {
     services.push('Refuel')
@@ -308,6 +329,9 @@ function Inspector({ systemObject }) {
   }
   if (systemObject?.universalCartographics === 1) {
     services.push('Universal Cartographics')
+  }
+  if (systemObject?.vistaGenomics === 1) {
+    services.push('Vista Genomics')
   }
 
   // Show exploration only if there is intersting data to show
