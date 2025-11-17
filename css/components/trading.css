@@ -92,16 +92,6 @@
   margin-bottom: 1rem;
 }
 
-@media only screen and (min-width: 1024px) {
-  .home__ticker {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    width: 25%;
-    margin-top: 0;
-  }
-}
-
 /* Form inputs styling */
 input[type='text'],
 input[type='search'],
