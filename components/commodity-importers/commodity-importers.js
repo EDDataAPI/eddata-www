@@ -74,7 +74,9 @@ function CommodityImporters({ tableName = 'Importers', commodities, rare }) {
   }
 
   const getSortIcon = key => {
-    if (sortConfig.key !== key) return null
+    if (sortConfig.key !== key) {
+      return null
+    }
     return sortConfig.direction === 'asc' ? ' ▲' : ' ▼'
   }
 
