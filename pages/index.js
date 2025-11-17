@@ -210,24 +210,24 @@ function Home() {
                         {trade.commodity}
                       </div>
                       <div className='profit'>
-                        +{trade.profit.toLocaleString()} CR (
-                        {trade.profitPercent.toFixed(1)}%)
+                        +{trade.profit?.toLocaleString() ?? 0} CR (
+                        {trade.profitPercent?.toFixed(1) ?? 0}%)
                       </div>
                       <div className='route'>
                         <small>
                           <span className='buy'>
-                            Buy @ {trade.buy.price.toLocaleString()} CR
+                            Buy @ {trade.buy?.price?.toLocaleString() ?? 0} CR
                           </span>
                           {' → '}
                           <span className='sell'>
-                            Sell @ {trade.sell.price.toLocaleString()} CR
+                            Sell @ {trade.sell?.price?.toLocaleString() ?? 0} CR
                           </span>
                         </small>
                       </div>
                       <div className='stock-info'>
                         <small className='text-muted'>
-                          Stock: {trade.buy.stock.toLocaleString()} | Demand:{' '}
-                          {trade.sell.demand.toLocaleString()}
+                          Stock: {trade.buy?.stock?.toLocaleString() ?? 0} |
+                          Demand: {trade.sell?.demand?.toLocaleString() ?? 0}
                         </small>
                       </div>
                     </div>

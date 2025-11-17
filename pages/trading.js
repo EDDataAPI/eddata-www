@@ -94,24 +94,24 @@ function Trading() {
                             </td>
                             <td style={{ textAlign: 'right' }}>
                               <span className='text-positive'>
-                                +{trade.profit.toLocaleString()} CR
+                                +{trade.profit?.toLocaleString() ?? 0} CR
                               </span>
                               <br />
                               <small className='text-muted'>
-                                {trade.profitPercent.toFixed(1)}%
+                                {trade.profitPercent?.toFixed(1) ?? 0}%
                               </small>
                             </td>
                             <td style={{ textAlign: 'right' }}>
-                              {trade.buy.price.toLocaleString()} CR
+                              {trade.buy?.price?.toLocaleString() ?? 0} CR
                             </td>
                             <td style={{ textAlign: 'right' }}>
-                              {trade.sell.price.toLocaleString()} CR
+                              {trade.sell?.price?.toLocaleString() ?? 0} CR
                             </td>
                             <td style={{ textAlign: 'right' }}>
-                              {trade.buy.stock.toLocaleString()}
+                              {trade.buy?.stock?.toLocaleString() ?? 0}
                             </td>
                             <td style={{ textAlign: 'right' }}>
-                              {trade.sell.demand.toLocaleString()}
+                              {trade.sell?.demand?.toLocaleString() ?? 0}
                             </td>
                           </tr>
                         ))}
@@ -156,17 +156,17 @@ function Trading() {
                             </td>
                             <td style={{ textAlign: 'right' }}>
                               <span className='text-warning'>
-                                {commodity.maxPrice.toLocaleString()} CR
+                                {commodity.maxPrice?.toLocaleString() ?? 0} CR
                               </span>
                             </td>
                             <td style={{ textAlign: 'right' }}>
-                              {commodity.markets.toLocaleString()}
+                              {commodity.markets?.toLocaleString() ?? 0}
                             </td>
                             <td style={{ textAlign: 'right' }}>
-                              {commodity.totalStock.toLocaleString()}
+                              {commodity.totalStock?.toLocaleString() ?? 0}
                             </td>
                             <td style={{ textAlign: 'right' }}>
-                              {commodity.totalDemand.toLocaleString()}
+                              {commodity.totalDemand?.toLocaleString() ?? 0}
                             </td>
                           </tr>
                         ))}
@@ -212,20 +212,20 @@ function Trading() {
                             </td>
                             <td style={{ textAlign: 'right' }}>
                               <span className='text-info'>
-                                {commodity.activeMarkets.toLocaleString()}
+                                {commodity.activeMarkets?.toLocaleString() ?? 0}
                               </span>
                             </td>
                             <td style={{ textAlign: 'right' }}>
-                              {commodity.avgBuyPrice.toLocaleString()} CR
+                              {commodity.avgBuyPrice?.toLocaleString() ?? 0} CR
                             </td>
                             <td style={{ textAlign: 'right' }}>
-                              {commodity.avgSellPrice.toLocaleString()} CR
+                              {commodity.avgSellPrice?.toLocaleString() ?? 0} CR
                             </td>
                             <td style={{ textAlign: 'right' }}>
-                              {commodity.totalStock.toLocaleString()}
+                              {commodity.totalStock?.toLocaleString() ?? 0}
                             </td>
                             <td style={{ textAlign: 'right' }}>
-                              {commodity.totalDemand.toLocaleString()}
+                              {commodity.totalDemand?.toLocaleString() ?? 0}
                             </td>
                           </tr>
                         ))}
