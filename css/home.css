@@ -89,7 +89,7 @@
   min-height: 16rem;
 }
 
-.button--large {
+.home__sign-in-placeholder .button--large {
   filter: var(--filter-overdrive);
   background: var(--color-primary-5);
   max-width: 15rem;
@@ -102,12 +102,12 @@
   padding: 1.25rem 0.5rem !important;
 }
 
-.button--large .icon {
+.home__sign-in-placeholder .button--large .icon {
   font-size: 1.25rem !important;
   line-height: 1.25rem !important;
 }
 
-.button--large:not(:hover)::before {
+.home__sign-in-placeholder .button--large:not(:hover)::before {
   background-color: var(--color-primary-1);
 }
 
