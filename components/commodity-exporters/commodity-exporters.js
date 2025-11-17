@@ -24,6 +24,58 @@ async function getExportsForCommodityBySystem(systemAddress, commodityName) {
 }
 
 function CommodityExporters({ tableName = 'Exporters', commodities }) {
+  const [sortedData, setSortedData] = useState(commodities)
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: null })
+
+  useEffect(() => {
+    setSortedData(commodities)
+  }, [commodities])
+
+  const handleSort = key => {
+    let direction = 'asc'
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc'
+    }
+
+    const sorted = [...sortedData].sort((a, b) => {
+      let aVal = a[key]
+      let bVal = b[key]
+
+      // Handle distance (can be undefined)
+      if (key === 'distance') {
+        aVal = aVal ?? Infinity
+        bVal = bVal ?? Infinity
+      }
+
+      // Handle date strings
+      if (key === 'updatedAt') {
+        aVal = new Date(aVal).getTime()
+        bVal = new Date(bVal).getTime()
+      }
+
+      // Handle strings (systemName)
+      if (typeof aVal === 'string') {
+        return direction === 'asc'
+          ? aVal.localeCompare(bVal)
+          : bVal.localeCompare(aVal)
+      }
+
+      // Handle numbers
+      if (direction === 'asc') {
+        return aVal - bVal
+      }
+      return bVal - aVal
+    })
+
+    setSortedData(sorted)
+    setSortConfig({ key, direction })
+  }
+
+  const getSortIcon = key => {
+    if (sortConfig.key !== key) return null
+    return sortConfig.direction === 'asc' ? ' ▲' : ' ▼'
+  }
+
   useEffect(animateTableEffect)
 
   return (
@@ -79,7 +131,14 @@ function CommodityExporters({ tableName = 'Exporters', commodities }) {
           )
         },
         {
-          title: 'System',
+          title: (
+            <span
+              onClick={() => handleSort('systemName')}
+              style={{ cursor: 'pointer', userSelect: 'none' }}
+            >
+              System{getSortIcon('systemName')}
+            </span>
+          ),
           dataIndex: 'systemName',
           key: 'systemName',
           align: 'right',
@@ -97,7 +156,14 @@ function CommodityExporters({ tableName = 'Exporters', commodities }) {
           )
         },
         {
-          title: 'Updated',
+          title: (
+            <span
+              onClick={() => handleSort('updatedAt')}
+              style={{ cursor: 'pointer', userSelect: 'none' }}
+            >
+              Updated{getSortIcon('updatedAt')}
+            </span>
+          ),
           dataIndex: 'updatedAt',
           key: 'updatedAt',
           align: 'right',
@@ -106,7 +172,14 @@ function CommodityExporters({ tableName = 'Exporters', commodities }) {
           render: v => <small>{timeBetweenTimestamps(v)}</small>
         },
         {
-          title: 'Stock',
+          title: (
+            <span
+              onClick={() => handleSort('stock')}
+              style={{ cursor: 'pointer', userSelect: 'none' }}
+            >
+              Stock{getSortIcon('stock')}
+            </span>
+          ),
           dataIndex: 'stock',
           key: 'stock',
           align: 'right',
@@ -120,7 +193,14 @@ function CommodityExporters({ tableName = 'Exporters', commodities }) {
           )
         },
         {
-          title: 'Price',
+          title: (
+            <span
+              onClick={() => handleSort('buyPrice')}
+              style={{ cursor: 'pointer', userSelect: 'none' }}
+            >
+              Price{getSortIcon('buyPrice')}
+            </span>
+          ),
           dataIndex: 'buyPrice',
           key: 'buyPrice',
           align: 'right',
@@ -129,7 +209,7 @@ function CommodityExporters({ tableName = 'Exporters', commodities }) {
           render: v => <>{v.toLocaleString()} CR</>
         }
       ]}
-      data={commodities}
+      data={sortedData}
       rowKey={r => `commodity_export_orders_${r.marketId}_${r.commodityName}`}
       expandable={{
         expandRowByClick: true,
