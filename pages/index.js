@@ -59,7 +59,7 @@ function Home() {
     })()
     ;(async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/v2/stats/ticker`)
+        const res = await fetch(`${API_BASE_URL}/v2/news/commodities`)
         if (res.ok) {
           const ticker = await res.json()
           setCommodityTicker(ticker)
