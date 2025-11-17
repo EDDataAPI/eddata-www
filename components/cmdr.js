@@ -293,7 +293,7 @@ function Cmdr() {
                                           s.stationType
                                         )
                                       )
-                                      ?.splice(0, 1)
+                                      ?.slice(0, 1)
                                       ?.filter(s => s.distance === 0)
                                       ?.map(station => (
                                         <Fragment
