@@ -192,14 +192,14 @@ function Home() {
 
         <Cmdr />
 
-        {commodityTicker && (
-          <div className='home__ticker'>
-            <div className='heading--with-underline'>
-              <h2 className='text-uppercase'>🔥 Hot Trades</h2>
-            </div>
-            <div className='ticker-widget scrollable'>
-              {commodityTicker.hotTrades &&
-                commodityTicker.hotTrades.slice(0, 5).map((trade, i) => (
+        <div className='home__ticker'>
+          <div className='heading--with-underline'>
+            <h2 className='text-uppercase'>🔥 Hot Trades</h2>
+          </div>
+          {commodityTicker && commodityTicker.hotTrades ? (
+            <>
+              <div className='ticker-widget scrollable'>
+                {commodityTicker.hotTrades.slice(0, 5).map((trade, i) => (
                   <div key={`hot-trade-${i}`} className='trade-opportunity'>
                     <div className='commodity-name text-uppercase'>
                       {trade.commodity}
@@ -227,28 +227,39 @@ function Home() {
                     </div>
                   </div>
                 ))}
+              </div>
+              <Link
+                className='button button--large'
+                style={{
+                  textAlign: 'center',
+                  display: 'block',
+                  margin: '.5rem'
+                }}
+                href='/trading'
+              >
+                <i
+                  className='icon icarus-terminal-cargo'
+                  style={{ marginRight: '.5rem' }}
+                />
+                View All Trading Opportunities
+                <i
+                  className='icon icarus-terminal-chevron-right'
+                  style={{ marginLeft: '.5rem' }}
+                />
+              </Link>
+            </>
+          ) : (
+            <div style={{ padding: '2rem 1rem', textAlign: 'center' }}>
+              <p className='text-muted'>
+                <i
+                  className='icarus-terminal-alert'
+                  style={{ marginRight: '.5rem' }}
+                />
+                Trading data currently unavailable. Please check back later.
+              </p>
             </div>
-            <Link
-              className='button button--large'
-              style={{
-                textAlign: 'center',
-                display: 'block',
-                margin: '.5rem'
-              }}
-              href='/trading'
-            >
-              <i
-                className='icon icarus-terminal-cargo'
-                style={{ marginRight: '.5rem' }}
-              />
-              View All Trading Opportunities
-              <i
-                className='icon icarus-terminal-chevron-right'
-                style={{ marginLeft: '.5rem' }}
-              />
-            </Link>
-          </div>
-        )}
+          )}
+        </div>
 
         <div className='home__about'>
           <div

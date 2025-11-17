@@ -91,34 +91,6 @@
   margin-bottom: 1rem;
 }
 
-/* Desktop Layout for Ticker */
-@media only screen and (min-width: 1024px) {
-  .home__ticker {
-    position: absolute;
-    top: -0.5rem;
-    left: calc(25% + 1rem);
-    right: calc(25% + 1rem);
-    bottom: 0;
-    margin-top: 1rem;
-  }
-
-  .home__news-feed {
-    position: absolute;
-    top: -0.5rem;
-    left: calc(25% + 1rem);
-    right: calc(50% + 1rem);
-    bottom: 0;
-  }
-
-  .home__ticker {
-    position: absolute;
-    top: -0.5rem;
-    left: calc(50% + 1rem);
-    right: calc(25% + 1rem);
-    bottom: 0;
-  }
-}
-
 /* Form inputs styling */
 input[type='text'],
 input[type='search'],
