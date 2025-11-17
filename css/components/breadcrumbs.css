@@ -75,7 +75,7 @@
 
 .breadcrumbs li:last-child:not(:first-child) a,
 .breadcrumbs li:last-child:not(:first-child) span {
-  color: var(--color-text-dark);
+  color: var(--color-text);
 }
 
 .breadcrumbs li:not(:first-child):after {
