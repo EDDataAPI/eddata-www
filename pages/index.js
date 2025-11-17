@@ -28,8 +28,9 @@ function Home() {
       try {
         const res = await fetch(`${API_BASE_URL}/v2/news/galnet`)
         if (res.ok) {
-          const news = await res.json()
-          setGalnetNews(news)
+          const data = await res.json()
+          // API returns { articles: [...], timestamp, source, count }
+          setGalnetNews(data.articles || [])
         }
       } catch (e) {
         console.error(e)
@@ -106,10 +107,10 @@ function Home() {
                         href={`https://www.elitedangerous.com/news/galnet/${newsItem.slug}`}
                         rel='noreferrer'
                       >
-                        {newsItem.date} — Galnet
+                        {new Date(newsItem.date).toLocaleDateString()} — Galnet
                       </a>
                     </p>
-                    <Markdown>{`${newsItem.text.replaceAll('\n', '\n\n')}`}</Markdown>
+                    <Markdown>{`${(newsItem.content || newsItem.text || '').replaceAll('\n', '\n\n')}`}</Markdown>
                     <div className='heading--with-underline'>
                       <h3>More from Galnet</h3>
                     </div>
@@ -141,10 +142,13 @@ function Home() {
                                       href={`https://www.elitedangerous.com/news/galnet/${nextNewsItem.slug}`}
                                       rel='noreferrer'
                                     >
-                                      {nextNewsItem.date} — Galnet
+                                      {new Date(
+                                        nextNewsItem.date
+                                      ).toLocaleDateString()}{' '}
+                                      — Galnet
                                     </a>
                                   </p>
-                                  <Markdown>{`${nextNewsItem.text.replaceAll('\n', '\n\n')}`}</Markdown>
+                                  <Markdown>{`${(nextNewsItem.content || nextNewsItem.text || '').replaceAll('\n', '\n\n')}`}</Markdown>
                                 </>
                               ),
                               visible: true
