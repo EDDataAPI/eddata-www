@@ -840,6 +840,54 @@ function Inspector({ systemObject }) {
           </div>
         )}
 
+        {systemObject?.prohibited && (
+          <div className='inspector__section'>
+            <div className='heading--with-underline'>
+              <h3>🚫 Prohibited Commodities</h3>
+            </div>
+            <div className='prohibited-section'>
+              <ul>
+                {(() => {
+                  try {
+                    const prohibitedList =
+                      typeof systemObject.prohibited === 'string'
+                        ? JSON.parse(systemObject.prohibited)
+                        : systemObject.prohibited
+                    return prohibitedList.map((commodity, i) => (
+                      <li key={`prohibited_${commodity}_${i}`}>
+                        <span className='text-uppercase'>{commodity}</span>
+                      </li>
+                    ))
+                  } catch (e) {
+                    return <li className='text-muted'>Invalid data</li>
+                  }
+                })()}
+              </ul>
+            </div>
+          </div>
+        )}
+
+        {systemObject?.stationType === 'FleetCarrier' &&
+          systemObject?.carrierDockingAccess && (
+            <div className='inspector__section'>
+              <div className='heading--with-underline'>
+                <h3>🚁 Docking Access</h3>
+              </div>
+              <p>
+                <span
+                  className={`access-badge access-${systemObject.carrierDockingAccess}`}
+                >
+                  {systemObject.carrierDockingAccess === 'all' &&
+                    '✓ Publicly Accessible'}
+                  {systemObject.carrierDockingAccess === 'squadronFriends' &&
+                    '⚠ Squadron & Friends'}
+                  {systemObject.carrierDockingAccess === 'none' &&
+                    '✕ Private / No Docking'}
+                </span>
+              </p>
+            </div>
+          )}
+
         {Object.prototype.hasOwnProperty.call(
           systemObject,
           'rotationalPeriod'
