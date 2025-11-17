@@ -89,14 +89,16 @@ function Home() {
             galnetNews.slice(0, 1).map((newsItem, _i) => (
               <div key={newsItem.url}>
                 <div className='home__news-article-body'>
-                  <Image
-                    src={newsItem.image}
-                    width={800}
-                    height={450}
-                    alt='News article headline'
-                    className='home__news-headline-image'
-                    priority
-                  />
+                  {newsItem.image && (
+                    <Image
+                      src={newsItem.image}
+                      width={800}
+                      height={450}
+                      alt='News article headline'
+                      className='home__news-headline-image'
+                      priority
+                    />
+                  )}
                   <div className='home__news-article-text scrollable'>
                     <h3 className='home__news-article-headline'>
                       {newsItem.title}
@@ -122,14 +124,16 @@ function Home() {
                               title: 'Galnet News',
                               contents: (
                                 <>
-                                  <Image
-                                    src={nextNewsItem.image}
-                                    width={800}
-                                    height={450}
-                                    alt='News article headline'
-                                    className='home__news-headline-image'
-                                    style={{ maxHeight: '10rem' }}
-                                  />
+                                  {nextNewsItem.image && (
+                                    <Image
+                                      src={nextNewsItem.image}
+                                      width={800}
+                                      height={450}
+                                      alt='News article headline'
+                                      className='home__news-headline-image'
+                                      style={{ maxHeight: '10rem' }}
+                                    />
+                                  )}
                                   <p
                                     style={{ fontSize: '1.5rem' }}
                                     className='text-uppercase'
@@ -379,10 +383,10 @@ function Home() {
               style={{ border: 0 }}
             >
               <i className='icon icarus-terminal-outpost' />
-              Icarus Terminal
+              coming soon...
               <br />
               <i className='icon icarus-terminal-star' />
-              Puppis Sector GB-X b1-5
+              coming soon...
               <br />
             </Link>
           </p>
@@ -393,7 +397,7 @@ function Home() {
           <p style={{ margin: 0, padding: '.5rem .25rem' }}>
             <span className='text-uppercase'>
               <i className='icon icarus-terminal-fleet-carrier' />
-              EDData Pioneer V9G-G7Z
+              DEEP HORIZON WHH-G2Z
             </span>
           </p>
         </div>
