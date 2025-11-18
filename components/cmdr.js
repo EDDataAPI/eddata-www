@@ -552,7 +552,7 @@ function Cmdr() {
 async function getNearestService(systemName, service) {
   try {
     const res = await fetch(
-      `${API_BASE_URL}/v2/system/name/${systemName}/nearest/${service}?minLandingPadSize=3`
+      `/api/proxy/v2/system/name/${systemName}/nearest/${service}?minLandingPadSize=3`
     )
     if (res.ok) {
       return await res.json()
