@@ -550,7 +550,7 @@ async function getNearestService(systemIdentifer, service) {
       ? 'address'
       : 'name'
     const res = await fetch(
-      `/api/proxy/v2/system/${systemIdentiferType}/${systemIdentifer}/nearest/${service}?minLandingPadSize=3`
+      `${API_BASE_URL}/v2/system/${systemIdentiferType}/${systemIdentifer}/nearest/${service}?minLandingPadSize=3`
     )
     if (res.ok) {
       return await res.json()

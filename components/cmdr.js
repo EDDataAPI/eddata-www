@@ -4,7 +4,7 @@ import { getCsrfToken } from 'lib/auth'
 import { getCmdrInfo } from 'lib/cmdr'
 import hexToAscii from 'lib/utils/hex-to-ascii'
 import StationIcon from 'components/station-icon'
-import { SIGN_IN_URL, SIGN_OUT_URL } from 'lib/consts'
+import { API_BASE_URL, SIGN_IN_URL, SIGN_OUT_URL } from 'lib/consts'
 import { loadCache, saveCache, deleteCache } from 'lib/cache'
 import { timeBetweenTimestamps } from 'lib/utils/dates'
 
@@ -551,7 +551,7 @@ function Cmdr() {
 
 async function getNearestService(systemName, service) {
   try {
-    const url = `/api/proxy/v2/system/name/${systemName}/nearest/${service}?minLandingPadSize=3`
+    const url = `${API_BASE_URL}/v2/system/name/${systemName}/nearest/${service}?minLandingPadSize=3`
     console.warn(`[CMDR] Fetching nearest service: ${url}`)
     const res = await fetch(url)
     console.warn(`[CMDR] Response status: ${res.status}`)
