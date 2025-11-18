@@ -20,10 +20,16 @@ function News(_props) {
       try {
         const res = await fetch(`${API_BASE_URL}/v2/news/galnet`)
         if (res.ok) {
-          setGalnetNews(await res.json())
+          const data = await res.json()
+          // Handle both direct array and {articles: []} formats
+          const articles = Array.isArray(data) ? data : data.articles || []
+          setGalnetNews(articles)
+          console.warn('[NEWS] Loaded galnet articles:', articles.length)
+        } else {
+          console.warn('[NEWS] Galnet API error:', res.status)
         }
       } catch (e) {
-        console.error(e)
+        console.error('[NEWS] Galnet fetch error:', e)
       }
     })()
   }, [])

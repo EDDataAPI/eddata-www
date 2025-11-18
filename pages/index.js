@@ -29,11 +29,15 @@ function Home() {
         const res = await fetch(`${API_BASE_URL}/v2/news/galnet`)
         if (res.ok) {
           const data = await res.json()
-          // API returns { articles: [...], timestamp, source, count }
-          setGalnetNews(data.articles || [])
+          // Handle both direct array and {articles: []} formats
+          const articles = Array.isArray(data) ? data : data.articles || []
+          setGalnetNews(articles)
+          console.warn('[HOME] Loaded galnet articles:', articles.length)
+        } else {
+          console.warn('[HOME] Galnet API error:', res.status)
         }
       } catch (e) {
-        console.error(e)
+        console.error('[HOME] Galnet fetch error:', e)
       }
     })()
     ;(async () => {

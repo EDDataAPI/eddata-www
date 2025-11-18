@@ -501,9 +501,24 @@ function Header() {
             Settings
           </button>
           <Link href='/about' className='--no-hover'>
-            <button aria-label='Commodities' className='header__menu-item'>
+            <button aria-label='About' className='header__menu-item'>
               <i className='icon icarus-terminal-info' />
               About
+            </button>
+          </Link>
+          <Link href='/status' className='--no-hover'>
+            <button aria-label='System Status' className='header__menu-item'>
+              <i className='icon icarus-terminal-pulse' />
+              Status
+            </button>
+          </Link>
+          <Link href='/api-docs' className='--no-hover'>
+            <button
+              aria-label='API Documentation'
+              className='header__menu-item'
+            >
+              <i className='icon icarus-terminal-db' />
+              API Docs
             </button>
           </Link>
           <button
