@@ -4,7 +4,7 @@ import { getCsrfToken } from 'lib/auth'
 import { getCmdrInfo } from 'lib/cmdr'
 import hexToAscii from 'lib/utils/hex-to-ascii'
 import StationIcon from 'components/station-icon'
-import { API_BASE_URL, SIGN_IN_URL, SIGN_OUT_URL } from 'lib/consts'
+import { SIGN_IN_URL, SIGN_OUT_URL } from 'lib/consts'
 import { loadCache, saveCache, deleteCache } from 'lib/cache'
 import { timeBetweenTimestamps } from 'lib/utils/dates'
 
