@@ -14,7 +14,6 @@
   );
   padding: 0.5rem;
   border-radius: 0.25rem;
-  overflow: hidden;
 }
 
 .layout__frame::after {
@@ -61,7 +60,8 @@
 */
 
 .layout__content {
-  overflow: auto;
+  overflow-y: auto; /* Vertikales Scrollen erlauben */
+  overflow-x: hidden; /* Horizontales Scrollen verhindern */
   position: absolute;
   top: 3.8rem;
   left: 0rem;

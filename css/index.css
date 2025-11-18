@@ -50,10 +50,10 @@ html {
   filter: contrast(var(--contrast));
 }
 
-body,
-.scrollable {
-  overflow-x: hidden !important;
-  font-synthesis: style;
+body {
+  margin: 0;
+  overflow-x: hidden; /* Nur horizontales Scrollen verhindern */
+  background: var(--color-layout-background);
 }
 
 @-moz-document url-prefix() {
