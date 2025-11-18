@@ -25,11 +25,18 @@ function News(_props) {
           const articles = Array.isArray(data) ? data : data.articles || []
           setGalnetNews(articles)
           console.warn('[NEWS] Loaded galnet articles:', articles.length)
+
+          // If no articles, show a helpful message
+          if (articles.length === 0) {
+            console.warn('[NEWS] No galnet articles available from API')
+          }
         } else {
           console.warn('[NEWS] Galnet API error:', res.status)
+          setGalnetNews([]) // Set empty array on error
         }
       } catch (e) {
         console.error('[NEWS] Galnet fetch error:', e)
+        setGalnetNews([]) // Set empty array on error
       }
     })()
   }, [])
@@ -102,7 +109,7 @@ function News(_props) {
                 )}
               </Fragment>
             ))
-          ) : (
+          ) : galnetNews !== undefined ? (
             <div
               className='home__news-article-body'
               style={{ marginBottom: '2rem' }}
@@ -118,7 +125,25 @@ function News(_props) {
                   />
                   Galnet news currently unavailable. Please check back later.
                 </p>
-                <p className='text-center'>
+                <div
+                  className='text-center'
+                  style={{
+                    gap: '1rem',
+                    display: 'flex',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <button
+                    onClick={() => window.location.reload()}
+                    className='button'
+                    style={{ marginRight: '1rem' }}
+                  >
+                    <i
+                      className='icarus-terminal-refresh'
+                      style={{ marginRight: '.5rem' }}
+                    />
+                    Refresh Page
+                  </button>
                   <a
                     href='https://www.elitedangerous.com/news/galnet'
                     target='_blank'
@@ -127,6 +152,21 @@ function News(_props) {
                   >
                     Visit Galnet Website
                   </a>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div
+              className='home__news-article-body'
+              style={{ marginBottom: '2rem' }}
+            >
+              <div className='home__news-article-text scrollable'>
+                <p className='text-center' style={{ padding: '2rem 1rem' }}>
+                  <i
+                    className='icarus-terminal-loader'
+                    style={{ marginRight: '.5rem' }}
+                  />
+                  Loading Galnet news...
                 </p>
               </div>
             </div>

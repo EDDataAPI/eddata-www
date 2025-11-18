@@ -10,6 +10,7 @@
     "build:local": "cross-env EDDATA_API_BASE_URL=http://localhost:3001/api EDDATA_AUTH_BASE_URL=http://localhost:3003/auth next build",
     "postbuild": "next-sitemap",
     "dev": "next dev -p 3000 --turbo",
+    "dev:no-turbo": "next dev -p 3000",
     "dev:local": "cross-env EDDATA_API_BASE_URL=http://localhost:3001/api EDDATA_AUTH_BASE_URL=http://localhost:3003/auth next dev -p 3000 --turbo",
     "dev:local:api": "cross-env EDDATA_API_BASE_URL=http://localhost:3001/api next dev -p 3000 --turbo",
     "dev:local:auth": "cross-env EDDATA_AUTH_BASE_URL=http://localhost:3003/auth next dev -p 3000 --turbo",

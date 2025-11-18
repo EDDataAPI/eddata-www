@@ -463,6 +463,21 @@ function Header() {
         >
           <i className='icon icarus-terminal-settings' />
         </button>
+        <Link href='/status' className='--no-hover is-hidden-mobile'>
+          <button aria-label='System Status' className='button'>
+            <i className='icon icarus-terminal-signal' />
+          </button>
+        </Link>
+        <Link href='/stats' className='--no-hover is-hidden-mobile'>
+          <button aria-label='Database Statistics' className='button'>
+            <i className='icon icarus-terminal-trending-up-chart' />
+          </button>
+        </Link>
+        <Link href='/api-docs' className='--no-hover is-hidden-mobile'>
+          <button aria-label='API Documentation' className='button'>
+            <i className='icon icarus-terminal-table-inspector' />
+          </button>
+        </Link>
         <button
           aria-label='Toggle Fullscreen'
           className='button --no-hover is-hidden-mobile'
@@ -508,7 +523,7 @@ function Header() {
           </Link>
           <Link href='/status' className='--no-hover'>
             <button aria-label='System Status' className='header__menu-item'>
-              <i className='icon icarus-terminal-pulse' />
+              <i className='icon icarus-terminal-signal' />
               Status
             </button>
           </Link>
@@ -517,7 +532,7 @@ function Header() {
               aria-label='Database Statistics'
               className='header__menu-item'
             >
-              <i className='icon icarus-terminal-graph' />
+              <i className='icon icarus-terminal-trending-up-chart' />
               Stats
             </button>
           </Link>
@@ -526,7 +541,7 @@ function Header() {
               aria-label='API Documentation'
               className='header__menu-item'
             >
-              <i className='icon icarus-terminal-db' />
+              <i className='icon icarus-terminal-table-inspector' />
               API Docs
             </button>
           </Link>
