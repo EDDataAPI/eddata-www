@@ -512,6 +512,15 @@ function Header() {
               Status
             </button>
           </Link>
+          <Link href='/stats' className='--no-hover'>
+            <button
+              aria-label='Database Statistics'
+              className='header__menu-item'
+            >
+              <i className='icon icarus-terminal-graph' />
+              Stats
+            </button>
+          </Link>
           <Link href='/api-docs' className='--no-hover'>
             <button
               aria-label='API Documentation'
