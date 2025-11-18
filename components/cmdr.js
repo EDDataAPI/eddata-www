@@ -246,181 +246,203 @@ function Cmdr() {
                                       paddingTop: 0
                                     }}
                                   >
-                                    {nearestServices[service]
-                                      ?.filter(s =>
-                                        SERVICE_STATION_TYPES.includes(
-                                          s.stationType
-                                        )
-                                      )
-                                      ?.filter(s => s.distance === 0)?.length >
-                                      0 && (
+                                    {nearestServices[service]?.error ? (
                                       <small
                                         style={{
-                                          display: 'block',
-                                          marginTop: '.5rem'
+                                          color: 'var(--color-text-dark)',
+                                          fontStyle: 'italic'
                                         }}
                                       >
-                                        Station in system
+                                        {nearestServices[service].error}
                                       </small>
-                                    )}
-                                    {nearestServices[service]
-                                      ?.filter(s =>
-                                        SERVICE_STATION_TYPES.includes(
-                                          s.stationType
+                                    ) : (
+                                      nearestServices[service]
+                                        ?.filter(s =>
+                                          SERVICE_STATION_TYPES.includes(
+                                            s.stationType
+                                          )
                                         )
-                                      )
-                                      ?.slice(0, 1)
-                                      ?.filter(s => s.distance === 0)
-                                      ?.map(station => (
-                                        <Fragment
-                                          key={`in_system_service_${service}_${station}`}
+                                        ?.filter(s => s.distance === 0)
+                                        ?.length > 0 && (
+                                        <small
+                                          style={{
+                                            display: 'block',
+                                            marginTop: '.5rem'
+                                          }}
                                         >
-                                          <p style={{ margin: '.5rem 0 0 0' }}>
-                                            <StationIcon station={station}>
-                                              {station.stationName}
-                                              {station.bodyName ? (
-                                                <>
-                                                  <br />
-                                                  <span
-                                                    style={{
-                                                      fontSize: '.9rem'
-                                                    }}
-                                                  >
-                                                    {station.bodyName}
-                                                  </span>
-                                                </>
-                                              ) : (
-                                                ''
-                                              )}
-                                              <small className='text-no-transform'>
-                                                {' '}
-                                                {Math.round(
-                                                  station.distanceToArrival
-                                                ).toLocaleString()}{' '}
-                                                Ls
-                                              </small>
-                                            </StationIcon>
-                                          </p>
-                                        </Fragment>
-                                      ))}
-                                    {nearestServices[service]
-                                      ?.filter(s =>
-                                        SERVICE_STATION_TYPES.includes(
-                                          s.stationType
-                                        )
+                                          Station in system
+                                        </small>
                                       )
-                                      .filter(s => s.distance > 0)?.length >
-                                      0 && (
-                                      <small
-                                        style={{
-                                          display: 'block',
-                                          marginTop: '.5rem'
-                                        }}
-                                      >
-                                        Next nearest station
-                                      </small>
                                     )}
-                                    {nearestServices[service]
-                                      ?.filter(s =>
-                                        SERVICE_STATION_TYPES.includes(
-                                          s.stationType
+                                    {!nearestServices[service]?.error &&
+                                      nearestServices[service]
+                                        ?.filter(s =>
+                                          SERVICE_STATION_TYPES.includes(
+                                            s.stationType
+                                          )
                                         )
-                                      )
-                                      ?.filter(s => s.distance > 0)
-                                      ?.splice(0, 1)
-                                      ?.map(station => (
-                                        <Fragment
-                                          key={`nearest_service_${service}_${station.stationName}`}
-                                        >
-                                          <p style={{ margin: '.5rem 0 0 0' }}>
-                                            <StationIcon station={station}>
-                                              {station.stationName}
-                                              <br />
-                                              <Link
-                                                style={{ fontSize: '.9rem' }}
-                                                href={`/system/${station.systemAddress}`}
-                                              >
-                                                {station.systemName}
-                                              </Link>
-                                              <small className='text-no-transform'>
-                                                {' '}
-                                                {station.distance.toLocaleString()}{' '}
-                                                ly
-                                              </small>
-                                            </StationIcon>
-                                          </p>
-                                        </Fragment>
-                                      ))}
-                                    {nearestServices[service]
-                                      ?.filter(
-                                        s => s.stationType !== 'FleetCarrier'
-                                      )
-                                      .filter(s => s.distance > 0)?.length ===
-                                      0 && (
-                                      <>
-                                        {nearestServices[service]?.filter(
-                                          s => s.stationType === 'FleetCarrier'
-                                        )?.length > 0 && (
-                                          <small
-                                            style={{
-                                              display: 'block',
-                                              marginTop: '.5rem'
-                                            }}
+                                        ?.slice(0, 1)
+                                        ?.filter(s => s.distance === 0)
+                                        ?.map(station => (
+                                          <Fragment
+                                            key={`in_system_service_${service}_${station}`}
                                           >
-                                            Nearest Carriers
-                                          </small>
-                                        )}
-                                        {nearestServices[service]
-                                          ?.filter(
+                                            <p
+                                              style={{ margin: '.5rem 0 0 0' }}
+                                            >
+                                              <StationIcon station={station}>
+                                                {station.stationName}
+                                                {station.bodyName ? (
+                                                  <>
+                                                    <br />
+                                                    <span
+                                                      style={{
+                                                        fontSize: '.9rem'
+                                                      }}
+                                                    >
+                                                      {station.bodyName}
+                                                    </span>
+                                                  </>
+                                                ) : (
+                                                  ''
+                                                )}
+                                                <small className='text-no-transform'>
+                                                  {' '}
+                                                  {Math.round(
+                                                    station.distanceToArrival
+                                                  ).toLocaleString()}{' '}
+                                                  Ls
+                                                </small>
+                                              </StationIcon>
+                                            </p>
+                                          </Fragment>
+                                        ))}
+                                    {!nearestServices[service]?.error &&
+                                      nearestServices[service]
+                                        ?.filter(s =>
+                                          SERVICE_STATION_TYPES.includes(
+                                            s.stationType
+                                          )
+                                        )
+                                        .filter(s => s.distance > 0)?.length >
+                                        0 && (
+                                        <small
+                                          style={{
+                                            display: 'block',
+                                            marginTop: '.5rem'
+                                          }}
+                                        >
+                                          Next nearest station
+                                        </small>
+                                      )}
+                                    {!nearestServices[service]?.error &&
+                                      nearestServices[service]
+                                        ?.filter(s =>
+                                          SERVICE_STATION_TYPES.includes(
+                                            s.stationType
+                                          )
+                                        )
+                                        ?.filter(s => s.distance > 0)
+                                        ?.slice(0, 1)
+                                        ?.map(station => (
+                                          <Fragment
+                                            key={`nearest_service_${service}_${station.stationName}`}
+                                          >
+                                            <p
+                                              style={{ margin: '.5rem 0 0 0' }}
+                                            >
+                                              <StationIcon station={station}>
+                                                {station.stationName}
+                                                <br />
+                                                <Link
+                                                  style={{ fontSize: '.9rem' }}
+                                                  href={`/system/${station.systemAddress}`}
+                                                >
+                                                  {station.systemName}
+                                                </Link>
+                                                <small className='text-no-transform'>
+                                                  {' '}
+                                                  {station.distance.toLocaleString()}{' '}
+                                                  ly
+                                                </small>
+                                              </StationIcon>
+                                            </p>
+                                          </Fragment>
+                                        ))}
+                                    {!nearestServices[service]?.error &&
+                                      nearestServices[service]
+                                        ?.filter(
+                                          s => s.stationType !== 'FleetCarrier'
+                                        )
+                                        .filter(s => s.distance > 0)?.length ===
+                                        0 && (
+                                        <>
+                                          {nearestServices[service]?.filter(
                                             s =>
                                               s.stationType === 'FleetCarrier'
-                                          )
-                                          ?.sort((a, b) =>
-                                            b?.updatedAt?.localeCompare(
-                                              a?.updatedAt
-                                            )
-                                          )
-                                          ?.splice(0, 3)
-                                          ?.map(station => (
-                                            <Fragment
-                                              key={`nearest_service_${service}_${station.stationName}`}
+                                          )?.length > 0 && (
+                                            <small
+                                              style={{
+                                                display: 'block',
+                                                marginTop: '.5rem'
+                                              }}
                                             >
-                                              <p
-                                                style={{
-                                                  margin: '.5rem 0 0 0'
-                                                }}
+                                              Nearest Carriers
+                                            </small>
+                                          )}
+                                          {nearestServices[service]
+                                            ?.filter(
+                                              s =>
+                                                s.stationType === 'FleetCarrier'
+                                            )
+                                            ?.sort((a, b) =>
+                                              b?.updatedAt?.localeCompare(
+                                                a?.updatedAt
+                                              )
+                                            )
+                                            ?.slice(0, 3)
+                                            ?.map(station => (
+                                              <Fragment
+                                                key={`nearest_service_${service}_${station.stationName}`}
                                               >
-                                                <StationIcon station={station}>
-                                                  {station.stationName}
-                                                  <br />
-                                                  <Link
-                                                    style={{
-                                                      fontSize: '.9rem'
-                                                    }}
-                                                    href={`/system/${station.systemAddress}`}
+                                                <p
+                                                  style={{
+                                                    margin: '.5rem 0 0 0'
+                                                  }}
+                                                >
+                                                  <StationIcon
+                                                    station={station}
                                                   >
-                                                    {station.systemName}
-                                                  </Link>
-                                                  <small className='text-no-transform'>
-                                                    {' '}
-                                                    {station.distance.toLocaleString()}{' '}
-                                                    ly
-                                                  </small>
-                                                  <br />
-                                                  {station.updatedAt && (
-                                                    <small>
-                                                      {timeBetweenTimestamps(
-                                                        station.updatedAt
-                                                      )}{' '}
-                                                      ago
+                                                    {station.stationName}
+                                                    <br />
+                                                    <Link
+                                                      style={{
+                                                        fontSize: '.9rem'
+                                                      }}
+                                                      href={`/system/${station.systemAddress}`}
+                                                    >
+                                                      {station.systemName}
+                                                    </Link>
+                                                    <small className='text-no-transform'>
+                                                      {' '}
+                                                      {station.distance.toLocaleString()}{' '}
+                                                      ly
                                                     </small>
-                                                  )}
-                                                </StationIcon>
-                                              </p>
-                                            </Fragment>
-                                          ))}
-                                      </>
-                                    )}
+                                                    <br />
+                                                    {station.updatedAt && (
+                                                      <small>
+                                                        {timeBetweenTimestamps(
+                                                          station.updatedAt
+                                                        )}{' '}
+                                                        ago
+                                                      </small>
+                                                    )}
+                                                  </StationIcon>
+                                                </p>
+                                              </Fragment>
+                                            ))}
+                                        </>
+                                      )}
                                   </td>
                                 </tr>
                               </Fragment>
@@ -528,10 +550,23 @@ function Cmdr() {
 }
 
 async function getNearestService(systemName, service) {
-  const res = await fetch(
-    `${API_BASE_URL}/v2/system/name/${systemName}/nearest/${service}?minLandingPadSize=3`
-  )
-  return res.ok ? await res.json() : null
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/v2/system/name/${systemName}/nearest/${service}?minLandingPadSize=3`
+    )
+    if (res.ok) {
+      return await res.json()
+    } else {
+      console.warn(`Nearest service API error for ${service}: ${res.status}`)
+      return {
+        error: `Service temporarily unavailable (${res.status})`,
+        service
+      }
+    }
+  } catch (e) {
+    console.error(`Nearest service fetch error for ${service}:`, e)
+    return { error: 'Service temporarily unavailable', service }
+  }
 }
 
 export default Cmdr

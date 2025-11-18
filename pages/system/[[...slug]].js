@@ -552,9 +552,18 @@ async function getNearestService(systemIdentifer, service) {
     const res = await fetch(
       `${API_BASE_URL}/v2/system/${systemIdentiferType}/${systemIdentifer}/nearest/${service}?minLandingPadSize=3`
     )
-    return res.ok ? await res.json() : null
+    if (res.ok) {
+      return await res.json()
+    } else {
+      console.warn(`Nearest service API error for ${service}: ${res.status}`)
+      return {
+        error: `Service temporarily unavailable (${res.status})`,
+        service
+      }
+    }
   } catch (e) {
-    console.error(e)
+    console.error(`Nearest service fetch error for ${service}:`, e)
+    return { error: 'Service temporarily unavailable', service }
   }
 }
 
