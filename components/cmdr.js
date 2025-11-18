@@ -551,9 +551,10 @@ function Cmdr() {
 
 async function getNearestService(systemName, service) {
   try {
-    const res = await fetch(
-      `/api/proxy/v2/system/name/${systemName}/nearest/${service}?minLandingPadSize=3`
-    )
+    const url = `/api/proxy/v2/system/name/${systemName}/nearest/${service}?minLandingPadSize=3`
+    console.warn(`[CMDR] Fetching nearest service: ${url}`)
+    const res = await fetch(url)
+    console.warn(`[CMDR] Response status: ${res.status}`)
     if (res.ok) {
       return await res.json()
     } else {
