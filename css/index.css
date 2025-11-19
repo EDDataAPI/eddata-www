@@ -54,7 +54,22 @@ html {
 body {
   margin: 0;
   overflow-x: hidden; /* Nur horizontales Scrollen verhindern */
+  overflow-y: auto !important; /* Vertikales Scrollen explizit erlauben */
+  height: 100vh; /* Vollständige Viewport-Höhe */
   background: var(--color-layout-background);
+}
+
+/* Scrollbar-Sichtbarkeit für alle scrollbaren Elemente erzwingen */
+.scrollable {
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  scrollbar-width: auto !important; /* Firefox */
+  scrollbar-color: var(--color-primary-5) var(--color-primary-4) !important; /* Firefox */
+}
+
+.scrollable::-webkit-scrollbar {
+  display: block !important; /* Webkit-Scrollbars explizit anzeigen */
+  width: 16px !important;
 }
 
 @-moz-document url-prefix() {
