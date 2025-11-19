@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import Layout from 'components/layout'
 import { NavigationContext } from 'lib/context'
 import { API_BASE_URL } from 'lib/consts'
 
@@ -107,7 +108,7 @@ export default function StatusPage() {
   }
 
   return (
-    <>
+    <Layout>
       <Head>
         <title>System Status • EDData</title>
       </Head>
@@ -556,6 +557,6 @@ export default function StatusPage() {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   )
 }

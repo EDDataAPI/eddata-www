@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import Head from 'next/head'
+import Layout from 'components/layout'
 import { NavigationContext } from 'lib/context'
 import { API_BASE_URL } from 'lib/consts'
 
@@ -139,7 +140,7 @@ export default function ApiDocsPage() {
   )
 
   return (
-    <>
+    <Layout>
       <Head>
         <title>API Documentation • EDData</title>
       </Head>
@@ -333,6 +334,6 @@ export default function ApiDocsPage() {
           </div>
         )}
       </div>
-    </>
+    </Layout>
   )
 }
