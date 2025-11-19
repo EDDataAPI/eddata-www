@@ -42,7 +42,6 @@ RUN npm ci --only=production --ignore-scripts && npm cache clean --force
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder --chown=nextjs:nodejs /app/next.config.js ./
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
@@ -59,4 +58,4 @@ ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
 # Start the application
-CMD ["node_modules/.bin/next", "start"]
+CMD ["./node_modules/.bin/next", "start"]
