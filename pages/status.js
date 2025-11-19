@@ -113,448 +113,430 @@ export default function StatusPage() {
         <title>System Status • EDData</title>
       </Head>
 
-      <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-        <div
+      <div
+        style={{
+          marginBottom: '2rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}
+      >
+        <h2
           style={{
-            marginBottom: '2rem',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
+            color: 'white',
+            textTransform: 'uppercase',
+            borderBottom: '2px solid #00ff00',
+            paddingBottom: '0.5rem',
+            display: 'inline-block',
+            margin: 0
           }}
         >
-          <h2
-            style={{
-              color: 'white',
-              textTransform: 'uppercase',
-              borderBottom: '2px solid #00ff00',
-              paddingBottom: '0.5rem',
-              display: 'inline-block',
-              margin: 0
-            }}
-          >
-            System Status
-          </h2>
+          System Status
+        </h2>
+      </div>
+
+      <div style={{ margin: '2rem 0' }}>
+        <button
+          onClick={loadStatusData}
+          disabled={loading}
+          style={{
+            padding: '0.5rem 1rem',
+            background: 'rgba(255,255,255,0.1)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            color: 'white',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            borderRadius: '4px'
+          }}
+        >
+          {loading ? 'Loading...' : 'Refresh Status'}
+        </button>
+      </div>
+
+      <div
+        style={{
+          display: 'grid',
+          gap: '2rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))'
+        }}
+      >
+        {/* Frontend Status */}
+        <div
+          style={{
+            border: `2px solid ${localStatus?.error ? '#ff4444' : '#00ff00'}`,
+            borderRadius: '8px',
+            padding: '1.5rem',
+            background: 'rgba(255,255,255,0.02)'
+          }}
+        >
+          <h3 style={{ color: 'white', margin: '0 0 1rem 0' }}>
+            Frontend (eddata-www)
+          </h3>
+
+          {localStatus?.error ? (
+            <div style={{ color: '#ff4444' }}>{localStatus.error}</div>
+          ) : localStatus ? (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.5rem'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#888' }}>Status:</span>
+                <span style={{ color: '#00ff00' }}>Healthy</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#888' }}>Version:</span>
+                <span style={{ color: 'white' }}>{localStatus.version}</span>
+              </div>
+              {localStatus.uptime && (
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                  <span style={{ color: '#888' }}>Uptime:</span>
+                  <span style={{ color: 'white' }}>
+                    {localStatus.uptime.formatted}
+                  </span>
+                </div>
+              )}
+              {localStatus.environment && (
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                  <span style={{ color: '#888' }}>Environment:</span>
+                  <span style={{ color: 'white' }}>
+                    {localStatus.environment}
+                  </span>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div style={{ color: '#888' }}>Loading...</div>
+          )}
+        </div>
+        {/* API Status */}
+        <div
+          style={{
+            border: `2px solid ${apiStatus?.error ? '#ff4444' : '#00ff00'}`,
+            borderRadius: '8px',
+            padding: '1.5rem',
+            background: 'rgba(255,255,255,0.02)'
+          }}
+        >
+          <h3 style={{ color: 'white', margin: '0 0 1rem 0' }}>API Backend</h3>
+
+          {apiStatus?.error ? (
+            <div style={{ color: '#ff4444' }}>{apiStatus.error}</div>
+          ) : apiStatus ? (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.5rem'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#888' }}>Status:</span>
+                <span style={{ color: '#00ff00' }}>Healthy</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#888' }}>Service:</span>
+                <span style={{ color: 'white' }}>
+                  {apiStatus.service || 'EDData API'}
+                </span>
+              </div>
+              {apiStatus.uptime && (
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                  <span style={{ color: '#888' }}>Uptime:</span>
+                  <span style={{ color: 'white' }}>
+                    {Math.floor(apiStatus.uptime / 3600)}h{' '}
+                    {Math.floor((apiStatus.uptime % 3600) / 60)}m
+                  </span>
+                </div>
+              )}
+              {apiStatus.timestamp && (
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                  <span style={{ color: '#888' }}>Last Check:</span>
+                  <span style={{ color: 'white' }}>
+                    {new Date(apiStatus.timestamp).toLocaleTimeString()}
+                  </span>
+                </div>
+              )}
+              {apiStatus.database && (
+                <>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    <span style={{ color: '#888' }}>Database:</span>
+                    <span
+                      style={{
+                        color: apiStatus.database.connected
+                          ? '#00ff00'
+                          : '#ff4444'
+                      }}
+                    >
+                      {apiStatus.database.connected
+                        ? 'Connected'
+                        : 'Disconnected'}
+                    </span>
+                  </div>
+                  {apiStatus.database.systems && (
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <span style={{ color: '#888' }}>Systems in DB:</span>
+                      <span style={{ color: 'white' }}>
+                        {apiStatus.database.systems.toLocaleString()}
+                      </span>
+                    </div>
+                  )}
+                  {apiStatus.database.stations && (
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <span style={{ color: '#888' }}>Stations in DB:</span>
+                      <span style={{ color: 'white' }}>
+                        {apiStatus.database.stations.toLocaleString()}
+                      </span>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          ) : (
+            <div style={{ color: '#888' }}>Loading...</div>
+          )}
         </div>
 
-        <div style={{ margin: '2rem 0' }}>
+        {/* Performance Metrics Card */}
+        {apiPerformance && (
+          <div
+            style={{
+              border: '2px solid #FF9500',
+              borderRadius: '8px',
+              padding: '1.5rem',
+              background: 'rgba(255,149,0,0.02)'
+            }}
+          >
+            <h3 style={{ color: 'white', margin: '0 0 1rem 0' }}>
+              API Performance
+            </h3>
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.5rem'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#888' }}>Total Response Time:</span>
+                <span
+                  style={{
+                    color:
+                      apiPerformance.totalResponseTime > 2000
+                        ? '#ff4444'
+                        : apiPerformance.totalResponseTime > 1000
+                          ? '#FF9500'
+                          : '#00ff00'
+                  }}
+                >
+                  {apiPerformance.totalResponseTime}ms
+                </span>
+              </div>
+              {apiPerformance.healthResponseTime && (
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                  <span style={{ color: '#888' }}>Health Endpoint:</span>
+                  <span style={{ color: 'white' }}>
+                    {apiPerformance.healthResponseTime}
+                  </span>
+                </div>
+              )}
+              {apiPerformance.fallbackUsed && (
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                  <span style={{ color: '#888' }}>Fallback Used:</span>
+                  <span style={{ color: '#FF9500' }}>v2/health endpoint</span>
+                </div>
+              )}
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#888' }}>Last Performance Check:</span>
+                <span style={{ color: 'white' }}>
+                  {new Date(apiPerformance.lastCheck).toLocaleTimeString()}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+        {/* Statistics Card */}
+        {apiStatus && !apiStatus.error && apiStatus.statistics && (
+          <div
+            style={{
+              border: '2px solid #00ff00',
+              borderRadius: '8px',
+              padding: '1.5rem',
+              background: 'rgba(255,255,255,0.02)',
+              gridColumn: 'span 2'
+            }}
+          >
+            <h3 style={{ color: 'white', margin: '0 0 1rem 0' }}>
+              Database Statistics
+            </h3>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gap: '0.5rem'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#888' }}>Total Systems:</span>
+                <span style={{ color: 'white' }}>
+                  {apiStatus.statistics.systems?.toLocaleString()}
+                </span>
+              </div>
+              {apiStatus.statistics.pointsOfInterest && (
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                  <span style={{ color: '#888' }}>Points of Interest:</span>
+                  <span style={{ color: 'white' }}>
+                    {apiStatus.statistics.pointsOfInterest.toLocaleString()}
+                  </span>
+                </div>
+              )}
+              {apiStatus.statistics.stations && (
+                <>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    <span style={{ color: '#888' }}>Stations:</span>
+                    <span style={{ color: 'white' }}>
+                      {apiStatus.statistics.stations.stations?.toLocaleString()}
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    <span style={{ color: '#888' }}>Fleet Carriers:</span>
+                    <span style={{ color: 'white' }}>
+                      {apiStatus.statistics.stations.carriers?.toLocaleString()}
+                    </span>
+                  </div>
+                </>
+              )}
+              {apiStatus.statistics.trade && (
+                <>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    <span style={{ color: '#888' }}>Trade Orders:</span>
+                    <span style={{ color: 'white' }}>
+                      {apiStatus.statistics.trade.orders?.toLocaleString()}
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    <span style={{ color: '#888' }}>Markets:</span>
+                    <span style={{ color: 'white' }}>
+                      {apiStatus.statistics.trade.markets?.toLocaleString()}
+                    </span>
+                  </div>
+                </>
+              )}
+              {apiStatus.statistics.updatedInLast24Hours && (
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                  <span style={{ color: '#888' }}>Updated (24h):</span>
+                  <span style={{ color: 'white' }}>
+                    {apiStatus.statistics.updatedInLast24Hours.toLocaleString()}
+                  </span>
+                </div>
+              )}
+              {apiStatus.lastUpdated && (
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                  <span style={{ color: '#888' }}>Stats Updated:</span>
+                  <span style={{ color: 'white' }}>
+                    {new Date(apiStatus.lastUpdated).toLocaleString()}
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div
+        style={{
+          marginTop: '2rem',
+          padding: '1rem',
+          background: 'rgba(255,255,255,0.05)',
+          borderRadius: '8px'
+        }}
+      >
+        <h3 style={{ color: 'white', margin: '0 0 1rem 0' }}>Quick Links</h3>
+        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <Link
+            href='/api-docs'
+            style={{
+              display: 'inline-block',
+              padding: '0.5rem 1rem',
+              background: 'rgba(0,255,0,0.1)',
+              border: '1px solid rgba(0,255,0,0.3)',
+              color: '#00ff00',
+              textDecoration: 'none',
+              borderRadius: '4px',
+              transition: 'background 0.3s'
+            }}
+          >
+            📚 API Documentation
+          </Link>
           <button
-            onClick={loadStatusData}
-            disabled={loading}
+            onClick={() => window.open(`${API_BASE_URL}`, '_blank')}
             style={{
               padding: '0.5rem 1rem',
               background: 'rgba(255,255,255,0.1)',
               border: '1px solid rgba(255,255,255,0.2)',
               color: 'white',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              borderRadius: '4px'
+              borderRadius: '4px',
+              cursor: 'pointer'
             }}
           >
-            {loading ? 'Loading...' : 'Refresh Status'}
+            🔗 API Base URL
           </button>
-        </div>
-
-        <div
-          style={{
-            display: 'grid',
-            gap: '2rem',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))'
-          }}
-        >
-          {/* Frontend Status */}
-          <div
-            style={{
-              border: `2px solid ${localStatus?.error ? '#ff4444' : '#00ff00'}`,
-              borderRadius: '8px',
-              padding: '1.5rem',
-              background: 'rgba(255,255,255,0.02)'
-            }}
-          >
-            <h3 style={{ color: 'white', margin: '0 0 1rem 0' }}>
-              Frontend (eddata-www)
-            </h3>
-
-            {localStatus?.error ? (
-              <div style={{ color: '#ff4444' }}>{localStatus.error}</div>
-            ) : localStatus ? (
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.5rem'
-                }}
-              >
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
-                  <span style={{ color: '#888' }}>Status:</span>
-                  <span style={{ color: '#00ff00' }}>Healthy</span>
-                </div>
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
-                  <span style={{ color: '#888' }}>Version:</span>
-                  <span style={{ color: 'white' }}>{localStatus.version}</span>
-                </div>
-                {localStatus.uptime && (
-                  <div
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
-                    <span style={{ color: '#888' }}>Uptime:</span>
-                    <span style={{ color: 'white' }}>
-                      {localStatus.uptime.formatted}
-                    </span>
-                  </div>
-                )}
-                {localStatus.environment && (
-                  <div
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
-                    <span style={{ color: '#888' }}>Environment:</span>
-                    <span style={{ color: 'white' }}>
-                      {localStatus.environment}
-                    </span>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div style={{ color: '#888' }}>Loading...</div>
-            )}
-          </div>
-          {/* API Status */}
-          <div
-            style={{
-              border: `2px solid ${apiStatus?.error ? '#ff4444' : '#00ff00'}`,
-              borderRadius: '8px',
-              padding: '1.5rem',
-              background: 'rgba(255,255,255,0.02)'
-            }}
-          >
-            <h3 style={{ color: 'white', margin: '0 0 1rem 0' }}>
-              API Backend
-            </h3>
-
-            {apiStatus?.error ? (
-              <div style={{ color: '#ff4444' }}>{apiStatus.error}</div>
-            ) : apiStatus ? (
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.5rem'
-                }}
-              >
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
-                  <span style={{ color: '#888' }}>Status:</span>
-                  <span style={{ color: '#00ff00' }}>Healthy</span>
-                </div>
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
-                  <span style={{ color: '#888' }}>Service:</span>
-                  <span style={{ color: 'white' }}>
-                    {apiStatus.service || 'EDData API'}
-                  </span>
-                </div>
-                {apiStatus.uptime && (
-                  <div
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
-                    <span style={{ color: '#888' }}>Uptime:</span>
-                    <span style={{ color: 'white' }}>
-                      {Math.floor(apiStatus.uptime / 3600)}h{' '}
-                      {Math.floor((apiStatus.uptime % 3600) / 60)}m
-                    </span>
-                  </div>
-                )}
-                {apiStatus.timestamp && (
-                  <div
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
-                    <span style={{ color: '#888' }}>Last Check:</span>
-                    <span style={{ color: 'white' }}>
-                      {new Date(apiStatus.timestamp).toLocaleTimeString()}
-                    </span>
-                  </div>
-                )}
-                {apiStatus.database && (
-                  <>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                      }}
-                    >
-                      <span style={{ color: '#888' }}>Database:</span>
-                      <span
-                        style={{
-                          color: apiStatus.database.connected
-                            ? '#00ff00'
-                            : '#ff4444'
-                        }}
-                      >
-                        {apiStatus.database.connected
-                          ? 'Connected'
-                          : 'Disconnected'}
-                      </span>
-                    </div>
-                    {apiStatus.database.systems && (
-                      <div
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'space-between'
-                        }}
-                      >
-                        <span style={{ color: '#888' }}>Systems in DB:</span>
-                        <span style={{ color: 'white' }}>
-                          {apiStatus.database.systems.toLocaleString()}
-                        </span>
-                      </div>
-                    )}
-                    {apiStatus.database.stations && (
-                      <div
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'space-between'
-                        }}
-                      >
-                        <span style={{ color: '#888' }}>Stations in DB:</span>
-                        <span style={{ color: 'white' }}>
-                          {apiStatus.database.stations.toLocaleString()}
-                        </span>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-            ) : (
-              <div style={{ color: '#888' }}>Loading...</div>
-            )}
-          </div>
-
-          {/* Performance Metrics Card */}
-          {apiPerformance && (
-            <div
-              style={{
-                border: '2px solid #FF9500',
-                borderRadius: '8px',
-                padding: '1.5rem',
-                background: 'rgba(255,149,0,0.02)'
-              }}
-            >
-              <h3 style={{ color: 'white', margin: '0 0 1rem 0' }}>
-                API Performance
-              </h3>
-
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.5rem'
-                }}
-              >
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
-                  <span style={{ color: '#888' }}>Total Response Time:</span>
-                  <span
-                    style={{
-                      color:
-                        apiPerformance.totalResponseTime > 2000
-                          ? '#ff4444'
-                          : apiPerformance.totalResponseTime > 1000
-                            ? '#FF9500'
-                            : '#00ff00'
-                    }}
-                  >
-                    {apiPerformance.totalResponseTime}ms
-                  </span>
-                </div>
-                {apiPerformance.healthResponseTime && (
-                  <div
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
-                    <span style={{ color: '#888' }}>Health Endpoint:</span>
-                    <span style={{ color: 'white' }}>
-                      {apiPerformance.healthResponseTime}
-                    </span>
-                  </div>
-                )}
-                {apiPerformance.fallbackUsed && (
-                  <div
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
-                    <span style={{ color: '#888' }}>Fallback Used:</span>
-                    <span style={{ color: '#FF9500' }}>v2/health endpoint</span>
-                  </div>
-                )}
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
-                  <span style={{ color: '#888' }}>Last Performance Check:</span>
-                  <span style={{ color: 'white' }}>
-                    {new Date(apiPerformance.lastCheck).toLocaleTimeString()}
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
-          {/* Statistics Card */}
-          {apiStatus && !apiStatus.error && apiStatus.statistics && (
-            <div
-              style={{
-                border: '2px solid #00ff00',
-                borderRadius: '8px',
-                padding: '1.5rem',
-                background: 'rgba(255,255,255,0.02)',
-                gridColumn: 'span 2'
-              }}
-            >
-              <h3 style={{ color: 'white', margin: '0 0 1rem 0' }}>
-                Database Statistics
-              </h3>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                  gap: '0.5rem'
-                }}
-              >
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
-                  <span style={{ color: '#888' }}>Total Systems:</span>
-                  <span style={{ color: 'white' }}>
-                    {apiStatus.statistics.systems?.toLocaleString()}
-                  </span>
-                </div>
-                {apiStatus.statistics.pointsOfInterest && (
-                  <div
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
-                    <span style={{ color: '#888' }}>Points of Interest:</span>
-                    <span style={{ color: 'white' }}>
-                      {apiStatus.statistics.pointsOfInterest.toLocaleString()}
-                    </span>
-                  </div>
-                )}
-                {apiStatus.statistics.stations && (
-                  <>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                      }}
-                    >
-                      <span style={{ color: '#888' }}>Stations:</span>
-                      <span style={{ color: 'white' }}>
-                        {apiStatus.statistics.stations.stations?.toLocaleString()}
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                      }}
-                    >
-                      <span style={{ color: '#888' }}>Fleet Carriers:</span>
-                      <span style={{ color: 'white' }}>
-                        {apiStatus.statistics.stations.carriers?.toLocaleString()}
-                      </span>
-                    </div>
-                  </>
-                )}
-                {apiStatus.statistics.trade && (
-                  <>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                      }}
-                    >
-                      <span style={{ color: '#888' }}>Trade Orders:</span>
-                      <span style={{ color: 'white' }}>
-                        {apiStatus.statistics.trade.orders?.toLocaleString()}
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                      }}
-                    >
-                      <span style={{ color: '#888' }}>Markets:</span>
-                      <span style={{ color: 'white' }}>
-                        {apiStatus.statistics.trade.markets?.toLocaleString()}
-                      </span>
-                    </div>
-                  </>
-                )}
-                {apiStatus.statistics.updatedInLast24Hours && (
-                  <div
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
-                    <span style={{ color: '#888' }}>Updated (24h):</span>
-                    <span style={{ color: 'white' }}>
-                      {apiStatus.statistics.updatedInLast24Hours.toLocaleString()}
-                    </span>
-                  </div>
-                )}
-                {apiStatus.lastUpdated && (
-                  <div
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
-                    <span style={{ color: '#888' }}>Stats Updated:</span>
-                    <span style={{ color: 'white' }}>
-                      {new Date(apiStatus.lastUpdated).toLocaleString()}
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div
-          style={{
-            marginTop: '2rem',
-            padding: '1rem',
-            background: 'rgba(255,255,255,0.05)',
-            borderRadius: '8px'
-          }}
-        >
-          <h3 style={{ color: 'white', margin: '0 0 1rem 0' }}>Quick Links</h3>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link
-              href='/api-docs'
-              style={{
-                display: 'inline-block',
-                padding: '0.5rem 1rem',
-                background: 'rgba(0,255,0,0.1)',
-                border: '1px solid rgba(0,255,0,0.3)',
-                color: '#00ff00',
-                textDecoration: 'none',
-                borderRadius: '4px',
-                transition: 'background 0.3s'
-              }}
-            >
-              📚 API Documentation
-            </Link>
-            <button
-              onClick={() => window.open(`${API_BASE_URL}`, '_blank')}
-              style={{
-                padding: '0.5rem 1rem',
-                background: 'rgba(255,255,255,0.1)',
-                border: '1px solid rgba(255,255,255,0.2)',
-                color: 'white',
-                borderRadius: '4px',
-                cursor: 'pointer'
-              }}
-            >
-              🔗 API Base URL
-            </button>
-          </div>
         </div>
       </div>
     </Layout>
