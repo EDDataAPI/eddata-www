@@ -60,7 +60,7 @@
 */
 
 .layout__content {
-  overflow-y: auto;
+  overflow-y: scroll !important; /* Scrollbars immer anzeigen */
   overflow-x: hidden;
   position: absolute;
   top: 3.8rem;
@@ -71,31 +71,9 @@
   padding-bottom: 1rem;
   padding-top: 1rem;
   margin: 0 0.5rem;
-  mask-image:
-    linear-gradient(
-      to bottom,
-      transparent,
-      black 1.25rem,
-      black calc(100% - 1.25rem),
-      transparent
-    ),
-    linear-gradient(black, black);
-  mask-size:
-    100% 100%,
-    16px 100%; /* The 16px here matches the width of the scrollbars, so the mask doesn't overlap them */
-  mask-position:
-    0 0,
-    100% 0;
-  mask-repeat: no-repeat, no-repeat;
-  /*
-    This line actually causes Chrome to fail to render the site (hard failure).
-    It seems like the tab crashes, but no errors in the logs. Only reproducable
-    in production builds, but can be reliably reproduced on ~50% of reloads on Mac
-    Windows and Android systems, by shift-refreshing.
-    I guess the implementation of scrollbar-gutter in Chrome has a bug.
-  */
-  /* scrollbar-gutter: stable; */
+  /* Mask entfernt da es Scrollbars verstecken kann */
   background: transparent;
+  min-height: calc(100vh - 7rem); /* Mindesthöhe für Scrolling */
 }
 
 .layout__content--with-navigation {
