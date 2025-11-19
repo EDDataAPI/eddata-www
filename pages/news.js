@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Head from 'next/head'
 import Layout from 'components/layout'
 import { NavigationContext } from 'lib/context'
-import { API_BASE_URL } from 'lib/consts'
 import Markdown from 'react-markdown'
 
 function News(_props) {
