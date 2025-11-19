@@ -40,16 +40,16 @@ export default function StatusPage() {
 
     // Load comprehensive API status using all available endpoints
     try {
-      // Primary health endpoint with uptime
-      const healthRes = await fetch(`${API_BASE_URL}/api/health`)
+      // Primary health endpoint with uptime (local)
+      const healthRes = await fetch('/api/health')
       if (healthRes.ok) {
         const healthData = await healthRes.json()
 
-        // Get database health and stats
+        // Get database health and stats via proxy
         const [dbRes, statsRes, versionRes] = await Promise.all([
-          fetch(`${API_BASE_URL}/api/health/database`).catch(() => null),
-          fetch(`${API_BASE_URL}/v2/stats`).catch(() => null),
-          fetch(`${API_BASE_URL}/v2/version`).catch(() => null)
+          fetch('/api/proxy/api/health/database').catch(() => null),
+          fetch('/api/proxy/v2/stats').catch(() => null),
+          fetch('/api/proxy/v2/version').catch(() => null)
         ])
 
         const dbData = dbRes?.ok ? await dbRes.json() : null
@@ -74,8 +74,8 @@ export default function StatusPage() {
           lastUpdated: statsData?.timestamp || null
         })
       } else {
-        // Fallback to v2/health if api/health fails
-        const v2HealthRes = await fetch(`${API_BASE_URL}/v2/health`)
+        // Fallback to v2/health via proxy if local health fails
+        const v2HealthRes = await fetch('/api/proxy/v2/health')
         if (v2HealthRes.ok) {
           const v2HealthData = await v2HealthRes.json()
           const totalTime = Date.now() - performanceStart
