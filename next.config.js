@@ -18,8 +18,6 @@ for (const configPath of EDDATA_CONFIG_LOCATIONS.reverse()) {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
-
   // Experimental features
   experimental: {
     optimizePackageImports: [
