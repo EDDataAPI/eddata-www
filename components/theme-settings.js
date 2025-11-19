@@ -6,32 +6,43 @@ const MIN_CONTRAST = 0.9
 const MAX_CONTRAST = 1.75
 
 const ThemeSettings = () => {
-  const hue = window
-    .getComputedStyle(document.documentElement)
-    .getPropertyValue('--color-primary-hue')
-  const saturation = window
-    .getComputedStyle(document.documentElement)
-    .getPropertyValue('--color-primary-saturation')
-  const contrast = window
-    .getComputedStyle(document.documentElement)
-    .getPropertyValue('--contrast')
-  const lightness =
-    100 - convertNumberToPercentage(contrast, MIN_CONTRAST, MAX_CONTRAST)
-  const hueShift = window
-    .getComputedStyle(document.documentElement)
-    .getPropertyValue('--highlight-hue-shift')
-  const currentColor = hsl2hex(hue, saturation.replace('%', ''), lightness)
-
-  const [color, setColor] = useState(currentColor)
-  const [highlightHueShift, setHighlightHueShift] = useState(hueShift)
+  const [color, setColor] = useState('#333333')
+  const [highlightHueShift, setHighlightHueShift] = useState('0')
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
-    document.getElementById('highlight-color-hue-shift').value = hueShift
+    // Only run on client side to avoid SSR hydration mismatch
+    setIsClient(true)
+
+    const hue = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue('--color-primary-hue')
+    const saturation = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue('--color-primary-saturation')
+    const contrast = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue('--contrast')
+    const lightness =
+      100 - convertNumberToPercentage(contrast, MIN_CONTRAST, MAX_CONTRAST)
+    const hueShift = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue('--highlight-hue-shift')
+
+    const currentColor = hsl2hex(hue, saturation.replace('%', ''), lightness)
+    setColor(currentColor)
+    setHighlightHueShift(hueShift)
+
+    if (document.getElementById('highlight-color-hue-shift')) {
+      document.getElementById('highlight-color-hue-shift').value = hueShift
+    }
   }, [])
 
   useEffect(() => {
-    saveChanges()
-  }, [color, highlightHueShift])
+    if (isClient) {
+      saveChanges()
+    }
+  }, [color, highlightHueShift, isClient])
 
   const onColorChange = useDebouncedCallback(
     hexColor => setColor(hexColor),
@@ -44,6 +55,8 @@ const ThemeSettings = () => {
   )
 
   const saveChanges = () => {
+    if (!isClient || typeof window === 'undefined') return
+
     const { h, s, l } = hex2hsl(color)
     document.documentElement.style.setProperty('--color-primary-hue', h)
     document.documentElement.style.setProperty(
@@ -73,6 +86,8 @@ const ThemeSettings = () => {
   }
 
   const resetToDefaults = () => {
+    if (!isClient || typeof window === 'undefined') return
+
     const defaultHue = window
       .getComputedStyle(document.documentElement)
       .getPropertyValue('--default-color-primary-hue')

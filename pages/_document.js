@@ -54,6 +54,34 @@ class MyDocument extends Document {
             }}
           />
           <script dangerouslySetInnerHTML={{ __html: onContextMenu }} />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+const isChromium = window.chrome
+const isOpera = typeof window.opr !== "undefined"
+const isIEedge = window.navigator.userAgent.indexOf('Edg') > -1
+const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+const isIOSChrome = window.navigator.userAgent.match('CriOS')
+const isIOSFirefox = window.navigator.userAgent.match('FxiOS')
+const isSafari = navigator.vendor.match(/apple/i) 
+  && !isIOSChrome && !isIOSFirefox
+  && !navigator.userAgent.match(/Opera|OPT\\//)
+
+if (isSafari) document.documentElement.setAttribute("data-browser", "safari")
+if (isFirefox) document.documentElement.setAttribute("data-browser", "firefox")
+
+try {
+ const themeSettings = JSON.parse(window.localStorage.getItem('theme-settings'))
+ if (themeSettings) {
+   document.documentElement.style.setProperty('--color-primary-hue', themeSettings.hue)
+   document.documentElement.style.setProperty('--color-primary-saturation', \`\${themeSettings.saturation}%\`)
+   if (themeSettings.contrast) document.documentElement.style.setProperty('--contrast', themeSettings.contrast)
+   if (themeSettings.highlightHueShift) document.documentElement.style.setProperty('--highlight-hue-shift', themeSettings.highlightHueShift)
+ }
+} catch (e) {}
+          `.trim()
+            }}
+          />
           <noscript>
             <style
               dangerouslySetInnerHTML={{
@@ -68,36 +96,6 @@ table.data-table--animated > tbody > tr:not(.rc-table-expanded-row),
           </noscript>
         </Head>
         <body>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: `
-<script>
-  const isChromium = window.chrome
-  const isOpera = typeof window.opr !== "undefined"
-  const isIEedge = window.navigator.userAgent.indexOf('Edg') > -1
-  const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-  const isIOSChrome = window.navigator.userAgent.match('CriOS')
-  const isIOSFirefox = window.navigator.userAgent.match('FxiOS')
-  const isSafari = navigator.vendor.match(/apple/i) 
-    && !isIOSChrome && !isIOSFirefox
-    && !navigator.userAgent.match(/Opera|OPT\\//)
-
- if (isSafari) document.documentElement.setAttribute("data-browser", "safari")
- if (isFirefox) document.documentElement.setAttribute("data-browser", "firefox")
-
- try {
-  const themeSettings = JSON.parse(window.localStorage.getItem('theme-settings'))
-  if (themeSettings) {
-    document.documentElement.style.setProperty('--color-primary-hue', themeSettings.hue)
-    document.documentElement.style.setProperty('--color-primary-saturation', \`\${themeSettings.saturation}%\`)
-    if (themeSettings.contrast) document.documentElement.style.setProperty('--contrast', themeSettings.contrast)
-    if (themeSettings.highlightHueShift) document.documentElement.style.setProperty('--highlight-hue-shift', themeSettings.highlightHueShift)
-  }
-} catch (e) {}
-</script>
-          `.trim()
-            }}
-          />
           <Main />
           <NextScript />
         </body>
