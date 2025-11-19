@@ -26,7 +26,7 @@ function Home() {
     ])
     ;(async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/v2/news/galnet`)
+        const res = await fetch('/api/proxy/v2/news/galnet')
         if (res.ok) {
           const data = await res.json()
           // Handle both direct array and {articles: []} formats
@@ -42,7 +42,7 @@ function Home() {
     })()
     ;(async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/v2/stats`)
+        const res = await fetch('/api/proxy/v2/stats')
         const stats = await res.json()
         setStats(stats)
       } catch (e) {
@@ -64,7 +64,7 @@ function Home() {
     })()
     ;(async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/v2/news/commodities`)
+        const res = await fetch('/api/proxy/v2/news/commodities')
         if (res.ok) {
           const ticker = await res.json()
           setCommodityTicker(ticker)

@@ -8,6 +8,7 @@ import { API_BASE_URL } from '../../../lib/consts'
 const ALLOWED_ENDPOINTS = [
   '/v2/system/',
   '/v2/news/',
+  '/v2/stats',
   '/v2/stations',
   '/v2/commodity/',
   '/v2/fleetcarrier/'
