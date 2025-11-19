@@ -60,20 +60,14 @@
 */
 
 .layout__content {
-  overflow-y: scroll !important; /* Scrollbars immer anzeigen */
+  overflow-y: visible !important; /* Lässt alles durch für globale Body-Scrollbars */
   overflow-x: hidden;
-  position: absolute;
-  top: 3.8rem;
-  left: 0rem;
-  right: 0rem;
-  bottom: 3.2rem;
+  position: static; /* Entfernt komplexe Positionierung */
   padding-right: 0.25rem;
   padding-bottom: 1rem;
   padding-top: 1rem;
   margin: 0 0.5rem;
-  /* Mask entfernt da es Scrollbars verstecken kann */
   background: transparent;
-  min-height: calc(100vh - 7rem); /* Mindesthöhe für Scrolling */
 }
 
 .layout__content--with-navigation {

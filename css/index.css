@@ -54,14 +54,13 @@ html {
 body {
   margin: 0;
   overflow-x: hidden;
+  overflow-y: scroll !important; /* Erzwingt Scrollbars */
   background: var(--color-layout-background);
 }
 
-/* Globale Scrollbar-Erzwingung */
-.layout__content,
-.scrollable {
-  scrollbar-width: auto !important; /* Firefox */
-  scrollbar-color: var(--color-primary-5) var(--color-primary-3) !important;
+/* Einfache Scrollbar-Lösung */
+* {
+  scrollbar-width: auto !important;
 }
 
 /* Scrollbar-Sichtbarkeit für alle scrollbaren Elemente */
