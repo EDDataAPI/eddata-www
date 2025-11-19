@@ -60,13 +60,16 @@
 */
 
 .layout__content {
-  overflow-y: visible !important; /* Lässt alles durch für globale Body-Scrollbars */
+  overflow-y: auto;
   overflow-x: hidden;
-  position: static; /* Entfernt komplexe Positionierung */
+  position: absolute;
+  top: 4.3rem;
+  left: 1rem;
+  right: 1rem;
+  bottom: 3.75rem;
   padding-right: 0.25rem;
   padding-bottom: 1rem;
   padding-top: 1rem;
-  margin: 0 0.5rem;
   background: transparent;
 }
 
