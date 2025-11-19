@@ -1,8 +1,7 @@
-import { useState, useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import Head from 'next/head'
 import Layout from 'components/layout'
 import { NavigationContext } from 'lib/context'
-import { API_BASE_URL } from 'lib/consts'
 
 export default function StatsPage() {
   const [, setNavigationPath] = useContext(NavigationContext)
@@ -21,8 +20,8 @@ export default function StatsPage() {
 
     try {
       const [statsRes, healthRes] = await Promise.all([
-        fetch(`${API_BASE_URL}/v2/stats`),
-        fetch(`${API_BASE_URL}/api/health/database`).catch(() => null)
+        fetch('/api/proxy/v2/stats'),
+        fetch('/api/proxy/api/health/database').catch(() => null)
       ])
 
       if (statsRes.ok) {

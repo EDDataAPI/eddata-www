@@ -11,7 +11,7 @@ function About({ toggle }) {
   useEffect(() => {
     ;(async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/v2/stats`)
+        const res = await fetch('/api/proxy/v2/stats')
         const stats = await res.json()
         setStats(stats)
       } catch (e) {

@@ -12,10 +12,14 @@ const ALLOWED_ENDPOINTS = [
   '/v2/endpoints',
   '/v2/health',
   '/v2/version',
+  '/v2/backup',
+  '/v2/commodities',
+  '/v2/market/',
   '/v2/stations',
   '/v2/commodity/',
   '/v2/fleetcarrier/',
-  '/api/health'
+  '/api/health',
+  '/'
 ]
 
 export default async function handler(req, res) {

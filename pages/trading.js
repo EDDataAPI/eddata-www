@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from 'components/layout'
 import { NavigationContext } from 'lib/context'
-import { API_BASE_URL } from 'lib/consts'
 
 function Trading() {
   const [, setNavigationPath] = useContext(NavigationContext)
@@ -17,7 +16,7 @@ function Trading() {
     ])
     ;(async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/v2/news/commodities`)
+        const res = await fetch('/api/proxy/v2/news/commodities')
         if (res.ok) {
           const ticker = await res.json()
           setCommodityTicker(ticker)

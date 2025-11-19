@@ -152,7 +152,7 @@ function Header() {
 
   const updateTicker = async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/v2/news/commodities`)
+      const res = await fetch('/api/proxy/v2/news/commodities')
       if (!res.ok) {
         console.warn(`Failed to fetch commodity news: ${res.status}`)
         return
