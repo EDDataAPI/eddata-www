@@ -60,8 +60,8 @@
 */
 
 .layout__content {
-  overflow-y: auto !important; /* Vertikales Scrollen erzwingen */
-  overflow-x: hidden; /* Horizontales Scrollen verhindern */
+  overflow-y: auto;
+  overflow-x: hidden;
   position: absolute;
   top: 3.8rem;
   left: 0rem;
@@ -71,7 +71,6 @@
   padding-bottom: 1rem;
   padding-top: 1rem;
   margin: 0 0.5rem;
-  height: calc(100vh - 7rem); /* Explizite Höhe für Scrolling */
   mask-image:
     linear-gradient(
       to bottom,
