@@ -33,10 +33,13 @@ RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
 # Copy necessary files from builder
-# Updated: 2025-11-19 18:00 - Force cache invalidation for Dokploy
-COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+# Updated: 2025-11-21 - Fix static file serving issues
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+
+# Debug: List files to verify structure
+RUN ls -la .next/static/ || echo "Static directory not found"
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
