@@ -8,11 +8,17 @@ export default function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
+  const startTime = Date.now()
+
   // Simple health check without external dependencies
-  res.status(200).json({
+  const healthData = {
     status: 'healthy',
     service: 'eddata-www',
     timestamp: new Date().toISOString(),
     uptime: Math.round(process.uptime())
-  })
+  }
+
+  const responseTime = Date.now() - startTime
+  res.setHeader('X-Response-Time', `${responseTime}ms`)
+  res.status(200).json(healthData)
 }
