@@ -65,6 +65,23 @@ function News(_props) {
           <div className='heading--with-underline'>
             <h2 className='text-uppercase'>Galnet News</h2>
           </div>
+          {galnetNews === undefined && (
+            <div
+              className='home__news-article-body'
+              style={{ marginBottom: '1rem', padding: '1rem' }}
+            >
+              <p
+                className='muted text-center'
+                style={{ color: '#4CAF50', fontSize: '0.9rem' }}
+              >
+                <i
+                  className='icarus-terminal-info'
+                  style={{ marginRight: '.5rem' }}
+                />
+                Loading Galnet news...
+              </p>
+            </div>
+          )}
           {galnetNews && galnetNews.length > 0 ? (
             galnetNews.map((newsItem, i) => (
               <Fragment key={`galnet-news-item-${i}}`}>
@@ -116,13 +133,14 @@ function News(_props) {
               <div className='home__news-article-text scrollable'>
                 <p
                   className='muted text-center'
-                  style={{ padding: '2rem 1rem' }}
+                  style={{ padding: '2rem 1rem', color: '#ff9500' }}
                 >
                   <i
                     className='icarus-terminal-alert'
                     style={{ marginRight: '.5rem' }}
                   />
-                  Galnet news currently unavailable. Please check back later.
+                  Galnet news data is currently unavailable from the API. The
+                  Elite Dangerous community data collection may be updating.
                 </p>
                 <div
                   className='text-center'
