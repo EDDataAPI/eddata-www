@@ -5,69 +5,56 @@ export default function DonateButton() {
         position: 'fixed',
         bottom: '2rem',
         right: '2rem',
-        zIndex: 100,
-        animation: 'fadeIn 0.5s ease-in'
+        zIndex: 100
       }}
     >
       <form
         action='https://www.paypal.com/donate'
         method='post'
-        target='_top'
+        target='_blank'
         style={{
           margin: 0,
           padding: 0
         }}
       >
-        <input type='hidden' name='hosted_button_id' value='83JB2X6H7DHXJ' />
+        <input
+          type='hidden'
+          name='hosted_button_id'
+          value='83JB2X6H7DHXJ'
+        />
         <button
           type='submit'
           style={{
+            padding: '10px 20px',
+            backgroundColor: '#0070ba',
+            color: 'white',
             border: 'none',
-            padding: 0,
-            background: 'none',
+            borderRadius: '4px',
             cursor: 'pointer',
-            transition: 'transform 0.2s ease',
-            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
+            fontSize: '14px',
+            fontWeight: 'bold',
+            transition: 'all 0.2s ease',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
           }}
-          onMouseEnter={e => {
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#005a87'
             e.currentTarget.style.transform = 'scale(1.05)'
+            e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.4)'
           }}
-          onMouseLeave={e => {
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#0070ba'
             e.currentTarget.style.transform = 'scale(1)'
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)'
           }}
           title='Support EDData with a donation'
         >
-          <img
-            src='https://www.paypalobjects.com/en_US/AT/i/btn/btn_donateCC_LG.gif'
-            border='0'
-            alt='Donate with PayPal button'
-            style={{
-              display: 'block',
-              width: '190px',
-              height: 'auto'
-            }}
-          />
+          <span style={{ fontSize: '18px' }}>❤️</span>
+          <span>Donate</span>
         </button>
-        <img
-          alt=''
-          border='0'
-          src='https://www.paypal.com/en_AT/i/scr/pixel.gif'
-          width='1'
-          height='1'
-          style={{ display: 'none' }}
-        />
       </form>
-      <style>{`
-        @media (max-width: 768px) {
-          div[style*="position: fixed"] {
-            bottom: 1rem !important;
-            right: 1rem !important;
-          }
-          button img {
-            width: 150px !important;
-          }
-        }
-      `}</style>
     </div>
   )
 }
