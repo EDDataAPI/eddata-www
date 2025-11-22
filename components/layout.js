@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Loader from './loader'
 import Dialog from 'components/dialog'
+import DonateButton from 'components/donate-button'
 import { useEffect } from 'react'
 import { playLoadingSound } from 'lib/sounds'
 
@@ -44,6 +45,7 @@ function Layout({
       </Head>
       <Loader visible={loading} text={loadingText} />
       <Dialog />
+      <DonateButton />
       <div
         className={`${sidebar !== undefined ? 'layout__content-wrapper scrollable' : ''} ${className !== undefined ? className : ''}`}
       >
