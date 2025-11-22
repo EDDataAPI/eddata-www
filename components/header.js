@@ -468,11 +468,6 @@ function Header() {
             <i className='icon icarus-terminal-signal' />
           </button>
         </Link>
-        <Link href='/stats' className='--no-hover is-hidden-mobile'>
-          <button aria-label='Database Statistics' className='button'>
-            <i className='icon icarus-terminal-trending-up-chart' />
-          </button>
-        </Link>
         <Link href='/api-docs' className='--no-hover is-hidden-mobile'>
           <button aria-label='API Documentation' className='button'>
             <i className='icon icarus-terminal-table-inspector' />
@@ -525,15 +520,6 @@ function Header() {
             <button aria-label='System Status' className='header__menu-item'>
               <i className='icon icarus-terminal-signal' />
               Status
-            </button>
-          </Link>
-          <Link href='/stats' className='--no-hover'>
-            <button
-              aria-label='Database Statistics'
-              className='header__menu-item'
-            >
-              <i className='icon icarus-terminal-trending-up-chart' />
-              Stats
             </button>
           </Link>
           <Link href='/api-docs' className='--no-hover'>
