@@ -17,11 +17,7 @@ export default function DonateButton() {
           padding: 0
         }}
       >
-        <input
-          type='hidden'
-          name='hosted_button_id'
-          value='83JB2X6H7DHXJ'
-        />
+        <input type='hidden' name='hosted_button_id' value='83JB2X6H7DHXJ' />
         <button
           type='submit'
           style={{
@@ -39,12 +35,12 @@ export default function DonateButton() {
             alignItems: 'center',
             gap: '8px'
           }}
-          onMouseEnter={(e) => {
+          onMouseEnter={e => {
             e.currentTarget.style.backgroundColor = '#005a87'
             e.currentTarget.style.transform = 'scale(1.05)'
             e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.4)'
           }}
-          onMouseLeave={(e) => {
+          onMouseLeave={e => {
             e.currentTarget.style.backgroundColor = '#0070ba'
             e.currentTarget.style.transform = 'scale(1)'
             e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)'
