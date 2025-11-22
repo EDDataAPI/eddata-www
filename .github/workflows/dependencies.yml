@@ -57,17 +57,13 @@ jobs:
               if: steps.check.outputs.has_updates == 'true'
               uses: peter-evans/create-pull-request@v5
               with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
                   commit-message: "chore: update dependencies"
                   title: "chore: update dependencies"
                   body: |
                       ## Dependency Updates
 
                       This PR updates outdated dependencies to their latest versions.
-
-                      ### Outdated Packages:
-                      ```
-                      ${{ steps.check.outputs.outdated }}
-                      ```
 
                       ### Changes Made:
                       - Ran `npm update` to upgrade dependencies
