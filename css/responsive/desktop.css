@@ -19,13 +19,15 @@
   }
 
   .layout__content--left-sidebar {
-    left: -0.5rem;
+    left: 0;
     bottom: 0;
     width: 15rem;
     padding-top: 1rem;
-    padding-left: 0.1rem;
-    padding-right: 0.35rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     overflow: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
     background: linear-gradient(
       to left,
       var(--color-primary-2) -30%,
