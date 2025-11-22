@@ -1,10 +1,13 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Homepage', () => {
-  test('should load successfully', async ({ page }) => {
-    await page.goto('/')
+  test.beforeEach(async ({ page }) => {
+    // Set base URL for tests
+    await page.goto('http://localhost:3000/')
+  })
 
-    // Wait for page to load
+  test('should load successfully', async ({ page }) => {
+    // Check if page loaded
     await page.waitForLoadState('networkidle')
 
     // Check if page title exists
@@ -12,11 +15,11 @@ test.describe('Homepage', () => {
   })
 
   test('should display header', async ({ page }) => {
-    await page.goto('/')
+    // Check if header exists
+    const headerElement = page.locator('header')
 
     // Check if header is visible
-    const header = page.locator('header')
-    await expect(header).toBeVisible()
+    await expect(headerElement).toBeVisible()
   })
 
   test('should navigate to commodities page', async ({ page }) => {
