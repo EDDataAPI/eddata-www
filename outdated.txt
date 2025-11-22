@@ -1,0 +1,9 @@
+Package                Current   Wanted   Latest  Location                            Depended by
+@next/bundle-analyzer   15.5.6   15.5.6   16.0.3  node_modules/@next/bundle-analyzer  eddata-www
+@react-three/fiber      8.18.0   8.18.0    9.4.0  node_modules/@react-three/fiber     eddata-www
+@sentry/nextjs         10.25.0  10.26.0  10.26.0  node_modules/@sentry/nextjs         eddata-www
+eslint-config-next      15.5.6   15.5.6   16.0.3  node_modules/eslint-config-next     eddata-www
+next                    15.5.6   15.5.6   16.0.3  node_modules/next                   eddata-www
+react                   18.3.1   18.3.1   19.2.0  node_modules/react                  eddata-www
+react-dom               18.3.1   18.3.1   19.2.0  node_modules/react-dom              eddata-www
+rimraf                   6.1.0    6.1.2    6.1.2  node_modules/rimraf                 eddata-www
