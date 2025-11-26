@@ -42,9 +42,16 @@ export default async function handler(req, res) {
       : targetUrl
 
     // Security check: only allow specific API endpoints
-    const isAllowed = ALLOWED_ENDPOINTS.some(endpoint =>
-      targetPath.startsWith(endpoint)
-    )
+    // Check if path matches any allowed endpoint prefix
+    const isAllowed = ALLOWED_ENDPOINTS.some(endpoint => {
+      if (endpoint === '') {
+        return true // Allow root
+      }
+      if (endpoint.endsWith('/')) {
+        return targetPath.startsWith(endpoint)
+      }
+      return targetPath === endpoint || targetPath.startsWith(`${endpoint}/`)
+    })
 
     if (!isAllowed) {
       console.warn(`[API Proxy] Blocked: ${targetPath}`)
