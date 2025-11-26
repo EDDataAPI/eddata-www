@@ -6,20 +6,20 @@
 import { API_BASE_URL } from '../../../lib/consts'
 
 const ALLOWED_ENDPOINTS = [
-  'v2/system/',
-  'v2/news/',
-  'v2/stats',
-  'v2/endpoints',
-  'v2/health',
-  'v2/version',
-  'v2/backup',
-  'v2/commodities',
-  'v2/market/',
-  'v2/stations',
-  'v2/commodity/',
-  'v2/fleetcarrier/',
-  'api/health',
-  ''
+  '/v2/system/',
+  '/v2/news/',
+  '/v2/stats',
+  '/v2/endpoints',
+  '/v2/health',
+  '/v2/version',
+  '/v2/backup',
+  '/v2/commodities',
+  '/v2/market/',
+  '/v2/stations',
+  '/v2/commodity/',
+  '/v2/fleetcarrier/',
+  '/api/health',
+  '/'
 ]
 
 export default async function handler(req, res) {
@@ -42,19 +42,12 @@ export default async function handler(req, res) {
       : targetUrl
 
     // Security check: only allow specific API endpoints
-    // Check if path matches any allowed endpoint prefix
-    const isAllowed = ALLOWED_ENDPOINTS.some(endpoint => {
-      if (endpoint === '') {
-        return true // Allow root
-      }
-      if (endpoint.endsWith('/')) {
-        return targetPath.startsWith(endpoint)
-      }
-      return targetPath === endpoint || targetPath.startsWith(`${endpoint}/`)
-    })
+    // Security check: only allow specific API endpoints
+    const isAllowed = ALLOWED_ENDPOINTS.some(
+      endpoint => targetPath.startsWith(endpoint.substring(1)) // Remove leading slash
+    )
 
     if (!isAllowed) {
-      console.warn(`[API Proxy] Blocked: ${targetPath}`)
       return res.status(403).json({ error: 'Endpoint not allowed' })
     }
 
