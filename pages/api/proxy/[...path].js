@@ -5,23 +5,6 @@
 
 import { API_BASE_URL } from '../../../lib/consts'
 
-const ALLOWED_ENDPOINTS = [
-  '/v2/system/',
-  '/v2/news/',
-  '/v2/stats',
-  '/v2/endpoints',
-  '/v2/health',
-  '/v2/version',
-  '/v2/backup',
-  '/v2/commodities',
-  '/v2/market/',
-  '/v2/stations',
-  '/v2/commodity/',
-  '/v2/fleetcarrier/',
-  '/api/health',
-  '/'
-]
-
 export default async function handler(req, res) {
   // Only allow GET requests
   if (req.method !== 'GET') {
@@ -41,14 +24,15 @@ export default async function handler(req, res) {
       ? `${targetUrl}?${queryString.toString()}`
       : targetUrl
 
-    // Security check: only allow specific API endpoints
-    // Security check: only allow specific API endpoints
-    const isAllowed = ALLOWED_ENDPOINTS.some(
-      endpoint => targetPath.startsWith(endpoint.substring(1)) // Remove leading slash
-    )
+    // Security check: only allow v2/ and api/ endpoints
+    const isAllowed =
+      targetPath.startsWith('v2/') || targetPath.startsWith('api/')
 
     if (!isAllowed) {
-      return res.status(403).json({ error: 'Endpoint not allowed' })
+      console.error(`[API Proxy] Blocked: ${targetPath}`)
+      return res
+        .status(403)
+        .json({ error: 'Endpoint not allowed', path: targetPath })
     }
 
     console.log(`[API Proxy] ${req.method} ${finalUrl}`)
