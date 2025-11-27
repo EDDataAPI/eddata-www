@@ -204,14 +204,14 @@ jobs:
       - name: Purge Cloudflare Cache
         run: |
           echo "🧹 Purging Cloudflare cache..."
-          
+
           RESPONSE=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
             -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
             -H "Content-Type: application/json" \
             --data '{"purge_everything":true}')
-          
+
           SUCCESS=$(echo $RESPONSE | jq -r '.success')
-          
+
           if [ "$SUCCESS" = "true" ]; then
             echo "✅ Cloudflare cache purged successfully!"
           else
