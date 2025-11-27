@@ -34,6 +34,12 @@ export default async function handler(req, res) {
     const targetPath = Array.isArray(path) ? path.join('/') : path
     const targetUrl = `${API_BASE_URL}/${targetPath}`
 
+    console.log('[API Proxy] Incoming request:', {
+      path,
+      targetPath,
+      isArray: Array.isArray(path)
+    })
+
     // Add query parameters if they exist
     const queryString = new URLSearchParams(req.query)
     queryString.delete('path') // Remove the path parameter
@@ -42,12 +48,25 @@ export default async function handler(req, res) {
       : targetUrl
 
     // Security check: only allow specific API endpoints
-    const isAllowed = ALLOWED_ENDPOINTS.some(
-      endpoint => targetPath.startsWith(endpoint.substring(1)) // Remove leading slash
-    )
+    const isAllowed = ALLOWED_ENDPOINTS.some(endpoint => {
+      const endpointWithoutSlash = endpoint.substring(1)
+      const matches = targetPath.startsWith(endpointWithoutSlash)
+      console.log('[API Proxy] Check:', {
+        endpoint,
+        endpointWithoutSlash,
+        targetPath,
+        matches
+      })
+      return matches
+    })
+
+    console.log('[API Proxy] Final isAllowed:', isAllowed)
 
     if (!isAllowed) {
-      return res.status(403).json({ error: 'Endpoint not allowed' })
+      console.error('[API Proxy] BLOCKED:', targetPath)
+      return res
+        .status(403)
+        .json({ error: 'Endpoint not allowed', path: targetPath })
     }
 
     console.log(`[API Proxy] ${req.method} ${finalUrl}`)
