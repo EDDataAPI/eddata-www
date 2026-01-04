@@ -38,7 +38,6 @@ function FleetCarriers() {
         setLoading(false)
       }
     })()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const filteredCarriers = fleetCarriers?.filter(carrier => {

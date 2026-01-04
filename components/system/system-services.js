@@ -18,7 +18,7 @@ const SERVICE_STATION_TYPES = [
   'CraterOutpost'
 ]
 
-module.exports = ({ system, nearestServices }) => {
+export default function SystemServices({ system, nearestServices }) {
   return (
     <div className='fx__fade-in'>
       <div className='heading--with-underline'>

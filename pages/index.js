@@ -73,7 +73,6 @@ function Home() {
         console.error(e)
       }
     })()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

@@ -1,24 +1,69 @@
-const { FlatCompat } = require('@eslint/eslintrc')
 const js = require('@eslint/js')
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended
-})
-
 module.exports = [
+  {
+    ignores: [
+      '.next/**',
+      'node_modules/**',
+      'out/**',
+      'coverage/**',
+      '.cache/**',
+      'public/**',
+      '*.config.js',
+      '__tests__/**',
+      'jest.setup.js'
+    ]
+  },
   js.configs.recommended,
-  ...compat.extends('next/core-web-vitals'),
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true
+        }
+      },
+      globals: {
+        // Browser globals
+        window: 'readonly',
+        document: 'readonly',
+        navigator: 'readonly',
+        console: 'readonly',
+        setTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearTimeout: 'readonly',
+        clearInterval: 'readonly',
+        fetch: 'readonly',
+        FormData: 'readonly',
+        CustomEvent: 'readonly',
+        IntersectionObserver: 'readonly',
+        performance: 'readonly',
+        URLSearchParams: 'readonly',
+        URL: 'readonly',
+        // Node.js globals
+        process: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        module: 'readonly',
+        require: 'readonly',
+        exports: 'readonly',
+        global: 'readonly',
+        Buffer: 'readonly',
+        // React/Next.js globals
+        React: 'readonly',
+        JSX: 'readonly'
+      }
+    },
     rules: {
       // Error prevention
       'no-unused-vars': [
-        'warn', // Downgrade to warning
+        'warn',
         {
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',
-          caughtErrors: 'none' // Don't warn about unused catch params
+          caughtErrors: 'none'
         }
       ],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
@@ -28,21 +73,10 @@ module.exports = [
       'prefer-const': 'error',
       'no-var': 'error',
       eqeqeq: ['error', 'always', { null: 'ignore' }],
-      curly: ['warn', 'all'], // Downgrade to warning
+      curly: ['warn', 'all'],
       'no-empty': ['error', { allowEmptyCatch: true }],
       'no-constant-binary-expression': 'error',
       'no-dupe-else-if': 'error',
-
-      // React specific
-      'react/display-name': 'off',
-      'react/prop-types': 'off', // Using TypeScript for prop validation
-      'react/react-in-jsx-scope': 'off', // Not needed in Next.js
-      'react-hooks/exhaustive-deps': 'warn', // Downgrade to warning
-      'react-hooks/rules-of-hooks': 'error',
-
-      // Next.js specific
-      '@next/next/no-img-element': 'warn', // Downgrade to warning
-      'import/no-anonymous-default-export': 'off', // Allow for now
 
       // Optional - can be removed if too strict
       'object-shorthand': 'warn',
@@ -53,7 +87,7 @@ module.exports = [
   {
     files: ['lib/logger.js', 'scripts/**/*.js', 'pages/api/**/*.js'],
     rules: {
-      'no-console': 'off' // Console is intentional in logger and scripts
+      'no-console': 'off'
     }
   },
   {

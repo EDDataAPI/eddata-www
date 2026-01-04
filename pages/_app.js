@@ -117,8 +117,8 @@ export default function App({ Component, pageProps }) {
       </Head>
       <div className='layout__frame'>
         <div className='fx__background' />
-        <NavigationContext.Provider value={memoizedNavigationValue}>
-          <DialogContext.Provider value={memoizedDialogValue}>
+        <NavigationContext value={memoizedNavigationValue}>
+          <DialogContext value={memoizedDialogValue}>
             <div
               id='notifications'
               style={{
@@ -154,8 +154,8 @@ export default function App({ Component, pageProps }) {
             </div>
             <Header />
             <Component {...pageProps} />
-          </DialogContext.Provider>
-        </NavigationContext.Provider>
+          </DialogContext>
+        </NavigationContext>
       </div>
       <div className='fx__scanlines' />
       <div className='fx__overlay' />

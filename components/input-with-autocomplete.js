@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 
 function InputWithAutocomplete({
   id = 'inputWithAutocomplete',
-  forwardRef,
+  ref,
   label = 'Input',
   name = 'input',
   placeholder = '',
@@ -15,7 +15,7 @@ function InputWithAutocomplete({
   onClear
 }) {
   const internalRef = useRef()
-  const inputRef = forwardRef || internalRef
+  const inputRef = ref || internalRef
   const resultsRef = useRef()
   const [focus, setFocus] = useState(false)
   const [_autoCompleteResults, _setAutoCompleteResults] = useState()

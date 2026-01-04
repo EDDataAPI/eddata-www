@@ -146,7 +146,7 @@ function CommodityFilterOptions({
         }}
       >
         <InputWithAutoComplete
-          forwardRef={commodityRef}
+          ref={commodityRef}
           id='commodity-name'
           name='commodity-name'
           label='Commodity'
@@ -245,7 +245,7 @@ function CommodityFilterOptions({
           autoCompleteResults={commodityAutoCompleteResults}
         />
         <InputWithAutoComplete
-          forwardRef={locationRef}
+          ref={locationRef}
           id='location'
           name='location'
           label='Near'
