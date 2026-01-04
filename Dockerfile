@@ -8,16 +8,18 @@ WORKDIR /app
 # Copy only package files first
 COPY package*.json .npmrc ./
 
-# Install dependencies with production optimizations
-# Using npm install instead of npm ci for better platform compatibility
+# Install ALL dependencies (including dev) for the build
 # DOCKER_BUILD=1 prevents husky installation
-RUN DOCKER_BUILD=1 npm install --omit=dev --prefer-offline --no-audit && npm cache clean --force
+RUN DOCKER_BUILD=1 npm install --prefer-offline --no-audit
 
 # Copy application files
 COPY . .
 
 # Build Next.js application
 RUN npm run build
+
+# Remove dev dependencies after build
+RUN npm prune --omit=dev && npm cache clean --force
 
 # Production stage
 FROM node:24-bookworm-slim AS runner
