@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Install dependencies for better caching
 # Copy only package files first
-COPY package*.json ./
+COPY package*.json .npmrc ./
 
 # Install dependencies with production optimizations
 # Using npm install instead of npm ci for better platform compatibility
