@@ -76,10 +76,10 @@ export default function StatusPage() {
 
         // Get database health and stats via proxy
         const [dbRes, statsRes, versionRes, dbSizeRes] = await Promise.all([
-          fetch('/api/proxy/api/health/database').catch(() => null),
-          fetch('/api/proxy/v2/stats').catch(() => null),
-          fetch('/api/proxy/v2/version').catch(() => null),
-          fetch('/api/proxy/v2/stats/database/size').catch(() => null)
+          fetch(`${API_BASE_URL}/api/health/database`).catch(() => null),
+          fetch(`${API_BASE_URL}/v2/stats`).catch(() => null),
+          fetch(`${API_BASE_URL}/v2/version`).catch(() => null),
+          fetch(`${API_BASE_URL}/v2/stats/database/size`).catch(() => null)
         ])
 
         const dbData = dbRes?.ok ? await dbRes.json() : null
@@ -107,7 +107,7 @@ export default function StatusPage() {
         })
       } else {
         // Fallback to v2/health via proxy if local health fails
-        const v2HealthRes = await fetch('/api/proxy/v2/health')
+        const v2HealthRes = await fetch(`${API_BASE_URL}/v2/health`)
         if (v2HealthRes.ok) {
           const v2HealthData = await v2HealthRes.json()
           const totalTime = Date.now() - performanceStart

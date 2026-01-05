@@ -24,7 +24,7 @@ export default function ApiDocsPage() {
 
     try {
       // Try to fetch endpoints dynamically first via proxy
-      const endpointsRes = await fetch('/api/proxy/v2/endpoints')
+      const endpointsRes = await fetch(`${API_BASE_URL}/v2/endpoints`)
       if (endpointsRes.ok) {
         const data = await endpointsRes.json()
         setEndpoints(data)

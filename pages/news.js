@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Head from 'next/head'
 import Layout from 'components/layout'
 import { NavigationContext } from 'lib/context'
+import { API_BASE_URL } from 'lib/consts'
 import Markdown from 'react-markdown'
 
 function News(_props) {
@@ -17,7 +18,7 @@ function News(_props) {
     setNavigationPath([{ name: 'Galnet News', path: '/news' }])
     ;(async () => {
       try {
-        const res = await fetch('/api/proxy/v2/news/galnet')
+        const res = await fetch(`${API_BASE_URL}/v2/news/galnet`)
         if (res.ok) {
           const data = await res.json()
           // Handle both direct array and {articles: []} formats
