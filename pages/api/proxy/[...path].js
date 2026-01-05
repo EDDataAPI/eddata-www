@@ -1,8 +1,6 @@
 /**
  * API Proxy to handle CORS issues with eddata API
  * Proxies requests from /api/proxy/* to https://api.eddata.dev/*
- *
- * Next.js 16 Route Handler Format
  */
 
 import { API_BASE_URL } from '../../../lib/consts'
@@ -24,28 +22,37 @@ const ALLOWED_ENDPOINTS = [
   '/'
 ]
 
-export async function GET(request, context) {
-  try {
-    // Get the path segments from the context params
-    const params = await context.params
-    const pathSegments = params.path || []
-    const targetPath = Array.isArray(pathSegments)
-      ? pathSegments.join('/')
-      : pathSegments
+export default async function handler(req, res) {
+  // Handle OPTIONS for CORS preflight
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+    return res.status(204).end()
+  }
 
-    // Get the URL to access query parameters
-    const { searchParams } = new URL(request.url)
+  // Only allow GET requests
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' })
+  }
+
+  try {
+    // Build the target URL
+    const { path } = req.query
+    const targetPath = Array.isArray(path) ? path.join('/') : path
+    const targetUrl = `${API_BASE_URL}/${targetPath}`
 
     console.log('[API Proxy] Incoming request:', {
-      pathSegments,
+      path,
       targetPath,
-      searchParams: Object.fromEntries(searchParams)
+      isArray: Array.isArray(path)
     })
 
-    // Build the target URL
-    const targetUrl = `${API_BASE_URL}/${targetPath}`
-    const finalUrl = searchParams.toString()
-      ? `${targetUrl}?${searchParams.toString()}`
+    // Add query parameters if they exist
+    const queryString = new URLSearchParams(req.query)
+    queryString.delete('path') // Remove the path parameter
+    const finalUrl = queryString.toString()
+      ? `${targetUrl}?${queryString.toString()}`
       : targetUrl
 
     // Security check: only allow specific API endpoints
@@ -65,56 +72,44 @@ export async function GET(request, context) {
 
     if (!isAllowed) {
       console.error('[API Proxy] BLOCKED:', targetPath)
-      return Response.json(
-        { error: 'Endpoint not allowed', path: targetPath },
-        { status: 403 }
-      )
+      return res
+        .status(403)
+        .json({ error: 'Endpoint not allowed', path: targetPath })
     }
 
-    console.log(`[API Proxy] GET ${finalUrl}`)
+    console.log(`[API Proxy] ${req.method} ${finalUrl}`)
 
     // Make the request to the API
     const apiResponse = await fetch(finalUrl, {
-      method: 'GET',
+      method: req.method,
       headers: {
         'User-Agent': 'EDData-WWW-Proxy/1.0',
         Accept: 'application/json'
       }
     })
 
-    // Forward the response with appropriate headers
+    // Forward the response
     const data = await apiResponse.text()
 
-    return new Response(data, {
-      status: apiResponse.status,
-      headers: {
-        'Content-Type':
-          apiResponse.headers.get('content-type') || 'application/json',
-        'Cache-Control': 'public, max-age=300, stale-while-revalidate=600',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type'
-      }
-    })
+    // Set appropriate headers including CORS
+    res.setHeader(
+      'Content-Type',
+      apiResponse.headers.get('content-type') || 'application/json'
+    )
+    res.setHeader(
+      'Cache-Control',
+      'public, max-age=300, stale-while-revalidate=600'
+    )
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+
+    return res.status(apiResponse.status).send(data)
   } catch (error) {
     console.error('[API Proxy] Error:', error)
-    return Response.json(
-      {
-        error: 'Proxy request failed',
-        message: error.message
-      },
-      { status: 500 }
-    )
+    return res.status(500).json({
+      error: 'Proxy request failed',
+      message: error.message
+    })
   }
-}
-
-export async function OPTIONS() {
-  return new Response(null, {
-    status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type'
-    }
-  })
 }

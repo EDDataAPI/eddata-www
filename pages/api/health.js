@@ -1,11 +1,13 @@
 /**
  * Health check API endpoint for load balancers and monitoring
  * GET /api/health
- *
- * Next.js 16 Route Handler Format
  */
 
-export async function GET() {
+export default function handler(req, res) {
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' })
+  }
+
   const startTime = Date.now()
 
   // Simple health check without external dependencies
@@ -17,11 +19,6 @@ export async function GET() {
   }
 
   const responseTime = Date.now() - startTime
-
-  return Response.json(healthData, {
-    status: 200,
-    headers: {
-      'X-Response-Time': `${responseTime}ms`
-    }
-  })
+  res.setHeader('X-Response-Time', `${responseTime}ms`)
+  res.status(200).json(healthData)
 }
