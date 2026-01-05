@@ -1,6 +1,8 @@
 /**
  * Prometheus Metrics Endpoint
  * Exposes application metrics in Prometheus format
+ *
+ * Next.js 16 Route Handler Format
  */
 
 let requestCount = 0
@@ -16,11 +18,7 @@ export function trackError() {
   errorCount++
 }
 
-export default function handler(req, res) {
-  if (req.method !== 'GET') {
-    return res.status(405).end()
-  }
-
+export async function GET() {
   const uptime = Math.floor((Date.now() - startTime) / 1000)
   const memoryUsage = process.memoryUsage()
 
@@ -54,6 +52,10 @@ eddata_www_memory_rss_bytes ${memoryUsage.rss}
 eddata_www_memory_external_bytes ${memoryUsage.external}
 `.trim()
 
-  res.setHeader('Content-Type', 'text/plain; version=0.0.4')
-  res.status(200).send(metrics)
+  return new Response(metrics, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/plain; version=0.0.4'
+    }
+  })
 }

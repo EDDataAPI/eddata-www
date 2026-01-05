@@ -1,6 +1,8 @@
 /**
  * Detailed status API endpoint
  * GET /api/status
+ *
+ * Next.js 16 Route Handler Format
  */
 
 import Package from '../../package.json'
@@ -26,11 +28,7 @@ function formatUptime(seconds) {
   return parts.join(' ')
 }
 
-export default function handler(req, res) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' })
-  }
-
+export async function GET() {
   const uptime = Math.round(process.uptime())
   const memory = process.memoryUsage()
 
@@ -52,5 +50,5 @@ export default function handler(req, res) {
     }
   }
 
-  res.status(200).json(status)
+  return Response.json(status, { status: 200 })
 }

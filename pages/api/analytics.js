@@ -1,14 +1,12 @@
 /**
  * Analytics endpoint for Web Vitals data
+ *
+ * Next.js 16 Route Handler Format
  */
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' })
-  }
-
+export async function POST(request) {
   try {
-    const { name, value, rating, id } = req.body
+    const { name, value, rating, id } = await request.json()
 
     // Log Web Vitals data (in production, send to analytics service)
     console.log('Web Vitals:', { name, value, rating, id })
@@ -16,8 +14,11 @@ export default async function handler(req, res) {
     // TODO: Send to analytics service (e.g., Google Analytics, Plausible, etc.)
     // await sendToAnalytics({ name, value, rating, id })
 
-    res.status(200).json({ success: true })
+    return Response.json({ success: true }, { status: 200 })
   } catch {
-    res.status(500).json({ error: 'Failed to process analytics data' })
+    return Response.json(
+      { error: 'Failed to process analytics data' },
+      { status: 500 }
+    )
   }
 }

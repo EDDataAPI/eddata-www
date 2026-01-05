@@ -42,6 +42,8 @@ module.exports = [
         performance: 'readonly',
         URLSearchParams: 'readonly',
         URL: 'readonly',
+        Response: 'readonly',
+        Request: 'readonly',
         // Node.js globals
         process: 'readonly',
         __dirname: 'readonly',
