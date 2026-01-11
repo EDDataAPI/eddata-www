@@ -36,11 +36,10 @@ function Home() {
     setRefreshing(true)
 
     try {
-      // Trigger stats regeneration in the collector
-      const collectorUrl = API_BASE_URL.replace('api.', 'collector.')
-      console.log('Attempting to fetch:', `${collectorUrl}/refresh-stats`)
+      // Trigger stats regeneration via API
+      console.log('Attempting to fetch:', `${API_BASE_URL}/v2/refresh-stats`)
 
-      const refreshRes = await fetch(`${collectorUrl}/refresh-stats`, {
+      const refreshRes = await fetch(`${API_BASE_URL}/v2/refresh-stats`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       })
