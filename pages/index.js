@@ -32,39 +32,26 @@ function Home() {
   }
 
   const handleRefreshStats = async () => {
-    console.log('Refresh Stats button clicked!')
     setRefreshing(true)
 
     try {
-      // Trigger stats regeneration via API
-      console.log('Attempting to fetch:', `${API_BASE_URL}/v2/refresh-stats`)
-
+      // Request stats info from API
       const refreshRes = await fetch(`${API_BASE_URL}/v2/refresh-stats`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       })
 
-      console.log('Response status:', refreshRes.status)
-
       if (refreshRes.ok) {
-        console.log('Stats regeneration triggered successfully')
-        // Wait a moment for stats to be generated, then reload
-        await new Promise(resolve => setTimeout(resolve, 2000))
+        // Just reload the current stats
         await loadStats()
-        console.log('Stats reloaded')
       } else {
-        const errorText = await refreshRes.text()
-        console.error(
-          'Failed to trigger stats refresh:',
-          refreshRes.status,
-          errorText
-        )
+        console.error('Failed to get stats info:', refreshRes.status)
       }
     } catch (e) {
-      console.error('Error triggering stats refresh:', e)
+      console.error('Error getting stats info:', e)
+    } finally {
+      setRefreshing(false)
     }
-
-    setRefreshing(false)
   }
 
   useEffect(() => {
