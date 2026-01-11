@@ -444,7 +444,7 @@ function Header() {
           </div>
         </div>
         <Link href='/' className='--no-hover'>
-          <button aria-label='Home' className='button'>
+          <button aria-label='Home' title='Home' className='button'>
             <i className='icon icarus-terminal-home' />
           </button>
         </Link>
@@ -452,29 +452,43 @@ function Header() {
           href='/commodity/advancedcatalysers'
           className='--no-hover is-hidden-mobile'
         >
-          <button aria-label='Commodities' className='button'>
+          <button
+            aria-label='Commodities'
+            title='Commodities'
+            className='button'
+          >
             <i className='icon icarus-terminal-cargo' />
+          </button>
+        </Link>
+        <Link href='/status' className='--no-hover is-hidden-mobile'>
+          <button
+            aria-label='System Status'
+            title='System Status'
+            className='button'
+          >
+            <i className='icon icarus-terminal-signal' />
+          </button>
+        </Link>
+        <Link href='/api-docs' className='--no-hover is-hidden-mobile'>
+          <button
+            aria-label='API Documentation'
+            title='API Documentation'
+            className='button'
+          >
+            <i className='icon icarus-terminal-table-inspector' />
           </button>
         </Link>
         <button
           aria-label='Settings'
+          title='Settings'
           className='button --no-hover is-hidden-mobile'
           onClick={showThemeSettings}
         >
           <i className='icon icarus-terminal-settings' />
         </button>
-        <Link href='/status' className='--no-hover is-hidden-mobile'>
-          <button aria-label='System Status' className='button'>
-            <i className='icon icarus-terminal-signal' />
-          </button>
-        </Link>
-        <Link href='/api-docs' className='--no-hover is-hidden-mobile'>
-          <button aria-label='API Documentation' className='button'>
-            <i className='icon icarus-terminal-table-inspector' />
-          </button>
-        </Link>
         <button
           aria-label='Toggle Fullscreen'
+          title='Toggle Fullscreen'
           className='button --no-hover is-hidden-mobile'
           onClick={() => toggleFullScreen()}
         >

@@ -33,8 +33,28 @@ function Home() {
 
   const handleRefreshStats = async () => {
     setRefreshing(true)
-    await loadStats()
-    setTimeout(() => setRefreshing(false), 500) // Brief UI feedback
+
+    try {
+      // Trigger stats regeneration in the collector
+      const collectorUrl = API_BASE_URL.replace('api.', 'collector.')
+      const refreshRes = await fetch(`${collectorUrl}/refresh-stats`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      })
+
+      if (refreshRes.ok) {
+        console.log('Stats regeneration triggered successfully')
+        // Wait a moment for stats to be generated, then reload
+        await new Promise(resolve => setTimeout(resolve, 2000))
+        await loadStats()
+      } else {
+        console.error('Failed to trigger stats refresh:', refreshRes.status)
+      }
+    } catch (e) {
+      console.error('Error triggering stats refresh:', e)
+    }
+
+    setRefreshing(false)
   }
 
   useEffect(() => {
@@ -372,21 +392,6 @@ function Home() {
             />
             {refreshing ? 'Refreshing...' : 'Refresh Stats'}
           </button>
-          <Link
-            className='button button--large'
-            style={{ textAlign: 'center', display: 'block', margin: '.5rem' }}
-            href='/commodity/advancedcatalysers'
-          >
-            <i
-              className='icon icarus-terminal-cargo'
-              style={{ marginRight: '.5rem' }}
-            />
-            Commodities
-            <i
-              className='icon icarus-terminal-chevron-right'
-              style={{ marginLeft: '.5rem' }}
-            />
-          </Link>
 
           {/* <div className='heading--with-underline' style={{ marginTop: '1rem' }}>
             <h2 className='heading--with-icon text-uppercase' style={{ fontSize: '1rem' }}>
