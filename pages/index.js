@@ -19,6 +19,23 @@ function Home() {
   const [stats, setStats] = useState()
   const [version, setVersion] = useState()
   const [commodityTicker, setCommodityTicker] = useState()
+  const [refreshing, setRefreshing] = useState(false)
+
+  const loadStats = async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/v2/stats`)
+      const stats = await res.json()
+      setStats(stats)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  const handleRefreshStats = async () => {
+    setRefreshing(true)
+    await loadStats()
+    setTimeout(() => setRefreshing(false), 500) // Brief UI feedback
+  }
 
   useEffect(() => {
     setNavigationPath([
@@ -40,15 +57,7 @@ function Home() {
         console.error('[HOME] Galnet fetch error:', e)
       }
     })()
-    ;(async () => {
-      try {
-        const res = await fetch(`${API_BASE_URL}/v2/stats`)
-        const stats = await res.json()
-        setStats(stats)
-      } catch (e) {
-        console.error(e)
-      }
-    })()
+    loadStats()
     ;(async () => {
       try {
         const res = await fetch(`${API_BASE_URL}/`)
@@ -331,6 +340,38 @@ function Home() {
             <br />
             in the last 24 hours
           </p>
+          {stats && stats.timestamp && (
+            <p
+              className='muted'
+              style={{
+                textAlign: 'center',
+                fontSize: '0.85rem',
+                marginTop: '0.5rem'
+              }}
+            >
+              Last updated: {new Date(stats.timestamp).toLocaleString()}
+            </p>
+          )}
+          <button
+            onClick={handleRefreshStats}
+            disabled={refreshing}
+            className='button'
+            style={{
+              textAlign: 'center',
+              display: 'block',
+              margin: '.5rem auto',
+              width: 'fit-content',
+              cursor: refreshing ? 'wait' : 'pointer',
+              opacity: refreshing ? 0.6 : 1
+            }}
+            title='Refresh statistics'
+          >
+            <i
+              className={`icon icarus-terminal-refresh ${refreshing ? 'spinning' : ''}`}
+              style={{ marginRight: '.5rem' }}
+            />
+            {refreshing ? 'Refreshing...' : 'Refresh Stats'}
+          </button>
           <Link
             className='button button--large'
             style={{ textAlign: 'center', display: 'block', margin: '.5rem' }}
