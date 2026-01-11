@@ -32,23 +32,34 @@ function Home() {
   }
 
   const handleRefreshStats = async () => {
+    console.log('Refresh Stats button clicked!')
     setRefreshing(true)
 
     try {
       // Trigger stats regeneration in the collector
       const collectorUrl = API_BASE_URL.replace('api.', 'collector.')
+      console.log('Attempting to fetch:', `${collectorUrl}/refresh-stats`)
+
       const refreshRes = await fetch(`${collectorUrl}/refresh-stats`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       })
+
+      console.log('Response status:', refreshRes.status)
 
       if (refreshRes.ok) {
         console.log('Stats regeneration triggered successfully')
         // Wait a moment for stats to be generated, then reload
         await new Promise(resolve => setTimeout(resolve, 2000))
         await loadStats()
+        console.log('Stats reloaded')
       } else {
-        console.error('Failed to trigger stats refresh:', refreshRes.status)
+        const errorText = await refreshRes.text()
+        console.error(
+          'Failed to trigger stats refresh:',
+          refreshRes.status,
+          errorText
+        )
       }
     } catch (e) {
       console.error('Error triggering stats refresh:', e)
